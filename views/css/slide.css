@@ -38,31 +38,31 @@
 #slide .slide-option1 img {
     position: absolute;
     opacity: 1;
-    top: 15%;
+/*    top: 15%;
     right: 10%;
-    width: 45%;
+    width: 45%;*/
 }
 
 #slide .slide-option1 .slide-text {
     position: absolute;
-    width: 40%;
+/*    width: 40%;
     top: 20%;
-    left: 10%;
+    left: 10%;*/
 }
 
 #slide .slide-option2 img {
     position: absolute;
     opacity: 1;
-    top: 5%;
+/*    top: 5%;
     left: 15%;
-    width: 25%;
+    width: 25%;*/
 }
 #slide .slide-option2 .slide-text {
     position: absolute;
     text-align: right;
-    width: 40%;
+/*    width: 40%;
     top: 15%;
-    right: 15%;
+    right: 15%;*/
 }
 
 
@@ -71,25 +71,23 @@
     top: -10%;
     font-size: 72px;
     font-weight: 700;
-    color: #333;
+/*    color: #333;*/
 }
 
-#slide .slide-options p {
+#slide .slide-options h3 {
     opacity: 1;
     top: -10%;
-    font-size: 16px;
-    color: #777;
+/*    color: #777;*/
 }
 
-#slide .slide-options a {
-    border-color: rgb(192, 192, 192);
-    box-shadow: rgb(169, 169, 169) 0px 0px 0px inset;
+#slide .slide-options button {
     margin-top: 10px;
+    
     opacity: 1;
     top: -10%;
 }
 
-#slide .slide-options a span {
+#slide .slide-options button span {
     margin-left: 10px;
 }
 
@@ -184,11 +182,11 @@
         font-size: 22px;
     }
     
-    #slide .slide-options p {
-        font-size: 14px;
+    #slide .slide-options h3 {
+        font-size: 1.2em;
     }
     
-    #slide .slide-options a {
+    #slide .slide-options button {
         padding: 10px;
     }
 
@@ -211,15 +209,15 @@
     }
     
     #slide .slide-options h1 {
-        font-size: 50px;
+        font-size: 40px;
         margin-top: 5px;
     }
     
-    #slide .slide-options p {
-        font-size: 14px;
+    #slide .slide-options h3  {
+        font-size: 1.2em;
     }
     
-    #slide .slide-options a {
+    #slide .slide-options button {
         padding: 10px;
     }
     
@@ -245,11 +243,11 @@
         margin-top: 5px;
     }
     
-    #slide .slide-options p {
-        font-size: 12px;
+    #slide .slide-options h3 {
+        font-size: 0.75em;
     }
     
-    #slide .slide-options a {
+    #slide .slide-options button {
         padding: 5px;
     }
 }
@@ -267,12 +265,12 @@
         margin-top: 5px;
     }
     
-    #slide .slide-options p {
-        font-size: 10px;
+    #slide .slide-options h3 {
+        font-size: 0.75em;
         margin-bottom: -5px;
     }
     
-    #slide .slide-options a {
+    #slide .slide-options button {
         padding: 5px;
         font-size: 10px;
     }
@@ -291,7 +289,7 @@
         margin-top: 5px;
     }
     
-    #slide .slide-options p {
+    #slide .slide-options h3 {
         display: none;
     }
     

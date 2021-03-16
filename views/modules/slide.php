@@ -6,70 +6,57 @@ $server = Route::ctrRouteServer();
 <section class="container-fluid" id="slide">
 
     <div class="row">
+        
+        <!-- Slides -->
+        
         <ul>
-            <!-- Slide 1 -->
-            <li>
-                <img src="<?php echo $server; ?>views/img/slide/default/back_default.jpg">
-
-                <div class="slide-options slide-option1">
-                    <img class="product-img" src="<?php echo $server; ?>views/img/slide/slide1/calzado.png">
-
-                    <div class="slide-text">
-                        <h1>Black Friday</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore</p>
-                        <a href="#" class="btn btn-secondary">Comprar Ahora <span class="fa fa-chevron-right"></span></a>
-                    </div>
-                </div>
-            </li>
             
-            <!-- Slide 2 -->
-            <li>
-                <img src="<?php echo $server; ?>views/img/slide/default/back_default.jpg">
-
-                <div class="slide-options slide-option2">
-                    <img class="product-img" src="<?php echo $server; ?>views/img/slide/slide2/curso.png">
-
-                    <div class="slide-text">
-                        <h1>Black Friday</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore</p>
-                        <a href="#" class="btn btn-secondary">Comprar Ahora <span class="fa fa-chevron-right"></span></a>
-                    </div>
-                </div>
-            </li>
+            <?php
             
-            <!-- Slide 3 -->
-            <li>
-                <img src="<?php echo $server; ?>views/img/slide/slide3/fondo2.jpg">
+                $server = Route::ctrRouteServer();
+                
+                $slide = SlideController::ctrShowSlide();
+                
+                foreach ($slide as $key => $value) {
+                    
+                    $styleImgProduct = json_decode($value["product_img_style"], true);
+                    $styleTextSlide = json_decode($value["slide_text_style"], true);
+                    $title = json_decode($value["title1"], true);
+                    $description = json_decode($value["description1"], true);
+                    
+                    echo '<li>
+                        <img src="'.$server.$value["bg_img"].'">
 
-                <div class="slide-options slide-option2">
-                    <img class="product-img" src="<?php echo $server; ?>views/img/slide/slide3/iphone.png">
+                        <div class="slide-options '.$value["slide_type"].'">';
+                           
+                            if($value["bg_product"] != "") {
+                                echo '<img class="product-img" src="'.$server.$value["bg_product"].'" style="top:'.$styleImgProduct["top"].'%; right:'.$styleImgProduct["right"].'%; width:'.$styleImgProduct["width"].'%; left:'.$styleImgProduct["left"].'%">';
+                            }
 
-                    <div class="slide-text">
-                        <h1>Black Friday</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore</p>
-                        <a href="#" class="btn btn-secondary">Comprar Ahora <span class="fa fa-chevron-right"></span></a>
-                    </div>
-                </div>
-            </li>
-            
-            <!-- Slide 4 -->
-            <li>
-                <img src="<?php echo $server; ?>views/img/slide/slide4/fondo3.jpg">
+                            echo '<div class="slide-text" style="top:'.$styleTextSlide["top"].'%; left:'.$styleTextSlide["left"].'%; width:'.$styleTextSlide["width"].'%; right:'.$styleTextSlide["right"].'%">
+                                <h1 style="color:'.$title["color"].'">'.$title["text"].'</h1>
+                                <h3 style="color:'.$description["color"].'">'.$description["text"].'</h3>';
+                                
+                                if($value["button"] != "") {
+                                    echo '<a href="'.$value["url"].'">
+										
+                                            <button class="btn btn-success text-uppercase">
 
-                <div class="slide-options slide-option1">
-                    <img class="product-img" src="">
+                                            '.$value["button"].' <span class="fa fa-chevron-right"></span>
 
-                    <div class="slide-text">
-                        <h1>Black Friday</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore</p>
-                        <a href="#" class="btn btn-secondary">Comprar Ahora <span class="fa fa-chevron-right"></span></a>
-                    </div>
-                </div>
-            </li>
+                                            </button>
+
+                                    </a>';
+                                }
+
+                            echo '</div>
+                        </div>
+                    </li> ';
+                    
+                }
+                
+            ?>
+                                   
         </ul>
         
         <!-- == Pagination == -->
