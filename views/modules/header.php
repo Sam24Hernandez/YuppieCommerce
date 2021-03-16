@@ -39,7 +39,7 @@
 
     <div class="container">
         <div class="inner-header">
-            <div class="row">
+            <div class="row row-2">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
                         <a href="#">
@@ -145,9 +145,17 @@
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="active"><a href="#">Inicio</a></li>
-                    <li><a href="#">Tecnología</a></li>
-                    <li><a href="#">Moda</a></li>
-                    <li><a href="#">Salud y Belleza</a></li>
+                    <?php
+                                       
+                    $itemCategoryMenu = null;
+                    $valueCategoryMenu = null;
+
+                    $categoriesMenu = ProductController::ctrShowCategories($itemCategoryMenu, $valueCategoryMenu);
+
+                    foreach (array_slice($categoriesMenu, 0, 3) as $key => $value) {     
+                        echo '<li><a href="#">'.$value["category_name"].'</a></li>';
+                    }
+                    ?>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Vender</a></li>
                 </ul>

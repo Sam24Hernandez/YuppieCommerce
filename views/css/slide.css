@@ -1,0 +1,302 @@
+/* 
+    Created on : 15/03/2021, 10:05:26 AM
+    Author     : Sam Hernández
+    Version: 1.0
+    Repository: https://github.com/Sam24Hernandez/YuppieCommerce
+*/
+
+/* == Hero Banner Section == */
+
+#slide {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+}
+
+#slide ul {
+    position: relative;
+    left: 0%;
+    margin: auto;
+    height: auto;
+    width: 400%;
+    clear: both;
+    display: table;
+}
+
+#slide ul li {
+    position: relative;
+    float: left;
+    width: 25%;
+}
+
+#slide ul li img {
+    width: 100%;
+}
+
+#slide .slide-option1 img {
+    position: absolute;
+    opacity: 1;
+    top: 15%;
+    right: 10%;
+    width: 45%;
+}
+
+#slide .slide-option1 .slide-text {
+    position: absolute;
+    width: 40%;
+    top: 20%;
+    left: 10%;
+}
+
+#slide .slide-option2 img {
+    position: absolute;
+    opacity: 1;
+    top: 5%;
+    left: 15%;
+    width: 25%;
+}
+#slide .slide-option2 .slide-text {
+    position: absolute;
+    text-align: right;
+    width: 40%;
+    top: 15%;
+    right: 15%;
+}
+
+
+#slide .slide-options h1 {
+    opacity: 1;
+    top: -10%;
+    font-size: 72px;
+    font-weight: 700;
+    color: #333;
+}
+
+#slide .slide-options p {
+    opacity: 1;
+    top: -10%;
+    font-size: 16px;
+    color: #777;
+}
+
+#slide .slide-options a {
+    border-color: rgb(192, 192, 192);
+    box-shadow: rgb(169, 169, 169) 0px 0px 0px inset;
+    margin-top: 10px;
+    opacity: 1;
+    top: -10%;
+}
+
+#slide .slide-options a span {
+    margin-left: 10px;
+}
+
+
+/* == Arrows == */
+
+#slide .arrows {
+    position: absolute;
+    font-size: 2em;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#slide #previous {
+    background: #666;
+    padding: 40px 15px 40px 10px;
+    left: 0;
+    top: 37%;
+    opacity: 0;
+    transition: .45s ease-in-out;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24),0 0 2px 0 rgba(0,0,0,0.12);
+}
+
+#slide #next {
+    background: #666;
+    padding: 40px 15px 40px 15px;
+    top: 37%;
+    right: 0;
+    opacity: 0;
+    transition: .45s ease-in-out;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24),0 0 2px 0 rgba(0,0,0,0.12);
+}
+
+#slide #previous:hover, #slide #next:hover{
+    background: #777;
+}
+
+#slide #previous:active, #slide #next:active{
+    background: #444;
+}
+
+/* == Pagination == */
+
+#slide #pagination {
+    position: absolute;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1;
+    background: rgba(0,0,0,.05);
+}
+
+#slide #pagination li {
+    display: inline-block;
+    margin: 0px 5px;
+    list-style: none;
+    cursor: pointer;
+    opacity: .5;
+    color: #fff;
+    text-shadow: 0px 0px 5px #333;
+}
+
+#slide #pagination li:first-child {
+    opacity: 1;
+}
+
+#btnSlide {
+    width: 150px;
+    border: 0px;
+    font-size: 25px;
+    padding: 2px;
+}
+
+/* ------------------------------ Responsive Media Styles ---------------------------- */
+
+@media only screen and (min-width: 1200px) and (max-width: 1920px) {
+
+    #slide #previous {
+        top: 37%;
+        padding: 40px 15px 40px 10px;
+        font-size: 22px;
+    }
+    
+    #slide #next {
+        top: 37%;
+        padding: 40px 15px 40px 10px;
+        font-size: 22px;
+    }
+    
+    #slide .slide-options p {
+        font-size: 14px;
+    }
+    
+    #slide .slide-options a {
+        padding: 10px;
+    }
+
+}
+
+/* Medium Device: 1200px */
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+    #slide #previous {
+        top: 35%;
+        padding: 40px 15px 40px 10px;
+        font-size: 18px;
+    }
+    
+    #slide #next {
+        top: 35%;
+        padding: 40px 15px 40px 10px;
+        font-size: 18px;
+    }
+    
+    #slide .slide-options h1 {
+        font-size: 50px;
+        margin-top: 5px;
+    }
+    
+    #slide .slide-options p {
+        font-size: 14px;
+    }
+    
+    #slide .slide-options a {
+        padding: 10px;
+    }
+    
+}
+
+/* Tablet Device: 768px */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+     #slide #previous {
+        top: 35%;
+        padding: 30px 8px 30px 5px;
+        font-size: 16px;
+    }
+    
+    #slide #next {
+        top: 35%;
+        padding: 30px 8px 30px 5px;
+        font-size: 16px;
+    }
+    
+    #slide .slide-options h1 {
+        font-size: 35px;
+        margin-top: 5px;
+    }
+    
+    #slide .slide-options p {
+        font-size: 12px;
+    }
+    
+    #slide .slide-options a {
+        padding: 5px;
+    }
+}
+
+/* Large Device: 480px */
+
+@media only screen and (max-width: 767px) {   
+    
+    #slide #previous, #slide #next {
+        display: none;
+    }
+    
+    #slide .slide-options h1 {
+        font-size: 25px;
+        margin-top: 5px;
+    }
+    
+    #slide .slide-options p {
+        font-size: 10px;
+        margin-bottom: -5px;
+    }
+    
+    #slide .slide-options a {
+        padding: 5px;
+        font-size: 10px;
+    }
+    
+}
+
+/* Small Device: 320px */
+
+@media only screen and (max-width: 479px) {
+    #slide #previous, #slide #next {
+        display: none;
+    }
+    
+    #slide .slide-options h1 {
+        font-size: 25px;
+        margin-top: 5px;
+    }
+    
+    #slide .slide-options p {
+        display: none;
+    }
+    
+    #slide .slide-options a {
+        padding: 5px;
+        font-size: 10px;
+    }
+}

@@ -109,9 +109,7 @@ input[type="tel"],
 input[type="password"],
 select,
 textarea {    
-    border: 1px solid #888C8C;
-    border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(15,17,17,.15) inset;
+    border-radius: 3px;    
     outline: 0;
 }
 
@@ -161,6 +159,14 @@ ul,
 ol {
     padding: 0;
     margin: 0;
+    list-style: none;
+}
+
+.row-2 {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 /* Error 404 Page */
