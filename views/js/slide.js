@@ -99,9 +99,9 @@ setInterval(function () {
         stopInterval = false;
 
         $("#slide ul li").finish();
-        
+
     } else {
-        
+
         if (!stopInterval) {
             next();
         }
@@ -139,7 +139,7 @@ $("#btnSlide").click(function () {
 
         $("#slide").slideUp("fast");
 
-        $("#btnSlide").html('<i class="fa fa-angle-down"></i>');
+        $("#btnSlide").html('<i class="fa fa-angle-down" title="Mostrar Slide"></i>');
 
     } else {
 
@@ -147,7 +147,7 @@ $("#btnSlide").click(function () {
 
         $("#slide").slideDown("fast");
 
-        $("#btnSlide").html('<i class="fa fa-angle-up"></i>');
+        $("#btnSlide").html('<i class="fa fa-angle-up" title="Ocultar Slide"></i>');
     }
 
 });

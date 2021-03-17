@@ -166,6 +166,12 @@
     padding: 2px;
 }
 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .other_browser {
+        display: block !important;
+    }
+}
+
 /* ------------------------------ Responsive Media Styles ---------------------------- */
 
 @media only screen and (min-width: 1200px) and (max-width: 1920px) {

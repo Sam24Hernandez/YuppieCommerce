@@ -5,9 +5,9 @@ $server = Route::ctrRouteServer();
 <!-- === Slide Banner === -->
 <section class="container-fluid" id="slide">
 
-    <div class="row">
+    <div class="row other_browser">
         
-        <!-- Slides -->
+        <!-- Slides --> 
         
         <ul>
             
@@ -40,7 +40,7 @@ $server = Route::ctrRouteServer();
                                 if($value["button"] != "") {
                                     echo '<a href="'.$value["url"].'">
 										
-                                            <button class="btn btn-success text-uppercase">
+                                            <button class="primary-btn">
 
                                             '.$value["button"].' <span class="fa fa-chevron-right"></span>
 
@@ -75,6 +75,6 @@ $server = Route::ctrRouteServer();
 
 <center>
     <button id="btnSlide" class="backColor">
-        <i class="fa fa-angle-up"></i>
+        <i class="fa fa-angle-up" title="Ocultar Slide"></i>
     </button>
 </center>
