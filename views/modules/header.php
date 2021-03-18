@@ -137,7 +137,7 @@
             <div class="nav-depart">
                 <div class="depart-btn">
                     <a href="#">
-                        <i class="fa fa-bars"></i>
+                        <i class="fa fa-shopping-bag"></i>
                         <span>Todo</span> 
                     </a>                   
                 </div>

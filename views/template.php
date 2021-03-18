@@ -29,6 +29,7 @@
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/header.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/slide.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/products.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/footer.css" type="text/css">
     </head>
     <body>
 
@@ -87,8 +88,10 @@ if (isset($_GET["route"])) {
 } else {
     include "modules/slide.php";
     
-    include "modules/featured.php";
+    include "modules/featured.php";        
 }
+
+include "modules/footer.php";
 
 /* == End Header Section  == */
 ?>
