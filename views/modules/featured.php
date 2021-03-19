@@ -179,523 +179,148 @@ $server = Route::ctrRouteServer();
     </div>
 </section>
 
-<section class="bar-products-section spad-sec">
-    <div class="container-fluid well well-sm product-bar">
+<?php
+
+$titleModules = array("Artículos Gratuitos", "Lo Más Vendido", "Lo Más Visto");
+$routeModules = array("articulos-gratis", "lo-mas-vendido", "lo-mas-visto");
+
+if($titleModules[0] === "Artículos Gratuitos") {
+    $order = "id";
+    $item = "price";
+    $valueProduct = 0;
+    
+    $free = ProductController::ctrShowProducts($order, $item, $valueProduct);
+}
+
+if($titleModules[1] === "Lo Más Vendido") {
+    $order = "sales";
+    $item = NULL;
+    $valueProduct = NULL;
+    
+    $sales = ProductController::ctrShowProducts($order, $item, $valueProduct);
+}
+
+if($titleModules[2] === "Lo Más Visto") {
+    $order = "views";
+    $item = NULL;
+    $valueProduct = NULL;
+    
+    $views = ProductController::ctrShowProducts($order, $item, $valueProduct);
+}
+
+$modules = array($free, $sales, $views);
+
+for($i = 0; $i < count($titleModules); $i++) {
+    echo '<section class="bar-products-section spad-sec">
+        <div class="container-fluid well well-sm product-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 organise-products"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container-fluid products spad-featured">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12 organise-products"></div>
+                <div class="col-lg-12 title-featured">
+                    <div class="featured-header-title">
+                        <h1>
+                            '.$titleModules[$i].'                      
+                        </h1>                                      
+                    </div>
+                    <div class="featured-seeall">
+                        <a href="'.$routeModules[$i].'">Ver Todo <i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>            
+                <div class="clearfix"></div> 
             </div>
+            
+            <div class="row grid'.$i.'">';
+    
+            foreach ($modules[$i] as $key => $value) {
+               
+                echo '<div class="col-lg-3 col-md-6">
+                    <div class="single-grid-product">
+                        <a href="'.$value["route"].'" class="pixelProduct">
+                            <img src="'.$server.$value["product_image"].'">
+                        </a>
+
+                        <div class="links-text">';
+
+                            if ($value["offer"] != 0 && $value["price"] != 0) {
+                                echo '<div class="discount-name">'.$value["offer_discount"].'% de Descuento</div>';
+                            }
+
+                            echo '<a href="'.$value["route"].'" class="pixelProduct">
+                                <h5>'.$value["product_title"].'</h5>
+                            </a>
+                            
+                            <p class="price">';
+                            
+                                if($value["price"] == 0) {
+                                    echo 'Gratis';
+                                } else {
+                                    if($value["offer"] != 0) {
+                                        echo 'MXN $'.$value["offer_price"].''
+                                        . '<span>$'.$value["price"].'</span>';
+                                    } else {
+                                        echo 'MXN $'.$value["price"].'';
+                                    }
+                                }
+                            
+                            echo '</p>
+
+                            <div class="tag-list links">
+                                <div class="tag-item">
+                                    <button type="button" class="btn btn-warning btn-sm wishes" idProduct="'.$value["id"].'" data-toggle="tooltip" title="Agregar a mi lista de deseos">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </button>&nbsp;';
+                            
+                                    if ($value["sort"] == "virtual" && $value["price"] != 0) {
+                                        if ($value["offer"] != 0) {
+                                            echo '<button type="button" class="btn btn-warning btn-sm addCart" idProduct="'.$value["id"].'" image="'.$server.$value["product_image"].'" product_title="'.$value["product_title"].'" price="'.$value["offer_price"].'" sort="'.$value["sort"].'" product_weight="'.$value["product_weight"].'" data-toggle="tooltip" title="Agregar a mi carrito de compras">
+                                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>                                            
+                                            </button>&nbsp;';
+                                        } else {
+                                            echo '<button type="button" class="btn btn-warning btn-sm addCart" idProduct="'.$value["id"].'" image="'.$server.$value["product_image"].'" product_title="'.$value["product_title"].'" price="'.$value["price"].'" sort="'.$value["sort"].'" product_weight="'.$value["product_weight"].'" data-toggle="tooltip" title="Agregar a mi carrito de compras">
+                                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>                                            
+                                            </button>&nbsp;';
+                                        }
+                                    }
+                                    
+                                    if ($value["sort"] == "fisico" && $value["price"] != 0) {
+                                        if ($value["offer"] != 0) {
+                                            echo '<button type="button" class="btn btn-warning btn-sm addCart" idProduct="'.$value["id"].'" image="'.$server.$value["product_image"].'" product_title="'.$value["product_title"].'" price="'.$value["offer_price"].'" sort="'.$value["sort"].'" product_weight="'.$value["product_weight"].'" data-toggle="tooltip" title="Agregar a mi carrito de compras">
+                                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>                                            
+                                            </button>&nbsp;';
+                                        } else {
+                                            echo '<button type="button" class="btn btn-warning btn-sm addCart" idProduct="'.$value["id"].'" image="'.$server.$value["product_image"].'" product_title="'.$value["product_title"].'" price="'.$value["price"].'" sort="'.$value["sort"].'" product_weight="'.$value["product_weight"].'" data-toggle="tooltip" title="Agregar a mi carrito de compras">
+                                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>                                            
+                                            </button>&nbsp;';
+                                        }
+                                    }
+                                              
+                                    echo '<button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
+                                        <a href="'.$value["route"].'" class="pixelProduct">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+                
+            }
+            
+            echo '</div>
         </div>
-    </div>
-</section>
+    </section>';
+}
 
-<!-- == Free Products == -->
-
-<section class="container-fluid products spad-featured">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 title-featured">
-                <div class="featured-header-title">
-                    <h1>
-                        Artículos Gratuitos                        
-                    </h1>                                      
-                </div>
-                <div class="featured-seeall">
-                    <a href="articulos-gratis">Ver Todo <i class="fa fa-chevron-right"></i></a>
-                </div>
-            </div>            
-            <div class="clearfix"></div> 
-        </div>
-
-        <div class="row grid0">
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/accesorios/accesorio04.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <a href="#" class="pixelProduct">
-                            <h5>Collar de Diamantes</h5>
-                        </a>
-                        <p class="price">
-                            Gratis
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/accesorios/accesorio03.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <a href="#" class="pixelProduct">
-                            <h5>Mochila Antirobo Color Gris</h5>
-                        </a>
-                        <p class="price">
-                            Gratis
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/accesorios/accesorio02.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <a href="#" class="pixelProduct">
-                            <h5>Mochila Militar</h5>
-                        </a>
-                        <p class="price">
-                            Gratis
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/accesorios/accesorio01.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <a href="#" class="pixelProduct">
-                            <h5>Pulsera de Diamantes</h5>
-                        </a>
-                        <p class="price">
-                            Gratis
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="bar-products-section spad-sec">
-    <div class="container-fluid well well-sm product-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12 organise-products"></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- == Top Selling Products == -->
-
-<section class="container-fluid products spad-featured">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 title-featured">
-                <div class="featured-header-title">
-                    <h1>
-                        Lo Más Vendido                        
-                    </h1>                                      
-                </div>
-                <div class="featured-seeall">
-                    <a href="articulos-gratis">Ver Todo <i class="fa fa-chevron-right"></i></a>
-                </div>
-            </div>            
-            <div class="clearfix"></div> 
-        </div>
-
-        <!-- == Grid of Products == -->
-        <div class="row grid0">
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/ropa/ropa03.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <div class="discount-name">40% de Descuento</div>
-                        <a href="#" class="pixelProduct">
-                            <h5>Falda de Flores</h5>
-                        </a>
-                        <p class="price">
-                            MXN $120.00
-                            <span>$200.00</span>
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-warning btn-sm addCart" idProduct="470" image="<?php echo $server; ?>views/img/products/cursos/curso05.jpg" product_title="Curso de Bootstrap" price="29.90" sort="virtual" product_weight="0" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/ropa/ropa04.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <div class="discount-name">40% de Descuento</div>
-                        <a href="#" class="pixelProduct">                            
-                            <h5>Vestido Jean</h5>
-                        </a>
-                        <p class="price">
-                            MXN $300.00
-                            <span>$500.00</span>
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-warning btn-sm addCart" idProduct="470" image="<?php echo $server; ?>views/img/products/cursos/curso05.jpg" product_title="Curso de Bootstrap" price="29.90" sort="virtual" product_weight="0" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/ropa/ropa05.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <div class="discount-name">30% de Descuento</div>
-                        <a href="#" class="pixelProduct">
-                            <h5>Vestido Clásico Verano</h5>
-                        </a>
-                        <p class="price">
-                            MXN $528.50
-                            <span>$755.00</span>
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-warning btn-sm addCart" idProduct="470" image="<?php echo $server; ?>views/img/products/cursos/curso05.jpg" product_title="Curso de Bootstrap" price="29.90" sort="virtual" product_weight="0" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/ropa/ropa01.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <div class="discount-name">10% de Descuento</div>
-                        <a href="#" class="pixelProduct">                            
-                            <h5>Playera Estilo Militar</h5>
-                        </a>
-                        <p class="price">
-                            MXN $288.00
-                            <span>$320.00</span>
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-warning btn-sm addCart" idProduct="470" image="<?php echo $server; ?>views/img/products/cursos/curso05.jpg" product_title="Curso de Bootstrap" price="29.90" sort="virtual" product_weight="0" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="bar-products-section spad-sec">
-    <div class="container-fluid well well-sm product-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12 organise-products"></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- == Most Viewed Products == -->
-
-<section class="container-fluid products spad-featured">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 title-featured">
-                <div class="featured-header-title">
-                    <h1>
-                        Lo Más Visto                       
-                    </h1>                                      
-                </div>
-                <div class="featured-seeall">
-                    <a href="articulos-gratis">Ver Todo <i class="fa fa-chevron-right"></i></a>
-                </div>
-            </div>            
-            <div class="clearfix"></div> 
-        </div>
-
-        <!-- == Grid of Products == -->
-        <div class="row grid0">
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/cursos/curso05.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <div class="discount-name">90% de Descuento</div>
-                        <a href="#" class="pixelProduct">
-                            <h5>Curso de Bootstrap</h5>
-                        </a>
-                        <p class="price">
-                            MXN $29.90
-                            <span>$299.00</span>
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-warning btn-sm addCart" idProduct="470" image="<?php echo $server; ?>views/img/products/cursos/curso05.jpg" product_title="Curso de Bootstrap" price="29.90" sort="virtual" product_weight="0" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/cursos/curso04.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <div class="discount-name">90% de Descuento</div>
-                        <a href="#" class="pixelProduct">
-                            <h5>Curso de HTML5 + Canvas</h5>
-                        </a>
-                        <p class="price">
-                            MXN $29.90
-                            <span>$299.00</span>
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-warning btn-sm addCart" idProduct="470" image="<?php echo $server; ?>views/img/products/cursos/curso05.jpg" product_title="Curso de Bootstrap" price="29.90" sort="virtual" product_weight="0" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/cursos/curso02.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <div class="discount-name">90% de Descuento</div>
-                        <a href="#" class="pixelProduct">
-                            <h5>Curso de Javascript</h5>
-                        </a>
-                        <p class="price">
-                            MXN $29.90
-                            <span>$299.00</span>
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-warning btn-sm addCart" idProduct="470" image="<?php echo $server; ?>views/img/products/cursos/curso05.jpg" product_title="Curso de Bootstrap" price="29.90" sort="virtual" product_weight="0" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="single-grid-product">
-                    <a href="#" class="pixelProduct">
-                        <img src="<?php echo $server; ?>views/img/products/cursos/curso03.jpg">
-                    </a>
-
-                    <div class="links-text">
-                        <div class="discount-name">90% de Descuento</div>
-                        <a href="#" class="pixelProduct">
-                            <h5>Introducción a Jquery</h5>
-                        </a>
-                        <p class="price">
-                            MXN $29.90
-                            <span>$299.00</span>
-                        </p>
-
-                        <div class="tag-list links">
-                            <div class="tag-item">
-                                <button type="button" class="btn btn-warning btn-sm wishes" idProduct="470" data-toggle="tooltip" title="Agregar a mi lista de deseos">
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                </button>
-                                
-                                <button type="button" class="btn btn-warning btn-sm addCart" idProduct="470" image="<?php echo $server; ?>views/img/products/cursos/curso05.jpg" product_title="Curso de Bootstrap" price="29.90" sort="virtual" product_weight="0" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
-                                    <a href="#" class="pixelProduct">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+?>
 
 <section class="delivery-section">
     <div class="container">

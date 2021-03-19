@@ -47,7 +47,8 @@ include "modules/header.php";
 /* == Dynamic Content  == */
 
 $routes = array();
-$route = null;
+$route = NULL;
+$infoProduct = NULL;
 
 if (isset($_GET["route"])) {
     $routes = explode("/", $_GET["route"]);
@@ -55,6 +56,7 @@ if (isset($_GET["route"])) {
     $item = "route";
     $valueCategory = $routes[0];
     $valueSubCategory = $routes[0];
+    $valueProduct = $routes[0];
 
     /* == Category Friendly URLs  == */
 
@@ -77,11 +79,22 @@ if (isset($_GET["route"])) {
             }
         }
     }
+    
+    /* == Product Friendly URLs  == */
+    
+    $routeProducts = ProductController::ctrShowInfoProduct($item, $valueProduct);
+
+    if ($routes[0] == $routeProducts["route"]) {
+        $infoProduct = $routes[0];
+    }
+    
 
     /* == White List of Friendly URLs  == */
 
-    if ($route != null) {
+    if ($route != null || $routes[0] === "articulos-gratis" || $routes[0] === "lo-mas-vendido" || $routes[0] === "lo-mas-visto") {
         include "modules/products.php";
+    } elseif ($infoProduct != NULL) {
+        include "modules/infoproduct.php";
     } else {
         include "modules/error404.php";
     }
@@ -96,8 +109,13 @@ include "modules/footer.php";
 /* == End Header Section  == */
 ?>
 
+        <!-- ============================================================== -->
+        <!-- All Jquery Plugins -->
+        <!-- ============================================================== -->
         <script src="<?php echo $url; ?>views/js/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/bootstrap.min.js" type="text/javascript"></script>
+        <!-- Bootstrap popper Core JavaScript -->
+        <script src="<?php echo $url; ?>views/js/plugins/popper.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/bootstrap/bootstrap.min.js" type="text/javascript"></script>        
         <script src="<?php echo $url; ?>views/js/plugins/jquery.easing.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/owl.carousel.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.countdown.min.js" type="text/javascript"></script>

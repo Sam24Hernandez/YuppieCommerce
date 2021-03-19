@@ -114,13 +114,13 @@
                 <div class="col-lg-3 text-right col-md-3" id="cart">
                     <ul class="nav-right">
                         <li class="heart-icon">
-                            <a href="#" title="Guardado">
+                            <a href="#" data-toggle="tooltip" title="Lista de Deseos">
                                 <i class="fa fa-heart" aria-hidden="true"></i>
                                 <span>1</span>
                             </a>
                         </li> 
                         <li class="cart-icon">
-                            <a href="#" title="Cesta">
+                            <a href="#" data-toggle="tooltip" title="Cesta">
                                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                 <span>3</span>
                             </a>
