@@ -125,7 +125,7 @@ textarea:focus {
 a, 
 a:link, 
 a:visited {
-    color: var(--color-link-default);
+    color: #3665f3;
     text-decoration: none;
     background-color: transparent;
 }
@@ -134,7 +134,7 @@ a:hover,
 a:focus {
     text-decoration: underline;
     outline: none;
-    color: var(--color-link-visited);
+    color: #C7511F;
 }
 
 dl,

@@ -90,7 +90,7 @@
                                         
                                         <td>
                                             <h3>
-                                                <a id="shop-see-all" title="" href="#">
+                                                <a id="shop-see-all" title="" href="<?php echo $url; ?>todas-las-categorias">
                                                     Ver todas las categorías
                                                     <i class="fa fa-angle-double-right"></i>
                                                 </a>

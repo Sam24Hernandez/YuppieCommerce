@@ -9,9 +9,8 @@
         <title>Yuppie | Comercio electrónico - Electrónicos - Ropa de Moda - Tecnología</title>
 
         <?php
-        
         session_start();
-        
+
         $server = Route::ctrRouteServer();
 
         echo '<link rel="icon" href="' . $server . 'views/img/template/icono.png">';
@@ -45,75 +44,77 @@
         </div>
         <!-- == End Preloader == -->
 
-<?php
-/* == Header Section Block  == */
+        <?php
+        /* == Header Section Block  == */
 
-include "modules/header.php";
+        include "modules/header.php";
 
-/* == Dynamic Content  == */
+        /* == Dynamic Content  == */
 
-$routes = array();
-$route = NULL;
-$infoProduct = NULL;
+        $routes = array();
+        $route = NULL;
+        $infoProduct = NULL;
 
-if (isset($_GET["route"])) {
-    $routes = explode("/", $_GET["route"]);
+        if (isset($_GET["route"])) {
+            $routes = explode("/", $_GET["route"]);
 
-    $item = "route";
-    $valueCategory = $routes[0];
-    $valueSubCategory = $routes[0];
-    $valueProduct = $routes[0];
+            $item = "route";
+            $valueCategory = $routes[0];
+            $valueSubCategory = $routes[0];
+            $valueProduct = $routes[0];
 
-    /* == Category Friendly URLs  == */
+            /* == Category Friendly URLs  == */
 
-    $routeCategories = ProductController::ctrShowCategories($item, $valueCategory);
+            $routeCategories = ProductController::ctrShowCategories($item, $valueCategory);
 
-    if (is_array($routeCategories)) {
-        if ($routes[0] == $routeCategories["route"]) {
-            $route = $routes[0];
-        }
-    }
-
-    /* == SubCategory Friendly URLs  == */
-
-    $routeSubCategories = ProductController::ctrShowSubCategories($item, $valueSubCategory);
-
-    foreach ($routeSubCategories as $key => $value) {
-        if (is_array($value)) {
-            if ($routes[0] == $value["route"]) {
-                $route = $routes[0];
+            if (is_array($routeCategories)) {
+                if ($routes[0] == $routeCategories["route"]) {
+                    $route = $routes[0];
+                }
             }
+
+            /* == SubCategory Friendly URLs  == */
+
+            $routeSubCategories = ProductController::ctrShowSubCategories($item, $valueSubCategory);
+
+            foreach ($routeSubCategories as $key => $value) {
+                if (is_array($value)) {
+                    if ($routes[0] == $value["route"]) {
+                        $route = $routes[0];
+                    }
+                }
+            }
+
+            /* == Product Friendly URLs  == */
+
+            $routeProducts = ProductController::ctrShowInfoProduct($item, $valueProduct);
+
+            if ($routes[0] == $routeProducts["route"]) {
+                $infoProduct = $routes[0];
+            }
+
+
+            /* == White List of Friendly URLs  == */
+
+            if ($route != null || $routes[0] === "articulos-gratis" || $routes[0] === "lo-mas-vendido" || $routes[0] === "lo-mas-visto") {
+                include "modules/products.php";
+            } elseif ($infoProduct != NULL) {
+                include "modules/infoproduct.php";
+            } elseif ($routes[0] === "todas-las-categorias") {
+                include "modules/all-categories.php";
+            } else {
+                include "modules/error404.php";
+            }
+        } else {
+            include "modules/slide.php";
+
+            include "modules/featured.php";
         }
-    }
-    
-    /* == Product Friendly URLs  == */
-    
-    $routeProducts = ProductController::ctrShowInfoProduct($item, $valueProduct);
 
-    if ($routes[0] == $routeProducts["route"]) {
-        $infoProduct = $routes[0];
-    }
-    
+        include "modules/footer.php";
 
-    /* == White List of Friendly URLs  == */
-
-    if ($route != null || $routes[0] === "articulos-gratis" || $routes[0] === "lo-mas-vendido" || $routes[0] === "lo-mas-visto") {
-        include "modules/products.php";
-    } elseif ($infoProduct != NULL) {
-        include "modules/infoproduct.php";
-    } else {
-        include "modules/error404.php";
-    }
-} else {
-    include "modules/slide.php";
-    
-    include "modules/featured.php";        
-}
-
-include "modules/footer.php";
-
-/* == End Header Section  == */
-?>
+        /* == End Header Section  == */
+        ?>
 
         <!-- ============================================================== -->
         <!-- All Jquery Plugins -->

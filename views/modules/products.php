@@ -277,7 +277,7 @@ $route = $routes[0];
                                     <h1>¡Oops!</h1>
                                     <h3 class="text-uppercase">Aún no hay productos en esta sección</h3>
                                     <p>Estamos trabajando en ofrecerle productos.</p>
-                                    <a class="btn btn-primary btn-rounded" href="#">Ir a Categorías</a>
+                                    <a class="btn btn-primary btn-rounded" href="'.$url.'todas-las-categorias">Ir a Categorías</a>
                                 </div>
                             </div>
                         </section>';
