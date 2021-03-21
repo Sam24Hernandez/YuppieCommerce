@@ -181,38 +181,51 @@ $server = Route::ctrRouteServer();
 
 <?php
 
+/*=============================================
+FEATURED PRODUCTS
+=============================================*/
+
 $titleModules = array("Artículos Gratuitos", "Lo Más Vendido", "Lo Más Visto");
 $routeModules = array("articulos-gratis", "lo-mas-vendido", "lo-mas-visto");
 
+$base = 0;
+$limit = 4;
+
 if($titleModules[0] === "Artículos Gratuitos") {
+    
     $order = "id";
     $item = "price";
     $valueProduct = 0;
+    $mode = "DESC";
     
-    $free = ProductController::ctrShowProducts($order, $item, $valueProduct);
+    $free = ProductController::ctrShowProducts($order, $item, $valueProduct, $base, $limit, $mode);
 }
 
 if($titleModules[1] === "Lo Más Vendido") {
+    
     $order = "sales";
     $item = NULL;
     $valueProduct = NULL;
+    $mode = "DESC";
     
-    $sales = ProductController::ctrShowProducts($order, $item, $valueProduct);
+    $sales = ProductController::ctrShowProducts($order, $item, $valueProduct, $base, $limit, $mode);
 }
 
 if($titleModules[2] === "Lo Más Visto") {
+    
     $order = "views";
     $item = NULL;
     $valueProduct = NULL;
+    $mode = "DESC";
     
-    $views = ProductController::ctrShowProducts($order, $item, $valueProduct);
+    $views = ProductController::ctrShowProducts($order, $item, $valueProduct, $base, $limit, $mode);
 }
 
 $modules = array($free, $sales, $views);
 
 for($i = 0; $i < count($titleModules); $i++) {
     echo '<section class="bar-products-section spad-sec">
-        <div class="container-fluid well well-sm product-bar">
+        <div class="container-fluid well well-lg product-bar">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12 organise-products"></div>

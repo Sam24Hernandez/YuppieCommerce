@@ -33,13 +33,23 @@ class ProductModel {
 
     static public function mdlShowSubCategories($table, $item, $valueSubCategory) {
 
-        $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
+        if ($item != NULL) {
+            $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
 
-        $stmt->bindParam(":" . $item, $valueSubCategory, PDO::PARAM_STR);
+            $stmt->bindParam(":" . $item, $valueSubCategory, PDO::PARAM_STR);
 
-        $stmt->execute();
+            $stmt->execute();
 
-        return $stmt->fetchAll();
+            return $stmt->fetchAll();
+        } else {
+            $stmt = Database::connect()->prepare("SELECT * FROM $table");
+
+            $stmt->bindParam(":" . $item, $valueSubCategory, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        }
 
         $stmt->close();
 
@@ -48,11 +58,11 @@ class ProductModel {
 
     /* SHOW PRODUCTS */
 
-    static public function mdlShowProducts($table, $order, $item, $valueProduct) {
+    static public function mdlShowProducts($table, $order, $item, $valueProduct, $base, $limit, $mode) {
 
         if ($item != NULL) {
 
-            $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE $item = :$item ORDER BY $order DESC LIMIT 4");
+            $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE $item = :$item ORDER BY $order $mode LIMIT $base, $limit");
 
             $stmt->bindParam(":" . $item, $valueProduct, PDO::PARAM_STR);
 
@@ -60,7 +70,7 @@ class ProductModel {
 
             return $stmt->fetchAll();
         } else {
-            $stmt = Database::connect()->prepare("SELECT * FROM $table ORDER BY $order DESC LIMIT 4");
+            $stmt = Database::connect()->prepare("SELECT * FROM $table ORDER BY $order $mode LIMIT $base, $limit");
 
             $stmt->execute();
 
@@ -79,13 +89,39 @@ class ProductModel {
         $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
 
         $stmt->bindParam(":" . $item, $valueProduct, PDO::PARAM_STR);
-        
+
         $stmt->execute();
-        
+
         return $stmt->fetch();
-        
+
         $stmt->close();
-        
+
+        $stmt = NULL;
+    }
+
+    /* PRODUCTS LIST */
+
+    static public function mdlListProducts($table, $order, $item, $valueProduct) {
+
+        if ($item != NULL) {
+
+            $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE $item = :$item ORDER BY $order DESC");
+
+            $stmt->bindParam(":" . $item, $valueProduct, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        } else {
+            $stmt = Database::connect()->prepare("SELECT * FROM $table ORDER BY $order DESC");
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        }
+
+        $stmt->close();
+
         $stmt = NULL;
     }
 

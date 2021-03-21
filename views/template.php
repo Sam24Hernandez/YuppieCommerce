@@ -9,6 +9,9 @@
         <title>Yuppie | Comercio electrónico - Electrónicos - Ropa de Moda - Tecnología</title>
 
         <?php
+        
+        session_start();
+        
         $server = Route::ctrRouteServer();
 
         echo '<link rel="icon" href="' . $server . 'views/img/template/icono.png">';
@@ -24,6 +27,9 @@
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/owl.carousel.min.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/jquery-ui.min.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/nice-select.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/slicknav.min.css" type="text/css">
 
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/template.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/header.css" type="text/css">
@@ -117,8 +123,11 @@ include "modules/footer.php";
         <script src="<?php echo $url; ?>views/js/plugins/popper.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/bootstrap/bootstrap.min.js" type="text/javascript"></script>        
         <script src="<?php echo $url; ?>views/js/plugins/jquery.easing.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery-ui.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/owl.carousel.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.countdown.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.nice-select.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.slicknav.js" type="text/javascript"></script>
 
         <script src="<?php echo $url; ?>views/js/header.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/template.js" type="text/javascript"></script>

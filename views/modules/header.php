@@ -42,7 +42,7 @@
             <div class="row row-2">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href="#">
+                        <a href="<?php echo $url; ?>">
                             <img src="http://localhost/yuppie_backend/views/img/template/logo.png">
                         </a>
                     </div>                                        
@@ -144,7 +144,7 @@
             </div>
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="active"><a href="#">Inicio</a></li>
+                    <li class="active"><a href="<?php echo $url; ?>">Inicio</a></li>
                     <?php
                                        
                     $itemCategoryMenu = null;
@@ -153,7 +153,7 @@
                     $categoriesMenu = ProductController::ctrShowCategories($itemCategoryMenu, $valueCategoryMenu);
 
                     foreach (array_slice($categoriesMenu, 0, 3) as $key => $value) {     
-                        echo '<li><a href="#">'.$value["category_name"].'</a></li>';
+                        echo '<li><a href="'.$url.$value["route"].'">'.$value["category_name"].'</a></li>';
                     }
                     ?>
                     <li><a href="#">Ofertas</a></li>

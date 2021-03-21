@@ -417,6 +417,10 @@ div.h-category {
     text-decoration: none;
 }
 
+.slicknav_menu {
+    display: none;
+}
+
 /* ------------------------------ Responsive Media Styles ---------------------------- */
 
 @media only screen and (min-width: 1200px) and (max-width: 1920px) {
@@ -575,6 +579,59 @@ div.h-category {
     .nav-item .nav-menu {
         display: none;
     }
+
+    .slicknav_menu {
+        display: block;
+        background: transparent;
+        text-align: center;
+        margin-top: -48px;
+    }
+
+    .slicknav_nav {
+        background: #333;
+    }
+
+    .slicknav_nav ul {
+        margin: 0;
+        text-align: left;
+    }
+    
+    .slicknav_nav a,
+    .slicknav_nav .slicknav_row {
+        margin: 0;
+    }
+    
+    .slicknav_nav .dropdown a {
+        padding-left: 25px;
+    }
+    
+    .nav-item .nav-depart {
+        display: none;
+    }
+    
+    .slicknav_btn {
+        border-radius: 0;
+        background-color: #e7ab3c !important;
+        display: inline-block;
+        right: -16px;
+    }
+    
+    .slicknav_nav .slicknav_row,
+    .slicknav_nav a {
+        padding: 8px 15px;
+    }
+    
+    .slicknav_nav a:hover {
+        border-radius: 0;
+        background: #e7ab3c;
+        color: #fff;
+    }
+    
+    .slicknav_nav .slicknav_row:hover {
+        border-radius: 0;
+        background: #e7ab3c;
+        color: #fff;
+    }
 }
 
 /* Small Device: 320px */
@@ -587,7 +644,7 @@ div.h-category {
     .inner-header .advanced-search-box .input-group {
         max-width: 100%;
     } 
-    
+
     .inner-header .advanced-search-box .input-group button {
         right: -2px;
     }
