@@ -582,6 +582,48 @@
     color: #b2b2b2;
 }
 
+/** Banner Products **/
+
+.zg-banner {
+/*    background: radial-gradient(#0A99AF, #057586);
+    height: 140px;
+    color: #fff;*/
+    padding-top: 6px;
+}
+
+.y-row {
+    width: 100%;
+}
+
+.y-row::after, .y-row::before {
+    display: table;
+    content: "";
+    line-height: 0;
+    font-size: 0;
+}
+
+.y-row::after {
+    clear: both;
+}
+
+.y-spacing-top-small {
+    margin-top: 8px;
+}
+
+.zg-banner-text {
+    font-size: 61px;
+    font-weight: 600;
+    line-height: 1.2em;
+}
+
+.zg-banner-subtext {
+    font-size: 16px;
+}
+
+.zg-banner-subtext {
+    display: block;
+}
+
 /*---------------------
   Product Shop
 -----------------------*/
@@ -1061,6 +1103,10 @@
     .product-slider .owl-nav button[type=button] {
         display: none;
     }
+    
+    .zg-banner-text {
+        font-size: 51px;
+    }
 }
 
 /* Large Device: 480px */
@@ -1092,6 +1138,10 @@
     .product-show-option .select-option .sorting.nice-select {
         margin-left: 15px;
         margin-bottom: 10px;
+    }
+    
+    #bannerProduct {
+        display: none;
     }
 
 }

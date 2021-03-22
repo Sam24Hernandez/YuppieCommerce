@@ -1,3 +1,10 @@
+<?php
+
+$server = Route::ctrRouteServer();
+$url = Route::ctrRoute();
+
+?>
+
 <!-- == Header Top == -->
 <header id="header-top" class="header-section header-top">
     <div class="h-top">
@@ -48,7 +55,7 @@
                     </div>                                        
                 </div>
                 <div class="col-lg-7 col-md-7">
-                    <div class="advanced-search-box" id="search">
+                    <div class="advanced-search-box">
                         <button type="button" class="category-btn" id="category-btn">Categorías</button>
                         <!-- == Categories == -->                        
                         <div id="categories" class="h-category">
@@ -90,7 +97,7 @@
                                         
                                         <td>
                                             <h3>
-                                                <a id="shop-see-all" title="" href="<?php echo $url; ?>todas-las-categorias">
+                                                <a id="shop-see-all" title="" href="<?php echo $url; ?>all-categories">
                                                     Ver todas las categorías
                                                     <i class="fa fa-angle-double-right"></i>
                                                 </a>
@@ -101,9 +108,9 @@
                             </table>                                                                                    
                         </div>
 
-                        <div class="input-group">
+                        <div id="search" class="input-group">
                             <input type="search" name="serach" size="50" maxlength="300" aria-label="Buscar artículos" placeholder="Buscar artículos" spellcheck="false" autocomplete="off" class="input-ui">
-                            <a href="#">
+                            <a href="<?php echo $url; ?>search/1/recientes">
                                 <button class="btn btn-default backColor" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>

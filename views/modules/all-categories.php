@@ -14,7 +14,9 @@ $route = $routes[0];
                         <i class="fa fa-home"></i>
                         Inicio
                     </a>
-                    <span class="text-uppercase active-page"><?php echo $routes[0] ?></span>
+                    <span class="text-uppercase active-page">
+                        Todas las categorías
+                    </span>
                 </div>
             </div>
         </div>

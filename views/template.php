@@ -100,8 +100,8 @@
                 include "modules/products.php";
             } elseif ($infoProduct != NULL) {
                 include "modules/infoproduct.php";
-            } elseif ($routes[0] === "todas-las-categorias") {
-                include "modules/all-categories.php";
+            } elseif ($routes[0] === "all-categories" || $routes[0] === "search") {
+                include "modules/".$routes[0].".php";
             } else {
                 include "modules/error404.php";
             }
@@ -135,6 +135,7 @@
         <script src="<?php echo $url; ?>views/js/slide.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/products.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/product-slider.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/search.js" type="text/javascript"></script>
 
     </body>
 </html>

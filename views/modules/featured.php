@@ -1,5 +1,6 @@
 <?php
 $server = Route::ctrRouteServer();
+
 ?>
 
 <!-- == Banner Section == -->
@@ -145,39 +146,45 @@ $server = Route::ctrRouteServer();
     </div>
 </section>
 
-<section class="deal-of-week set-bg spad" data-setbg="<?php echo $server; ?>views/img/banner/time-bg.jpg">
-    <div class="container">
-        <div class="col-lg-6 text-center">
-            <div class="section-title">
-                <h2>Oferta De La Semana</h2>
-                <p>Abre tu cuenta con nosotros y empieza a ganar totalmente gratis.</p>                
-                <div class="product-price">
-                    $35.00
-                    <span>/ Mochila de Viaje</span>
-                </div>                              
+<?php
+
+$offer_banner = ProductController::ctrShowOfferBanner();
+
+echo '<section class="deal-of-week set-bg spad" data-setbg="'.$server.$offer_banner["product_image"].'">
+        <div class="container">
+            <div class="col-lg-6 text-center">
+                <div class="section-title">
+                    <h2>Oferta De La Semana</h2>
+                    <p>'.$offer_banner["product_discount"].'% de Descuento</p>                
+                    <div class="product-price">
+                        $'.$offer_banner["product_price"].'
+                        <span>/ '.$offer_banner["product_title"].'</span>
+                    </div>                              
+                </div>
+                <div class="countdown-timer" id="countdown">
+                    <div class="cd-item">
+                        <span>56</span>
+                        <p>Días</p>
+                    </div>
+                    <div class="cd-item">
+                        <span>12</span>
+                        <p>Hrs</p>
+                    </div>
+                    <div class="cd-item">
+                        <span>40</span>
+                        <p>Mins</p>
+                    </div>
+                    <div class="cd-item">
+                        <span>52</span>
+                        <p>Segs</p>
+                    </div>
+                </div>
+                <a href="#" class="primary-btn">Conoce más <i class="fa fa-chevron-right"></i></a>
             </div>
-            <div class="countdown-timer" id="countdown">
-                <div class="cd-item">
-                    <span>56</span>
-                    <p>Días</p>
-                </div>
-                <div class="cd-item">
-                    <span>12</span>
-                    <p>Hrs</p>
-                </div>
-                <div class="cd-item">
-                    <span>40</span>
-                    <p>Mins</p>
-                </div>
-                <div class="cd-item">
-                    <span>52</span>
-                    <p>Segs</p>
-                </div>
-            </div>
-            <a href="#" class="primary-btn">Conoce más <i class="fa fa-chevron-right"></i></a>
-        </div>
-    </div>
-</section>
+        </div>    
+    </section>';
+
+?>  
 
 <?php
 

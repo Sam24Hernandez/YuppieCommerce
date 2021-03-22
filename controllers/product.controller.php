@@ -44,17 +44,60 @@ class ProductController {
 
         return $response;
     }
-    
+
     /* PRODUCTS LIST */
-    
+
     static public function ctrListProducts($order, $item, $valueProduct) {
-        
+
         $table = "products";
-        
+
         $response = ProductModel::mdlListProducts($table, $order, $item, $valueProduct);
-        
+
         return $response;
-        
+    }
+
+    /* SHOW OFFER BANNER */
+
+    static public function ctrShowOfferBanner() {
+
+        $table = "offer_banner";
+
+        $response = ProductModel::mdlShowOfferBanner($table);
+
+        return $response;
+    }
+
+    /* SHOW BANNER PRODUCT */
+
+    static public function ctrShowBanner($route) {
+
+        $table = "banner";
+
+        $response = ProductModel::mdlShowBanner($table, $route);
+
+        return $response;
+    }
+
+    /* SEARCH PRODUCT */
+
+    static public function ctrSearchProducts($search, $order, $mode, $base, $limit) {
+
+        $table = "products";
+
+        $response = ProductModel::mdlSearchProducts($table, $search, $order, $mode, $base, $limit);
+
+        return $response;
+    }
+
+    /* LIST SEARCH PRODUCT */
+
+    static public function ctrListSearchProducts($search) {
+
+        $table = "products";
+
+        $response = ProductModel::mdlListSearchProducts($table, $search);
+
+        return $response;
     }
 
 }

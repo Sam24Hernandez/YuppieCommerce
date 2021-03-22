@@ -125,4 +125,64 @@ class ProductModel {
         $stmt = NULL;
     }
 
+    /* SHOW OFFER BANNER */
+
+    static public function mdlShowOfferBanner($table) {
+
+        $stmt = Database::connect()->prepare("SELECT * FROM $table");
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
+    /* SHOW BANNER PRODUCT */
+
+    static public function mdlShowBanner($table, $route) {
+
+        $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE route = :route");
+
+        $stmt->bindParam(":route", $route, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch();
+
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
+    /** SEARCH PRODUCTS **/
+    static public function mdlSearchProducts($table, $search, $order, $mode, $base, $limit) {
+
+        $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE route like '%$search%' OR product_title like '%$search%' OR description like '%$search%' ORDER BY $order $mode LIMIT $base, $limit");
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
+    /** LIST SEARCH PRODUCTS * */
+    static public function mdlListSearchProducts($table, $search) {
+
+        $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE route like '%$search%' OR product_title like '%$search%' OR description like '%$search%'");
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
 }

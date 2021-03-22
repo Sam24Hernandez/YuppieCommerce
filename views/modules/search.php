@@ -1,29 +1,3 @@
-<?php
-$server = Route::ctrRouteServer();
-$url = Route::ctrRoute();
-
-$route = $routes[0];
-
-$banner = ProductController::ctrShowBanner($route);
-
-if($banner != null) {
-    
-    $backgroundBanner = json_decode($banner["banner_bg"], true);
-    
-    echo '<section id="bannerProduct" class="y-row zg-banner text-center" style="background:'.$backgroundBanner["background"].'; height:'.$backgroundBanner["height"].'px; color:'.$backgroundBanner["color"].';">
-            <div class="y-row y-spacing-top-small">
-                <span class="zg-banner-text">
-                    '.$banner["title"].'
-                </span>
-                <span class="zg-banner-subtext">
-                    '.$banner["subtitle"].'
-                </span>
-            </div>
-    </section>';
-}
-
-?>
-
 <!-- Breadcrumb Section Begin -->
 <div class="breadcrumb-section">
     <div class="container">
@@ -34,7 +8,7 @@ if($banner != null) {
                         <i class="fa fa-home"></i>
                         Inicio
                     </a>
-                    <span class="text-uppercase active-page"><?php echo $routes[0] ?></span>
+                    <span class="text-uppercase active-page">Buscador</span>
                 </div>
             </div>
         </div>
@@ -191,8 +165,8 @@ if($banner != null) {
                                 <select class="sorting" onchange="location = this.value;">
                                     <option value="">Ordenar Productos</option>
                                     <?php
-                                    echo '<option value="' . $url . $routes[0] . '/1/recientes">Más reciente</option>
-                                        <option value="' . $url . $routes[0] . '/1/antiguos">Más antiguo</option>';
+                                    echo '<option value="' . $url . $routes[0] . '/1/recientes/'.$routes[3].'">Más reciente</option>
+                                        <option value="' . $url . $routes[0] . '/1/antiguos/'.$routes[3].'">Más antiguo</option>';
                                     ?>
                                 </select>
                             </div>
@@ -204,7 +178,7 @@ if($banner != null) {
 
                         <?php
                         /** Call to Pagination * */
-                        if (isset($routes[1]) && preg_match('/^[0-9]+$/', $routes[1])) {
+                        if (isset($routes[1])) {
 
                             if (isset($routes[2])) {
 
@@ -216,11 +190,7 @@ if($banner != null) {
                                     $_SESSION["order"] = "DESC";
                                 }
                             } else {
-                                if (isset($_SESSION["order"])) {
-                                    $mode = $_SESSION["order"];
-                                } else {
-                                    $mode = "DESC";
-                                }
+                                $mode = $_SESSION["order"];
                             }
 
                             $base = ($routes[1] - 1) * 12;
@@ -234,44 +204,20 @@ if($banner != null) {
                             $_SESSION["order"] = "DESC";
                         }
 
-                        /** Call Categories, Subcategories, Featured Products * */
-                        if ($routes[0] === "articulos-gratis") {
-
-                            $item2 = "price";
-                            $valueProduct = 0;
-                            $order = "id";
-                        } elseif ($routes[0] === "lo-mas-vendido") {
-
-                            $item2 = NULL;
-                            $valueProduct = NULL;
-                            $order = "sales";
-                        } elseif ($routes[0] === "lo-mas-visto") {
-
-                            $item2 = NULL;
-                            $valueProduct = NULL;
-                            $order = "views";
-                        } else {
-
-                            $order = "id";
-                            $item1 = "route";
-                            $valueCategory = $routes[0];
-                            $valueSubCategory = $routes[0];
-
-                            $category = ProductController::ctrShowCategories($item1, $valueCategory);
-
-                            if (!$category) {
-                                $subcategory = ProductController::ctrShowSubCategories($item1, $valueSubCategory);
-
-                                $item2 = "subcategory_id";
-                                $valueProduct = $subcategory[0]["id"];
-                            } else {
-                                $item2 = "category_id";
-                                $valueProduct = $category["id"];
-                            }
-                        }
-
-                        $products = ProductController::ctrShowProducts($order, $item2, $valueProduct, $base, $limit, $mode);
-                        $listProducts = ProductController::ctrListProducts($order, $item2, $valueProduct);
+                        /** Call Products By Search **/
+                        
+                        $products = NULL;
+                        $listProducts = NULL;
+                        
+                        $order = "id";
+                        
+                        if (isset($routes[3])) {
+                            
+                            $search = $routes[3];
+                            
+                            $products = ProductController::ctrSearchProducts($search, $order, $mode, $base, $limit);
+                            $listProducts = ProductController::ctrListSearchProducts($search);
+                        }                        
 
                         if (!$products) {
                             echo '<section class="error-section">
@@ -348,13 +294,13 @@ if($banner != null) {
                                 echo '<ul class="pagination justify-content-center">';
 
                                 for ($i = 1; $i <= 4; $i++) {
-                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
+                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '/'. $routes[2] .'/'. $routes[3].'">' . $i . '</a></li>';
                                 }
 
                                 echo '<li class="page-item disabled"><a class="page-link">...</a></li>
-                                <li id="item' . $pageProducts . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $pageProducts . '">' . $pageProducts . '</a></li>
+                                <li id="item' . $pageProducts . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $pageProducts . '/'. $routes[2] .'/'. $routes[3].'">' . $pageProducts . '</a></li>
                                 <li class="page-item">
-                                    <a class="page-link" href="' . $url . $routes[0] . '/2">
+                                    <a class="page-link" href="' . $url . $routes[0] . '/2/'. $routes[2] .'/'. $routes[3].'">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Siguiente</span>
                                     </a>
@@ -370,20 +316,20 @@ if($banner != null) {
 
                                 echo '<ul class="pagination justify-content-center">
                                     <li class="page-item">
-                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage - 1) . '">
+                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage - 1) . '/'.$routes[2].'/'.$routes[3].'">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Anterior</span>
                                     </a>
                                 </li>';
 
                                 for ($i = $numActualPage; $i <= ($numActualPage + 3); $i++) {
-                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
+                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '/'.$routes[2].'/'.$routes[3].'">' . $i . '</a></li>';
                                 }
 
                                 echo '<li class="page-item disabled"><a class="page-link">...</a></li>
-                                <li id="item' . $pageProducts . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $pageProducts . '">' . $pageProducts . '</a></li>
+                                <li id="item' . $pageProducts . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $pageProducts . '/'.$routes[2].'/'.$routes[3].'">' . $pageProducts . '</a></li>
                                 <li class="page-item">
-                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage + 1) . '">
+                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage + 1) . '/'.$routes[2].'/'.$routes[3].'">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Siguiente</span>
                                     </a>
@@ -399,20 +345,20 @@ if($banner != null) {
 
                                 echo '<ul class="pagination justify-content-center">
                                     <li class="page-item">
-                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage - 1) . '">
+                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage - 1) . '/'.$routes[2].'/'.$routes[3].'">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Anterior</span>
                                     </a>
                                 </li>
-                                <li id="item1" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/1">1</a></li>
+                                <li id="item1" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/1/'.$routes[2].'/'.$routes[3].'">1</a></li>
                                 <li class="page-item disabled"><a class="page-link">...</a></li>';
 
                                 for ($i = $numActualPage; $i <= ($numActualPage + 3); $i++) {
-                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
+                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '/'.$routes[2].'/'.$routes[3].'">' . $i . '</a></li>';
                                 }
 
                                 echo '<li class="page-item">
-                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage + 1) . '">
+                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage + 1) . '/'.$routes[2].'/'.$routes[3].'">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Siguiente</span>
                                     </a>
@@ -424,16 +370,16 @@ if($banner != null) {
 
                                 echo '<ul class="pagination justify-content-center">
                                     <li class="page-item">
-                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage - 1) . '">
+                                    <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage - 1) . '/'.$routes[2].'/'.$routes[3].'">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Anterior</span>
                                     </a>
                                 </li>
-                                <li id="item1" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/1">1</a></li>
+                                <li id="item1" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/1/'.$routes[2].'/'.$routes[3].'">1</a></li>
                                 <li class="page-item disabled"><a class="page-link">...</a></li>';
 
                                 for ($i = ($pageProducts - 3); $i <= $pageProducts; $i++) {
-                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
+                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '/'.$routes[2].'/'.$routes[3].'">' . $i . '</a></li>';
                                 }
 
                                 echo '</ul>';
@@ -444,7 +390,7 @@ if($banner != null) {
 
                             for ($i = 1; $i <= $pageProducts; $i++) {
 
-                                echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
+                                echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '/'.$routes[2].'/'.$routes[3].'">' . $i . '</a></li>';
                             }
 
                             echo '</ul>';
@@ -458,3 +404,4 @@ if($banner != null) {
         </div>
     </div>
 </section>
+
