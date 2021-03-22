@@ -34,6 +34,7 @@
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/header.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/slide.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/products.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/infoproduct.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/footer.css" type="text/css">
     </head>
     <body>
@@ -129,6 +130,7 @@
         <script src="<?php echo $url; ?>views/js/plugins/jquery.countdown.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.nice-select.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.slicknav.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.zoom.min.js" type="text/javascript"></script>
 
         <script src="<?php echo $url; ?>views/js/header.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/template.js" type="text/javascript"></script>
@@ -136,6 +138,7 @@
         <script src="<?php echo $url; ?>views/js/products.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/product-slider.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/search.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/infoproduct.js" type="text/javascript"></script>
 
     </body>
 </html>
