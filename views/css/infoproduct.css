@@ -200,8 +200,33 @@
     margin-bottom: 0;
 }
 
+.product-details .pd-color .pd-color-choose .cc-item label.cc-white {
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-black-white {
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);
+}
+
 .product-details .pd-color .pd-color-choose .cc-item label.cc-yellow {
     background: #EEEE21;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-cian {
+    background: #a4bdb2;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-cian-yellow {
+    background: linear-gradient(90deg, rgba(9,90,144,1) 0%, rgba(255,255,0,1) 100%);
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-green {
+    background: #008000;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-olive-green {
+    background: #6B8E23;
 }
 
 .product-details .pd-color .pd-color-choose .cc-item label.cc-violet {
@@ -216,8 +241,44 @@
     background: #0000ff;
 }
 
+.product-details .pd-color .pd-color-choose .cc-item label.cc-dark-blue {
+    background: #00008B
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-baby-blue {
+    background: #89cff0;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-navy-blue {
+    background: #000080;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-navy-blue-white {
+    background: linear-gradient(90deg, rgba(0,0,128,1) 25%, rgba(255,255,255,1) 90%);
+}
+
 .product-details .pd-color .pd-color-choose .cc-item label.cc-red {
     background: #ff0000;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-red-white {
+    background: linear-gradient(90deg, rgba(227,16,16,1) 0%, rgba(255,255,255,1) 100%);
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-shedron {
+    background: #BE5A02;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-gold {
+    background: #D4AF37;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-pink {
+    background: #ffc0cb;
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-beige {
+    background: #f5f5dc;
 }
 
 .product-details .pd-size-choose {
@@ -254,6 +315,22 @@
 .product-details .pd-size-choose .sc-item label.active {
     background: #252525;
     color: #ffffff;
+}
+
+.product-details .pd-courses-info h2 {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.02rem;
+    font-size: 1.1rem;
+}
+
+.product-details .pd-courses-info ul {
+    margin-top: 8px;
+    margin-bottom: 21px;
+}
+
+.product-details .pd-courses-info ul li {
+    font-size: 14px;
 }
 
 .product-details .shopping-buttons {
@@ -612,11 +689,23 @@
     margin-bottom: 45px;
 }
 
+/* ------------------------------ Responsive Media Styles ---------------------------- */
+
+@media only screen and (min-width: 1200px) and (max-width: 1920px) {
+    .videoPresentation {
+        height: 415px;
+    }
+}
+
 /* Medium Device: 1200px */
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .tab-item ul li a {
         padding: 18px 89px;
+    }
+    
+    .videoPresentation {
+        height: 415px;
     }
 }
 
@@ -633,6 +722,10 @@
     .tab-item ul li a {
         padding: 18px 49px;
     }
+    
+    .videoPresentation {
+        height: 400px;
+    }
 }
 
 /* Large Device: 480px */
@@ -642,31 +735,39 @@
         padding: 18px 51px;
         margin-bottom: 10px;
     }
+    
+    .videoPresentation {
+        height: 400px;
+    }
 }
 
 /* Small Device: 320px */
 
 @media only screen and (max-width: 479px) {
-    
+
     .product-show-option .select-option {
         display: inline-block;
     }
-    
+
     .product-details .shopping-buttons .pd-cart,
     .product-details .shopping-buttons .pd-shop {
         padding: 14px 20px 10px;
     }
-    
+
     .product-details .pd-ad {
         display: none;
     }
-    
+
     .tab-ite ul li a {
         padding: 18px 30px;
         margin-bottom: 10px;
     }
-    
+
     .specification-table table tr td.p-catagory {
         width: 160px;
+    }
+    
+    .videoPresentation {
+        height: 300px;
     }
 }
