@@ -263,7 +263,7 @@ $url = Route::ctrRoute();
                                     <i class="fa fa-shopping-cart" style="margin: 0px 5px;"></i>
                                     ' . $infoproduct["free_sales"] . ' inscritos |
                                     <i class="fa fa-eye" style="margin: 0px 5px;"></i>
-                                    Visto ' . $infoproduct["free_views"] . ' veces
+                                    Visto <span class="views" sort="'.$infoproduct["price"].'">' . $infoproduct["free_views"] . '</span> veces
                                 </div>';
                         } else {
                             echo '<div class="label label-default" style="font-weight: 100;">
@@ -272,7 +272,7 @@ $url = Route::ctrRoute();
                                     <i class="fa fa-shopping-cart" style="margin: 0px 5px;"></i>
                                     ' . $infoproduct["sales"] . ' inscritos |
                                     <i class="fa fa-eye" style="margin: 0px 5px;"></i>
-                                    Visto ' . $infoproduct["views"] . ' veces
+                                    Visto <span class="views" sort="'.$infoproduct["price"].'">' . $infoproduct["views"] . '</span> veces
                                 </div>';
                         }
                     } else {
@@ -282,7 +282,7 @@ $url = Route::ctrRoute();
                                 <i class="fa fa-shopping-cart" style="margin: 0px 5px;"></i>
                                 ' . $infoproduct["sales"] . ' ventas |
                                 <i class="fa fa-eye" style="margin: 0px 5px;"></i>
-                                Visto ' . $infoproduct["views"] . ' veces
+                                Visto <span class="views" sort="'.$infoproduct["price"].'">' . $infoproduct["views"] . '</span> veces
                             </div>';
                     }
 

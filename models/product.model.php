@@ -157,7 +157,7 @@ class ProductModel {
         $stmt = NULL;
     }
 
-    /** SEARCH PRODUCTS **/
+    /** SEARCH PRODUCTS * */
     static public function mdlSearchProducts($table, $search, $order, $mode, $base, $limit) {
 
         $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE route like '%$search%' OR product_title like '%$search%' OR description like '%$search%' ORDER BY $order $mode LIMIT $base, $limit");
@@ -183,6 +183,26 @@ class ProductModel {
         $stmt->close();
 
         $stmt = NULL;
+    }
+
+    /** UPDATE VIEW COUNTER FOR PRODUCTS * */
+    static public function mdlUpdateProduct($table, $data, $item) {
+
+        $stmt = Database::connect()->prepare("UPDATE $table SET $item = :$item WHERE route = :route");
+
+        $stmt->bindParam(":route", $data["route"], PDO::PARAM_STR);
+        $stmt->bindParam(":" . $item, $data["valueProduct"], PDO::PARAM_STR);
+        
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            return "error";
+        }
+        
+        $stmt->close();
+
+        $stmt = NULL;
+        
     }
 
 }

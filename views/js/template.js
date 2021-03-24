@@ -1,3 +1,7 @@
+/* Global variable from route */
+
+var hidePath = $("#hidePath").val();
+
 /** Preloader **/
 
 $(window).on("load", function () {

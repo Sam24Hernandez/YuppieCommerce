@@ -31,3 +31,49 @@ $('.product-thumbs-track .pt').on('click', function () {
 
 $(".product-pic-zoom").zoom();
 
+/*------------------
+ Counter Views
+ --------------------*/
+
+var counter = 0;
+
+$(window).on("load", function() {
+   
+   var views = $("span.views").html();
+   var price = $("span.views").attr("sort");   
+   
+   counter = Number(views) + 1;
+   
+   $("span.views").html(counter);
+   
+   if (price == 0) {
+       var item = "free_views";
+   } else {
+       var item = "views";
+   }
+   
+   // EVALUATE THE ROUTE TO DEFINE THE PRODUCT TO BE UPGRADED
+   
+   var actualUrl = location.pathname;
+   var route = actualUrl.split("/");
+   
+   var data = new FormData();
+   
+   data.append("valueProduct", counter);
+   data.append("item", item);
+   data.append("route", route.pop());  
+   
+   $.ajax({
+      
+      url: hidePath+"ajax/product.ajax.php",
+      method: "POST",
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function(response){console.log("Respuesta:", response);}
+        
+   });
+    
+});
+

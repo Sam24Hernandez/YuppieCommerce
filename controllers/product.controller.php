@@ -99,5 +99,17 @@ class ProductController {
 
         return $response;
     }
+    
+    /* UPDATE VIEW COUNTER FOR PRODUCTS */
+    
+    static public function ctrUpdateProduct($data, $item) {
+        
+        $table = "products";
+        
+        $response = ProductModel::mdlUpdateProduct($table, $data, $item);
+        
+        return $response;
+        
+    }
 
 }
