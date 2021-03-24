@@ -354,6 +354,12 @@
     font-weight: 700;
     padding: 12px 30px;
     border-radius: 3px;
+    margin-right: 13px;
+}
+
+.product-details .shopping-buttons .pd-shop a {
+    color: #fff !important;
+    text-decoration: none;
 }
 
 
@@ -516,6 +522,8 @@
     text-align: left;
     padding-left: 34px;
     font-size: 16px;
+    background: #f3f3f3;
+    border-bottom: 1px solid #e7e7e7;
     color: #4c4c4c;
     font-weight: 700;
     text-transform: uppercase;
@@ -592,9 +600,11 @@
 }
 
 .customer-review-option .comment-option .co-item .avatar-pic img {
-    height: 63px;
-    width: 63px;
+    height: 34px;
+    width: 34px;
     border-radius: 50%;
+    border: 2px solid #FFF;
+    background-color: #FFF;
 }
 
 .customer-review-option .comment-option .co-item .avatar-text {
@@ -616,12 +626,14 @@
     color: #252525;
     font-weight: 700;
     margin-top: 10px;
+    font-size: 13px;
+    line-height: 19px;
     margin-bottom: 10px;
 }
 
 .customer-review-option .comment-option .co-item .avatar-text h5 span {
     color: #b2b2b2;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -640,7 +652,63 @@
 
 .customer-review-option .comment-option .co-item .avatar-text .at-reply {
     font-size: 14px;
-    color: #636363;
+    color: #252525;
+    margin-bottom: 8px;
+}
+
+.customer-review-option .comment-option .co-item .avatar-text .cr-vote-text {
+    color: #565959;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.customer-review-option .comment-option .co-item .avatar-text .cr-vote-success i {
+    margin-right: 5px;
+}
+
+.customer-review-option .comment-option .co-item .avatar-text p {
+    margin-top: .4rem;
+    margin-left: 5px;
+    background: #e7e9ec;
+    border-radius: 3px;
+    border-color: #ADB1B8 #A2A6AC #8D9096;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.customer-review-option .comment-option .co-item .avatar-text p a {
+    background: linear-gradient(to bottom,#f7f8fa,#e7e9ec);
+    height: 29px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 0 rgba(255,255,255,.6);
+    border-radius: 2px;
+    color: #6c757d;
+}
+
+.customer-review-option .comment-option .co-item .avatar-text p a:hover {
+    background: linear-gradient(to bottom,#e7eaf0,#d9dce1);
+    text-decoration: none !important;
+}
+
+.customer-review-option .comment-option .co-item .avatar-text p a span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 5px;
+    width: 77px;
+}
+
+.customer-review-option .comment-option .co-item .avatar-text p a span i {
+    margin-right: 3px;
 }
 
 .customer-review-option .personal-rating {
@@ -652,17 +720,31 @@
     color: #252525;
 }
 
-.customer-review-option .personal-rating .rating i {
-    font-size: 12px;
-    display: inline-block;
-    color: #FAC451;
-    margin-right: -3px;
-}
-
 .customer-review-option .leave-comment h4 {
     color: #292f3b;
     font-weight: 700;
     margin-bottom: 35px;
+}
+
+.customer-review-option .leave-comment .rating-section {
+    padding-top: 4px;
+    margin-bottom: 22px;
+}
+
+.customer-review-option .leave-comment .rating-section .ryp__star__button {
+    margin-right: 2px;
+    border: none;
+    background: 0 0;
+    padding: 0;
+}
+
+.customer-review-option .leave-comment .rating-section .ryp__star--large {
+    width: 35px;
+}
+
+.customer-review-option .leave-comment .comment-form label {
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .customer-review-option .leave-comment .comment-form input {
@@ -689,6 +771,96 @@
     margin-bottom: 45px;
 }
 
+/** Infoproduct for a course */
+
+.video-course-details {
+    max-width: 70rem;
+    margin-top: 2.4rem;
+}
+
+.video-course-details h3 {
+    color: #252525;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    margin-bottom: .8rem;
+}
+
+.video-course-details .instructor-links {
+    margin-bottom: .8rem;
+    flex-direction: row;
+    align-items: center;
+    display: flex;    
+}
+
+.video-course-details .instructor-links .intructor-names {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    max-height: 4.48rem;
+    flex: 1;
+    min-width: 1px;
+}
+
+.text-sm {
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.video-course-details .lead-elements {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.video-course-details .lead-elements .lead-element-item {
+    margin-bottom: .8rem;
+}
+
+.video-course-details .lead-elements .lead-element-item .created-time {
+    margin-right: 1.6rem;
+}
+
+.video-course-details .lead-elements .lead-element-item .created-time i {
+    margin-right: .8rem;    
+}
+
+.video-course-details .lead-elements .lead-locale i {
+    margin-right: .8rem;
+}
+
+.video-course-details .course-landing-page {
+    max-width: 70rem;
+}
+
+.video-course-details .course-landing-page .notice-course {
+    margin: .4rem 0;
+    display: flex;
+    align-items: center;
+    padding: 1.6rem;
+    background: #f7f9fa;
+    border: 1px solid #d1d7dc;
+    border-radius: 4px;
+}
+
+.video-course-details .course-landing-page .notice-course span {
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -.02rem;
+    line-height: 1.2;
+}
+
+.video-course-details .course-landing-page .notice-course span a {
+    color: #e0a800;
+    text-decoration: none;
+}
+
+.video-course-details .course-landing-page .notice-course span a:hover {
+    color: #e7ab3c;
+}
+
 /* ------------------------------ Responsive Media Styles ---------------------------- */
 
 @media only screen and (min-width: 1200px) and (max-width: 1920px) {
@@ -703,7 +875,7 @@
     .tab-item ul li a {
         padding: 18px 89px;
     }
-    
+
     .videoPresentation {
         height: 415px;
     }
@@ -722,7 +894,7 @@
     .tab-item ul li a {
         padding: 18px 49px;
     }
-    
+
     .videoPresentation {
         height: 400px;
     }
@@ -735,7 +907,7 @@
         padding: 18px 51px;
         margin-bottom: 10px;
     }
-    
+
     .videoPresentation {
         height: 400px;
     }
@@ -766,7 +938,7 @@
     .specification-table table tr td.p-catagory {
         width: 160px;
     }
-    
+
     .videoPresentation {
         height: 300px;
     }
