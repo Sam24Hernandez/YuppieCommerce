@@ -66,3 +66,26 @@ $(window).scroll(function () {
     cur = cur[cur.length - 1];
 //    var id = cur && cur.length ? cur[0].id : "";
 });
+
+// Change the type of input to password or text
+
+function Toggle() {
+    var temp = document.getElementById("regPassword");
+    if (temp.type === "password") {
+        temp.type = "text";
+    } else {
+        temp.type = "password";
+    }
+}
+
+// Change the icon toggle on click
+
+$("#toggle-password").click(function() {
+   
+   if (document.getElementById("show-pass").className === "fa fa-eye") {
+       document.getElementById("show-pass").className = "fa fa-eye-slash";
+   } else {
+       document.getElementById("show-pass").className = "fa fa-eye";
+   }
+   
+});

@@ -102,19 +102,6 @@ textarea {
     outline: 0;
 }
 
-input[type="text"],
-input[type="search"],
-input[type="number"],
-input[type="tel"],
-input[type="password"],
-input[type="date"],
-input[type="email"]{
-    background: var(--color-background-default);
-    height: 31px;
-    padding: 3px 7px;
-    line-height: normal;   
-}
-
 input:focus,
 select:focus,
 button:focus,
@@ -166,6 +153,20 @@ ol {
 
 .primary-btn:hover,
 .primary-btn:link {
+    text-decoration: none;
+}
+
+.btn-inverse {
+    background: #2f3d4a;
+    border: 1px solid #2f3d4a;
+    color: #ffffff;
+}
+
+.btn-inverse:hover {
+    background-color: #232a37;
+    border: 1px solid #232a37;
+    opacity: 0.7;
+    color: #ffffff;
     text-decoration: none;
 }
 

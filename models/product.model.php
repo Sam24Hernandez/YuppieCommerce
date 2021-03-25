@@ -81,6 +81,22 @@ class ProductModel {
 
         $stmt = NULL;
     }
+    
+    /** SHOW RANDOM PRODUCTS **/
+    
+    static public function mdlRandomProducts($table, $limit) {
+        
+        $stmt = Database::connect()->prepare("SELECT * FROM $table ORDER BY RAND() LIMIT $limit");
+        
+        $stmt->execute();
+        
+        return $stmt->fetchAll();
+        
+        $stmt->close();
+
+        $stmt = NULL;
+        
+    }
 
     /* SHOW INFOPRODUCT */
 

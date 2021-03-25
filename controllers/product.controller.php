@@ -33,6 +33,18 @@ class ProductController {
 
         return $response;
     }
+    
+    /** SHOW RANDOM PRODUCT */
+    
+    static public function ctrRandomProduct($limit) {
+        
+        $table = "products";
+        
+        $response = ProductModel::mdlRandomProducts($table, $limit);
+        
+        return $response;
+        
+    }
 
     /* SHOW INFOPRODUCT */
 

@@ -421,6 +421,190 @@ div.h-category {
     display: none;
 }
 
+/** Modals **/
+
+.modalForm .facebook {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.modalForm .google {
+    margin-bottom: 15px;
+}
+
+.modalForm .facebook button {
+    background-color: #4267b2;
+    color: #fff;
+    border: #4267b2;
+    font-size: 1rem;
+    padding-bottom: 13px;
+    padding-top: 15px;
+    font-weight: bold;
+    min-height: 48px;
+    width: 100%;
+    max-width: 100%;
+}
+
+.modalForm .google button {
+    border: thin solid #888;
+    background-color: #fff;
+    color: #444;
+    padding-right: 30px;
+    line-height: inherit;
+    padding-left: 34px;
+    font-size: 1rem;
+    padding-bottom: 13px;
+    padding-top: 15px;
+    font-weight: bold;
+    min-height: 48px;
+    width: 100%;
+    min-width: 100%;
+}
+
+.modalForm .facebook button:hover {
+    background-color: #10299c;
+    border: #10299c;
+}
+
+.modalForm .google button:hover {
+    border: thin solid #888;
+    background-color: #eee;
+    color: #444;
+}
+
+.modalForm .facebook button::before {
+    content: "";
+    position: absolute;
+    top: 32px;
+    left: 22px;
+    width: 34px;
+    height: 90%;
+}
+
+.modalForm .google button::before {
+    content: "";
+    position: absolute;
+    top: 111px;
+    left: 32px;
+    width: 20px;
+    height: 20px;
+}
+
+.modalForm .facebook button::before {
+    background: url(../../views/img/facebook-logo.png) 6px 6px no-repeat; 
+}
+
+.modalForm .google button::before {
+    background: url(../../views/img/google-logo.png) no-repeat;
+    background-size: 100%;
+}
+
+.modalForm form {
+    padding: 20px;
+}
+
+.modalForm .input-group .input-group-addon {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.modalForm .input-group .input-group-addon {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.modalForm .input-group .input-group-addon {
+    padding: .5rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+
+.modalForm .input-group .input-group-addon:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.modalForm .input-group .input-group-addon:not(:last-child) {
+    border-right: 0;
+}
+
+.input-group > .form-control:focus {
+    z-index: 0 !important;
+}
+
+.form-input-password {
+    padding-right: 3rem;
+}
+
+.separator {
+    display: block;
+    width: 100%;
+    height: 30px;
+    padding: 1px;
+}
+
+.separator-line {
+    width: 100%;
+    height: 1px;
+    margin: 16px 0 0;
+    background-color: #c7c7c7;
+}
+
+.separator-content {
+    position: relative;
+    top: -9px;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.separator-content mark {
+    background-color: #FFF;
+    padding: 0 4px;
+}
+
+.help-tools-section {
+    margin-top: 8px;
+}
+
+.icon-font-component {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.form-input-icon {
+    height: 24px;
+    width: 24px;
+    background: none;
+    border: 0;    
+    height: 100%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 3rem;
+}
+
+.reg-toggle-password-visible {
+    color: #e7ab3c;
+}
+
+.form-input-icon.form-input-right {
+    border-radius: 0 .3rem .3rem 0;
+    right: 0;
+}
+
 /* ------------------------------ Responsive Media Styles ---------------------------- */
 
 @media only screen and (min-width: 1200px) and (max-width: 1920px) {
@@ -647,5 +831,10 @@ div.h-category {
 
     .inner-header .advanced-search-box .input-group button {
         right: -2px;
+    }
+    
+    .modal-footer {
+        display: inline;
+        font-size: 14px;
     }
 }
