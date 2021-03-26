@@ -13,6 +13,9 @@ require_once "models/user.model.php";
 /* Routes */
 require_once "models/routes.php";
 
+/* Vendor */
+require_once "extensions/vendor/autoload.php";
+
 $template = new TemplateController();
 $template->template();
 

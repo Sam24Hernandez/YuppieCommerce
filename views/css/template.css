@@ -77,6 +77,10 @@ img {
     border: 0;
 }
 
+.img-circle {
+    border-radius: 50%;
+}
+
 input,
 select {
     vertical-align: middle;

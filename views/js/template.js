@@ -71,6 +71,7 @@ $(window).scroll(function () {
 
 function Toggle() {
     var temp = document.getElementById("regPassword");
+
     if (temp.type === "password") {
         temp.type = "text";
     } else {
@@ -78,14 +79,53 @@ function Toggle() {
     }
 }
 
-// Change the icon toggle on click
+// Change the type of input to password or text on Login Form
 
-$("#toggle-password").click(function() {
-   
-   if (document.getElementById("show-pass").className === "fa fa-eye") {
-       document.getElementById("show-pass").className = "fa fa-eye-slash";
-   } else {
-       document.getElementById("show-pass").className = "fa fa-eye";
-   }
-   
+function ToggleLogin() {
+
+    var tempLogin = document.getElementById("logPassword");
+
+    if (tempLogin.type === "password") {
+
+        tempLogin.type = "text";
+
+    } else {
+
+        tempLogin.type = "password";
+
+    }
+
+}
+
+
+// Change the icon toggle on click to the register Form
+
+$("#toggle-password").click(function () {
+
+    if (document.getElementById("show-pass").className === "fa fa-eye") {
+
+        document.getElementById("show-pass").className = "fa fa-eye-slash";
+
+    } else {
+
+        document.getElementById("show-pass").className = "fa fa-eye";
+
+    }
+
+});
+
+// Change the icon toggle on click to the login form
+
+$("#toggle-password-login").click(function () {
+
+    if (document.getElementById("show-pass-login").className === "fa fa-eye") {
+
+        document.getElementById("show-pass-login").className = "fa fa-eye-slash";
+
+    } else {
+
+        document.getElementById("show-pass-login").className = "fa fa-eye";
+
+    }
+
 });

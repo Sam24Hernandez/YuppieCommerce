@@ -39,6 +39,7 @@
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/slide.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/products.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/infoproduct.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/profile.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/footer.css" type="text/css">
 
         <!-- ============================================================== -->
@@ -121,7 +122,7 @@
                 include "modules/products.php";
             } elseif ($infoProduct != NULL) {
                 include "modules/infoproduct.php";
-            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout") {
+            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile") {
                 include "modules/" . $routes[0] . ".php";
             } else {
                 include "modules/error404.php";
@@ -150,6 +151,35 @@
         <script src="<?php echo $url; ?>views/js/search.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/infoproduct.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/users.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/registerFacebook.js" type="text/javascript"></script>
+
+        <!--=====================================
+        https://developers.facebook.com/
+        ======================================-->
+        <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '179926760461889',
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v10.0'
+                });
+
+                FB.AppEvents.logPageView();
+
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>               
 
     </body>
 </html>

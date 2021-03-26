@@ -1,15 +1,43 @@
 <?php
 $server = Route::ctrRouteServer();
 $url = Route::ctrRoute();
-
 /** Login User * */
 if (isset($_SESSION["validateSession"])) {
-
     if ($_SESSION["validateSession"] === "ok") {
         echo '<script>
                 localStorage.setItem("user", "' . $_SESSION["id"] . '");
         </script>';
     }
+}
+/** Google API * */
+// https://console.developers.google.com/apis
+// https://github.com/google/google-api-php-client
+
+/** Create an Object from Google API * */
+$client = new Google_Client();
+$client->setAuthConfig('models/client_secret.json');
+$client->setAccessType("offline");
+$client->setScopes(['profile', 'email']);
+/* Route for Google Login Modal */
+$googleRoute = $client->createAuthUrl();
+// Get code variable on callback status
+if (isset($_GET["code"])) {
+    $token = $client->authenticate($_GET["code"]);
+    $_SESSION['id_token_google'] = $token;
+    $client->setAccessToken($token);
+}
+// Receive the encrypted data from google in an array
+if ($client->getAccessToken()) {
+    $item = $client->verifyIdToken();
+    $data = array("name" => $item["name"], "email" => $item["email"], "password" => "null", "picture" => $item["picture"], "mode" => "google", "email_verification" => 0, "encrypted_email" => "null");
+    $response = UserController::ctrRegisterSocialMedia($data);
+    
+    echo '<script>
+        setTimeout(function() {
+           window.location = localStorage.getItem("actualRoute"); 
+        }, 1000);
+    </script>';
+    
 }
 ?>
 
@@ -31,24 +59,39 @@ if (isset($_SESSION["validateSession"])) {
             <!-- == Register Section == -->
             <div class="h-right">
 
-                <?php
-                if (isset($_SESSION["validateSession"])) {
-
-                    if ($_SESSION["validateSession"] === "ok") {
-
-                        if ($_SESSION["mode"] === "directo") {
-
-                            echo '<a href="'.$url.'profile" class="user-panel">
-                                    <img class="user-image" src="'.$server.'views/img/users/default/anonymous.png" width="10%">
+<?php
+if (isset($_SESSION["validateSession"])) {
+    if ($_SESSION["validateSession"] === "ok") {
+        if ($_SESSION["mode"] === "directo") {
+            echo '<a href="' . $url . 'profile" class="user-panel">
+                                    <img class="user-image img-circle" src="' . $server . 'views/img/users/default/anonymous.png" width="10%">
                                 </a>                                
-                                <a href="'.$url.'signout" class="logout-panel">
+                                <a href="' . $url . 'signout" class="logout-panel">
                                     <i class="fa fa-sign-out"></i>
                                     Cerrar sesión
                                 </a>';
-                        }
-                    }
-                } else {
-                    echo '<a href="#modalLogin" data-toggle="modal" class="login-panel">
+        }
+        if ($_SESSION["mode"] === "facebook") {
+            echo '<a href="' . $url . 'profile" class="user-panel">
+                                    <img class="user-image img-circle" src="' . $_SESSION["picture"] . '" width="10%">
+                                </a>                                
+                                <a href="' . $url . 'signout" class="logout-panel signout">
+                                    <i class="fa fa-sign-out"></i>
+                                    Cerrar sesión
+                                </a>';
+        }
+        if ($_SESSION["mode"] === "google") {
+            echo '<a href="' . $url . 'profile" class="user-panel">
+                                    <img class="user-image img-circle" src="' . $_SESSION["picture"] . '" width="10%">
+                                </a>                                
+                                <a href="' . $url . 'signout" class="logout-panel">
+                                    <i class="fa fa-sign-out"></i>
+                                    Cerrar sesión
+                                </a>';
+        }
+    }
+} else {
+    echo '<a href="#modalLogin" data-toggle="modal" class="login-panel">
                     <i class="fa fa-user"></i>
                     Iniciar sesión
                 </a>               
@@ -57,8 +100,8 @@ if (isset($_SESSION["validateSession"])) {
                     <i class="fa fa-user-plus"></i>
                     Regístrarse
                 </a>';
-                }
-                ?>
+}
+?>
                 <!-- == Social Section == -->
                 <div class="social">
                     <a href="https://facebook.com" target="_blank"><i class="fa fa-facebook social-media fb-w" aria-hidden="true"></i></a>
@@ -90,37 +133,30 @@ if (isset($_SESSION["validateSession"])) {
                             <table id="header-sbc" role="presentation">
                                 <tbody>
                                     <tr>
-                                        <?php
-                                        $item = null;
-                                        $valueCategory = null;
-
-                                        $categories = ProductController::ctrShowCategories($item, $valueCategory);
-
-                                        foreach (array_slice($categories, 0, 4) as $key => $value) {
-
-                                            echo '<td>
+<?php
+$item = null;
+$valueCategory = null;
+$categories = ProductController::ctrShowCategories($item, $valueCategory);
+foreach (array_slice($categories, 0, 4) as $key => $value) {
+    echo '<td>
                                                         <h3 class="header-sbc-parent">
                                                             <a class="pixelCategories" title="' . $value["category_name"] . ' " href="' . $value["route"] . '">
                                                                 ' . $value["category_name"] . '                                                  
                                                             </a>
                                                         </h3>
                                                         <ul class="header-list-sbc">';
-
-                                            $item = "category_id";
-                                            $valueSubCategory = $value["id"];
-
-                                            $subcategories = ProductController::ctrShowSubCategories($item, $valueSubCategory);
-
-                                            foreach ($subcategories as $key => $value) {
-                                                echo '<li>
+    $item = "category_id";
+    $valueSubCategory = $value["id"];
+    $subcategories = ProductController::ctrShowSubCategories($item, $valueSubCategory);
+    foreach ($subcategories as $key => $value) {
+        echo '<li>
                                                                 <a class="pixelSubcategories" title="' . $value["subcategory_name"] . '" href="' . $value["route"] . '">' . $value["subcategory_name"] . '</a>
                                                             </li>';
-                                            }
-
-                                            echo '</ul>
+    }
+    echo '</ul>
                                                     </td>';
-                                        }
-                                        ?>                                                                                                                   
+}
+?>                                                                                                                   
 
                                         <td>
                                             <h3>
@@ -179,16 +215,14 @@ if (isset($_SESSION["validateSession"])) {
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="active"><a href="<?php echo $url; ?>">Inicio</a></li>
-                    <?php
-                    $itemCategoryMenu = null;
-                    $valueCategoryMenu = null;
-
-                    $categoriesMenu = ProductController::ctrShowCategories($itemCategoryMenu, $valueCategoryMenu);
-
-                    foreach (array_slice($categoriesMenu, 0, 3) as $key => $value) {
-                        echo '<li><a href="' . $url . $value["route"] . '">' . $value["category_name"] . '</a></li>';
-                    }
-                    ?>
+<?php
+$itemCategoryMenu = null;
+$valueCategoryMenu = null;
+$categoriesMenu = ProductController::ctrShowCategories($itemCategoryMenu, $valueCategoryMenu);
+foreach (array_slice($categoriesMenu, 0, 3) as $key => $value) {
+    echo '<li><a href="' . $url . $value["route"] . '">' . $value["category_name"] . '</a></li>';
+}
+?>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Vender</a></li>
                 </ul>
@@ -234,15 +268,15 @@ if (isset($_SESSION["validateSession"])) {
                     </div>
                 </div>
 
-                <?php
-                $register = new UserController();
-                $register->ctrRegisterUser();
-                ?>
+<?php
+$register = new UserController();
+$register->ctrRegisterUser();
+?>
 
                 <input class="btn btn-success" type="submit" value="Crear tu cuenta de Yuppie">                    
 
                 <div class="help-tools-section">
-                    <p>Al crear una cuenta, aceptas las <a href="#">Condiciones de Uso</a> y admistes haber leído el <a href="#">Aviso de Privacidad</a></p>
+                    <p>Al crear una cuenta, aceptas las <a href="#">Condiciones de Uso</a> y admistes haber leído el <a href="#">Aviso de Privacidad</a>.</p>
                 </div>
             </form>
             <div class="separator">
@@ -260,7 +294,9 @@ if (isset($_SESSION["validateSession"])) {
 
                 <div class="google">
                     <button id="register_google" class="google-login">
-                        Continuar con Google
+                        <a href="<?php echo $googleRoute; ?>">
+                            Continuar con Google
+                        </a>                        
                     </button>   
                 </div>
             </div>
@@ -294,13 +330,16 @@ if (isset($_SESSION["validateSession"])) {
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-lock"></i></div>
                         <input type="password" class="form-control" id="logPassword" name="logPassword" placeholder="Ingresa tu contraseña" required>
+                        <button id="toggle-password-login" class="icon-font-component form-input-icon form-input-right reg-toggle-password-visible" type="button" onclick="ToggleLogin()">
+                            <i id="show-pass-login" class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
 
-                <?php
-                $login = new UserController();
-                $login->ctrLoginUser();
-                ?>
+<?php
+$login = new UserController();
+$login->ctrLoginUser();
+?>
 
                 <input class="btn btn-success btn-login" type="submit" value="Continuar" />
 
@@ -323,7 +362,9 @@ if (isset($_SESSION["validateSession"])) {
 
                 <div class="google">
                     <button id="login_google" class="google-login">
-                        Continuar con Google
+                        <a href="<?php echo $googleRoute; ?>">
+                            Continuar con Google
+                        </a> 
                     </button>   
                 </div>
             </div>
@@ -334,5 +375,4 @@ if (isset($_SESSION["validateSession"])) {
         </div>
     </div>
 </div>
-
 

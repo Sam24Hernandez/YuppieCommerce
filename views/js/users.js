@@ -1,7 +1,7 @@
-
+/** Get the Route **/
 var actualRoute = location.href;
 
-$(".btn-login").click(function() {
+$(".btn-login, .facebook, .google").click(function() {
    
    localStorage.setItem("actualRoute", actualRoute);
     

@@ -4,6 +4,12 @@ session_destroy();
 
 $url = Route::ctrRoute();
 
+if (isset($_SESSION['id_token_google']) && !empty($_SESSION['id_token_google'])) {
+    
+    unset($_SESSION['id_token_google']);
+    
+}
+
 echo '<script>
     localStorage.removeItem("user");
     localStorage.clear();

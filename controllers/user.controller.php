@@ -160,4 +160,80 @@ class UserController {
         }
     }
 
+    /** Register with Social Medias */
+    static public function ctrRegisterSocialMedia($data) {
+
+        $table = "users";
+        $item = "email";
+        $valueUser = $data["email"];
+        $emailRepeated = false;
+
+        $response0 = UserModel::mdlShowUser($table, $item, $valueUser);
+
+        if ($response0) {
+
+            if ($response0["mode"] != $data["mode"]) {
+
+                echo '<script>
+
+                    swal({
+                        title: "¡Error!",
+                        text: "¡El correo electrónico ' . $data["email"] . ', ya está registrado en el sistema!",
+                        type: "error",
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Cerrar",
+                        closeOnConfirm: false,
+                      },
+                      function(isConfirm){
+                        if (isConfirm) {
+                            history.back();
+                        } 
+                      });
+                </script>';
+
+                $emailRepeated = false;
+            }
+
+            $emailRepeated = true;
+        } else {
+
+            $response1 = UserModel::mdlRegisterUser($table, $data);
+        }
+
+        if ($emailRepeated || $response1 === "ok") {
+
+            $response2 = UserModel::mdlShowUser($table, $item, $valueUser);
+
+            if ($response2["mode"] === "facebook") {
+
+                session_start();
+
+                $_SESSION["validateSession"] = "ok";
+                $_SESSION["id"] = $response2["id"];
+                $_SESSION["name"] = $response2["name"];
+                $_SESSION["email"] = $response2["email"];
+                $_SESSION["password"] = $response2["password"];
+                $_SESSION["picture"] = $response2["picture"];
+                $_SESSION["mode"] = $response2["mode"];
+
+                echo "ok";
+                
+            } elseif ($response2["mode"] === "google") {
+                
+                $_SESSION["validateSession"] = "ok";
+                $_SESSION["id"] = $response2["id"];
+                $_SESSION["name"] = $response2["name"];
+                $_SESSION["email"] = $response2["email"];
+                $_SESSION["password"] = $response2["password"];
+                $_SESSION["picture"] = $response2["picture"];
+                $_SESSION["mode"] = $response2["mode"];
+                
+                echo "<span style='color:white;'>ok</span>";
+                
+            } else {
+                echo "";
+            }
+        }
+    }
+
 }
