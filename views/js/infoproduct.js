@@ -71,7 +71,7 @@ $(window).on("load", function() {
       cache: false,
       contentType: false,
       processData: false,
-      success: function(response){console.log("Respuesta:", response);}
+      success: function(response){}
         
    });
     

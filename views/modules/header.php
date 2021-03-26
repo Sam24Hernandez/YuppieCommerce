@@ -1,6 +1,16 @@
 <?php
 $server = Route::ctrRouteServer();
 $url = Route::ctrRoute();
+
+/** Login User * */
+if (isset($_SESSION["validateSession"])) {
+
+    if ($_SESSION["validateSession"] === "ok") {
+        echo '<script>
+                localStorage.setItem("user", "' . $_SESSION["id"] . '");
+        </script>';
+    }
+}
 ?>
 
 <!-- == Header Top == -->
@@ -16,10 +26,29 @@ $url = Route::ctrRoute();
                     <i class="fa fa-phone"></i>
                     +99 33.188.888
                 </div>
-            </div>
+            </div>           
+
             <!-- == Register Section == -->
             <div class="h-right">
-                <a href="#modalLogin" data-toggle="modal" class="login-panel">
+
+                <?php
+                if (isset($_SESSION["validateSession"])) {
+
+                    if ($_SESSION["validateSession"] === "ok") {
+
+                        if ($_SESSION["mode"] === "directo") {
+
+                            echo '<a href="'.$url.'profile" class="user-panel">
+                                    <img class="user-image" src="'.$server.'views/img/users/default/anonymous.png" width="10%">
+                                </a>                                
+                                <a href="'.$url.'signout" class="logout-panel">
+                                    <i class="fa fa-sign-out"></i>
+                                    Cerrar sesión
+                                </a>';
+                        }
+                    }
+                } else {
+                    echo '<a href="#modalLogin" data-toggle="modal" class="login-panel">
                     <i class="fa fa-user"></i>
                     Iniciar sesión
                 </a>               
@@ -27,8 +56,9 @@ $url = Route::ctrRoute();
                 <a href="#modalRegister" data-toggle="modal" class="register-panel">
                     <i class="fa fa-user-plus"></i>
                     Regístrarse
-                </a>
-
+                </a>';
+                }
+                ?>
                 <!-- == Social Section == -->
                 <div class="social">
                     <a href="https://facebook.com" target="_blank"><i class="fa fa-facebook social-media fb-w" aria-hidden="true"></i></a>
@@ -170,7 +200,7 @@ $url = Route::ctrRoute();
 </header>
 <!-- == End Header Top == -->
 
-<!-- == Modal Login == -->
+<!-- == Modal Register == -->
 <div class="modal fade modalForm" id="modalRegister" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -181,11 +211,11 @@ $url = Route::ctrRoute();
                 </button>
             </div>            
 
-            <form class="form" method="POST">
+            <form class="form" method="POST" onsubmit="return registerUser()">
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                        <input type="text" class="form-control" id="regName" name="regName" placeholder="Ingresa tu nombre: Ej. Sam Hernández" maxlength="50" autocomplete="off" required>
+                        <input type="text" class="form-control" id="regUser" name="regUser" placeholder="Ingresa tu nombre: Ej. Sam Hernández" maxlength="50" autocomplete="off" required>
                     </div>                    
                 </div>
                 <div class="form-group">
@@ -197,16 +227,20 @@ $url = Route::ctrRoute();
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-lock"></i></div>
-                        <input type="password" class="form-control form-input-password" id="regPassword" name="regPassword" placeholder="Ingresa tu contraseña" autocomplete="off" required>
+                        <input type="password" class="form-control form-input-password" id="regPassword" name="regPassword" placeholder="Ingresa tu contraseña" minlength="8" autocomplete="off" required>
                         <button id="toggle-password" class="icon-font-component form-input-icon form-input-right reg-toggle-password-visible" type="button" onclick="Toggle()">
                             <i id="show-pass" class="fa fa-eye" aria-hidden="true"></i>
                         </button>
                     </div>
                 </div>
-                <button class="btn btn-success" type="submit">
-                    Crear tu cuenta de Yuppie
-                </button>
-                
+
+                <?php
+                $register = new UserController();
+                $register->ctrRegisterUser();
+                ?>
+
+                <input class="btn btn-success" type="submit" value="Crear tu cuenta de Yuppie">                    
+
                 <div class="help-tools-section">
                     <p>Al crear una cuenta, aceptas las <a href="#">Condiciones de Uso</a> y admistes haber leído el <a href="#">Aviso de Privacidad</a></p>
                 </div>
@@ -262,10 +296,14 @@ $url = Route::ctrRoute();
                         <input type="password" class="form-control" id="logPassword" name="logPassword" placeholder="Ingresa tu contraseña" required>
                     </div>
                 </div>
-                <button class="btn btn-success" type="submit">
-                    Continuar
-                </button>
-                
+
+                <?php
+                $login = new UserController();
+                $login->ctrLoginUser();
+                ?>
+
+                <input class="btn btn-success btn-login" type="submit" value="Continuar" />
+
                 <div class="help-tools-section">
                     <a href="#">¿Olvidaste tu contraseña?</a>
                 </div>

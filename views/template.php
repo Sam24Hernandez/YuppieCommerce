@@ -18,26 +18,46 @@
         /* == Maintaining the project's fixed route == */
 
         $url = Route::ctrRoute();
-        ?>
+        ?>      
 
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
-
+        <!-- === CSS PLUGINS === -->
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/jquery-ui.min.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/nice-select.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/slicknav.min.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/sweetalert.css" type="text/css">                
 
+        <!-- === GOOGLE FONTS === -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+        <!-- === CSS CUSTOM STYLES === -->
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/template.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/header.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/slide.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/products.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/infoproduct.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/footer.css" type="text/css">
+
+        <!-- ============================================================== -->
+        <!-- All Jquery Plugins -->
+        <!-- ============================================================== -->
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.min.js" type="text/javascript"></script>
+        <!-- Bootstrap popper Core JavaScript -->
+        <script src="<?php echo $url; ?>views/js/plugins/popper.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/bootstrap/bootstrap.min.js" type="text/javascript"></script>        
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.easing.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/owl.carousel.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.countdown.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.nice-select.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/sweetalert.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.slicknav.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.zoom.min.js" type="text/javascript"></script>         
     </head>
-    <body>
+    <body>       
 
         <!-- ==  Preloader Section == -->
         <div id="preloader">
@@ -101,8 +121,8 @@
                 include "modules/products.php";
             } elseif ($infoProduct != NULL) {
                 include "modules/infoproduct.php";
-            } elseif ($routes[0] === "all-categories" || $routes[0] === "search") {
-                include "modules/".$routes[0].".php";
+            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout") {
+                include "modules/" . $routes[0] . ".php";
             } else {
                 include "modules/error404.php";
             }
@@ -116,24 +136,12 @@
 
         /* == End Header Section  == */
         ?>
-        
-        <input type="hidden" value="<?php echo $url; ?>" id="hidePath">
+
+        <input type="hidden" value="<?php echo $url; ?>" id="hidePath">               
 
         <!-- ============================================================== -->
-        <!-- All Jquery Plugins -->
+        <!-- All Javascript Custom -->
         <!-- ============================================================== -->
-        <script src="<?php echo $url; ?>views/js/plugins/jquery.min.js" type="text/javascript"></script>
-        <!-- Bootstrap popper Core JavaScript -->
-        <script src="<?php echo $url; ?>views/js/plugins/popper.min.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/bootstrap/bootstrap.min.js" type="text/javascript"></script>        
-        <script src="<?php echo $url; ?>views/js/plugins/jquery.easing.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/owl.carousel.min.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/jquery.countdown.min.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/jquery.nice-select.min.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/jquery.slicknav.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/jquery.zoom.min.js" type="text/javascript"></script>
-
         <script src="<?php echo $url; ?>views/js/header.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/template.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/slide.js" type="text/javascript"></script>
@@ -141,6 +149,7 @@
         <script src="<?php echo $url; ?>views/js/product-slider.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/search.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/infoproduct.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/users.js" type="text/javascript"></script>
 
     </body>
 </html>

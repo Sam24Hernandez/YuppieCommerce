@@ -80,6 +80,39 @@
     margin-right: 8px;
 }
 
+.h-top .h-right .user-panel {
+    float: right;
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-top: 14px;
+    transition: all .3s ease-in-out;
+}
+
+.h-top .h-right .user-panel:hover {
+    opacity: .7;
+}
+
+.h-top .h-right .user-panel img {
+    width: 25px;
+    object-fit: cover;
+}
+
+.h-top .h-right .logout-panel {
+    position: absolute;
+    font-size: 14px;
+    right: 50px;
+    color: #0F1111;
+    padding-bottom: 15px;
+    padding-top: 18px;
+    border-left: 1px solid #e5e5e5;
+    padding-left: 20px;
+}
+
+.h-top .h-right .logout-panel i {
+    margin-right: 8px;
+}
+
 .h-top .h-right .social {
     float: right;
     padding-right: 20px;
@@ -501,6 +534,7 @@ div.h-category {
 
 .modalForm form {
     padding: 20px;
+    margin-bottom: -20px;
 }
 
 .modalForm .input-group .input-group-addon {
