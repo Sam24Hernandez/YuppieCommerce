@@ -9,8 +9,8 @@ $url = Route::ctrRoute();
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text product-more">
-                    <a href="<?php $url; ?>"><i class="fa fa-home"></i> Inicio</a>
-                    <span><?php echo $routes[0] ?></span>
+                    <a class="text-uppercase" href="<?php $url; ?>"><i class="fa fa-home"></i> Inicio</a>
+                    <span class="text-uppercase active-page"><?php echo $routes[0] ?></span>
                 </div>
             </div>
         </div>

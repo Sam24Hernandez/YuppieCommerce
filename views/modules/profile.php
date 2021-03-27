@@ -164,8 +164,10 @@ if (!isset($_SESSION["validateSession"])) {
                         <div class="profile-row header"></div>
                         <div class="profile-row spacing-none name-container">
                             <span class="profile-name"><?php echo $_SESSION["name"] ?></span>
-                            <i class="fa fa-pencil edit-name-icon"></i>
-                        </div>                        
+                        </div> 
+                        <div class="profile-row spacing-none">
+                            <span>Usuario desde: 24 marzo de 2021</span>
+                        </div>   
                         <div class="profile-section desktop inline-edit-container"></div>
                         <div class="name-header-footer-placeholder"></div>
                         <div class="profile-row name-header-footer-container">
@@ -217,11 +219,11 @@ if (!isset($_SESSION["validateSession"])) {
                         <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Mi Cuenta</span></div>
                         <div class="profile-row">
                             <div id="customer-profile-your-account" class="profile-section">
-                                <div class="profile-row"><span>Revisa tus pedidos, agrega métodos de pago, administra tu contraseña y más.</span></div>
+                                <div class="profile-row"><span style="font-size: 12px;">Revisa tus pedidos, agrega métodos de pago, administra tu contraseña y más.</span></div>
                             </div>
                         </div>
                         <div class="profile-row">
-                            <div class="profile-row a-spacing-top-small"><a class="a-link-normal a-text-bold" href="#">Ir a mi cuenta</a></div>
+                            <div class="profile-row a-spacing-top-small"><a class="a-link-normal a-text-bold" href="<?php $url; ?>my_account">Ir a mi cuenta</a></div>
                         </div>
                     </div>
                 </div>

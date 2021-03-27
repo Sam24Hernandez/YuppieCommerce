@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/jquery-ui.min.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/nice-select.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/slicknav.min.css" type="text/css">
-        <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/sweetalert.css" type="text/css">                
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/sweetalert.css" type="text/css">         
 
         <!-- === GOOGLE FONTS === -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -40,6 +40,7 @@
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/products.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/infoproduct.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/profile.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/my_account.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/footer.css" type="text/css">
 
         <!-- ============================================================== -->
@@ -56,7 +57,7 @@
         <script src="<?php echo $url; ?>views/js/plugins/jquery.nice-select.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/sweetalert.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.slicknav.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/jquery.zoom.min.js" type="text/javascript"></script>         
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.zoom.min.js" type="text/javascript"></script>
     </head>
     <body>       
 
@@ -122,7 +123,7 @@
                 include "modules/products.php";
             } elseif ($infoProduct != NULL) {
                 include "modules/infoproduct.php";
-            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile") {
+            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile" || $routes[0] === "my_account") {
                 include "modules/" . $routes[0] . ".php";
             } else {
                 include "modules/error404.php";

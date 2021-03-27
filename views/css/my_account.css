@@ -1,0 +1,74 @@
+/* 
+    Created on : 15/03/2021, 10:05:26 AM
+    Author     : Sam Hernández
+    Version: 1.0
+    Repository: https://github.com/Sam24Hernandez/YuppieCommerce
+*/
+
+.account-section {
+    padding: 14px 18px 18px;
+    margin: 0 auto;
+}
+
+.page-titles {   
+    margin-bottom: 12px;
+    padding: 0px;
+}
+
+.page-titles h3 {
+    font-weight: 500;
+    line-height: 36px;
+}
+
+.p-t-10 {
+    padding-top: 10px;
+}
+
+.p-b-10 {
+    padding-bottom: 10px;
+}
+
+.p-r-0 {
+    padding-right: 0px;
+}
+
+.m-b-20 {
+    margin-bottom: 20px !important;
+}
+
+.font-light {
+    font-weight: 300;
+}
+
+.card-whole-card-link {
+    height: 100%;
+    display: block;
+}
+
+.card-whole-card-link:hover {
+    background: #eee;
+    text-decoration: none;
+}
+
+.column-account {
+    padding: 14px 18px;
+}
+
+.column-account h2 {
+    font-size: 17px;
+    color: #111;
+    padding-bottom: 0;
+}
+
+.text-light {
+    font-size: 14px;
+}
+
+.nav-tabs .nav-link {
+    border: 0px;
+}
+
+.profile-tab li a.nav-link.active, .customtab li a.nav-link.active {
+    border-bottom: 2px solid #e7ab3c;
+    color: #e7ab3c;
+}
