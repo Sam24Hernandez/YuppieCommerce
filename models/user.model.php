@@ -66,4 +66,24 @@ class UserModel {
         $stmt = NULL;
     }
 
+    /** Update User Picture * */
+    static public function mdlUpdatePictureUser($table, $data) {
+
+        $stmt = Database::connect()->prepare("UPDATE $table SET picture = :picture WHERE id = :id");
+
+        $stmt->bindParam(":picture", $data["picture"], PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
 }

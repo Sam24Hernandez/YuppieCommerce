@@ -1,6 +1,14 @@
 <?php
-$server = Route::ctrRouteServer();
 $url = Route::ctrRoute();
+$server = Route::ctrRouteServer();
+
+if (!isset($_SESSION["validateSession"])) {
+
+    echo '<script>
+            window.location = "' . $url . '";
+	</script>';
+    exit();
+}
 ?>
 
 <!-- Breadcrumb Section Begin -->
@@ -88,30 +96,57 @@ $url = Route::ctrRoute();
 
                         <div class="tab-pane active" id="settings" role="tabpanel">
                             <div class="card-body">
-                                <form class="form-horizontal form-material">
-                                    <div class="form-group">
+                                <form method="POST" class="form-horizontal form-material">
+
+                                    <?php
+                                    if ($_SESSION["mode"] !== "directo") {
+                                        echo '<div class="form-group">
                                         <label class="col-md-12">Nombre</label>
                                         <div class="col-md-12">
-                                            <input type="text" placeholder="Nuevo nombre" class="form-control form-control-line">
+                                            <input type="text" placeholder="Nuevo nombre" value="' . $_SESSION["name"] . '" class="form-control form-control-line" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="example-email" class="col-md-12">Correo electrónico</label>
                                         <div class="col-md-12">
-                                            <input type="email" placeholder="Nuevo correo electrónico" class="form-control form-control-line" name="example-email" id="example-email">
+                                            <input type="email" placeholder="Nuevo correo electrónico" value="' . $_SESSION["email"] . '" class="form-control form-control-line" readonly>
+                                        </div>                                       
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Modo de Registro</label>
+                                        <div class="col-md-12 input-group">
+                                            <div class="input-group-addon"><i class="fa fa-' . $_SESSION["mode"] . '"></i></div>
+                                            <input type="text" class="form-control form-control-line text-uppercase" value="' . $_SESSION["mode"] . '" readonly>
+                                        </div> 
+                                    </div>  ';
+                                    } else {
+                                        echo '<div class="form-group">
+                                        <label for="editName" class="col-md-12">Cambiar Nombre</label>
+                                        <div class="col-md-12">
+                                            <input type="text" id="editName" name="editName" placeholder="Nuevo nombre" value="' . $_SESSION["name"] . '" class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12">Contraseña</label>
+                                        <label for="editEmail" class="col-md-12">Cambiar Correo electrónico</label>
                                         <div class="col-md-12">
-                                            <input type="password" value="password" class="form-control form-control-line">
-                                        </div>
-                                    </div>                                                                                                           
+                                            <input type="email" id="editEmail" name="editEmail" placeholder="Nuevo correo electrónico" value="' . $_SESSION["email"] . '" class="form-control form-control-line">
+                                        </div>                                       
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPassword" class="col-md-12">Contraseña</label>
+                                        <div class="col-md-12 input-group">
+                                            <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+                                            <input type="password" id="editPassword" name="editPassword" placeholder="Escriba la nueva contraseña" class="form-control form-control-line">
+                                        </div> 
+                                    </div>  
+                                                
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success">Actualizar Datos</button>
+                                            <button type="submit" class="btn btn-success">Actualizar Datos</button>
                                         </div>
-                                    </div>
+                                    </div>';
+                                    }
+                                    ?>                                   
                                 </form>
                             </div>
                         </div>

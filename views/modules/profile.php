@@ -106,159 +106,184 @@ if (!isset($_SESSION["validateSession"])) {
                 </div>
                 <div id="customer-profile-avatar-image" class="profile-section desktop avatar-image-container">
                     <div class="profile-section">
-                        <input accept="image/*" id="avatarUploadInput" name="avatar" type="file" /><canvas id="resizingCanvas"></canvas>
-                        <span
-                            class="a-declarative"
-                            data-action="a-popover"
-                            data-a-popover='{"name":"avatar-edit-image-popover","dataStrategy":"preload","position":"triggerBottom","activate":"onclick","closeButton":"false","closeButtonLabel":"avatar-edit-image-popover-close"}'
-                            >
-                            <div class="profile-section updated-profile-image-holder desktop">
-                                <div
-                                    style="background-image: url('<?php echo $server; ?>views/img/perfiles/default/anonymous.png'); background-size: contain;"
-                                    class="profile-section spacing-none circular-avatar-image"
-                                    >
-                                    <img alt="" src="<?php echo $server; ?>views/img/perfiles/default/anonymous460.png" id="avatar-image" />
-                                    <div class="profile-section">
-                                        <div class="profile-row image-edit-popover-trigger-holder">
-                                            <img alt="" src="<?php echo $server; ?>views/img/perfiles/default/camera.png" />
-                                        </div>
-                                        <div class="a-popover-preload" id="a-popover-avatar-edit-image-popover">
-                                            <div class="profile-section spacing-none">
-                                                <div class="profile-section spacing-none">
-                                                    <div class="profile-row">
-                                                        <label class="imageUploadLabel"><span class="a-size-small a-color-base upload-photo">Cargar</span></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="a-popover-preload" id="a-popover-avatar-delete-popover">
-                                            <div class="profile-section desktop delete-modal-content">
-                                                <div class="profile-row delete-modal-message"><span>¿Estás seguro de que deseas eliminar tu foto de perfil?</span></div>
-                                                <div class="profile-row delete-modal-footer">
-                                                    <div class="profile-section desktop delete-modal-buttons">
-                                                        <span class="a-button desktop cancel-button-delete-modal">
-                                                            <span class="a-button-inner">
-                                                                <input class="a-button-input" type="submit" /><span class="a-button-text" aria-hidden="true"><span>Cancelar</span></span>
-                                                            </span>
-                                                        </span>
-                                                        <span class="a-button a-button-primary desktop delete-button-delete-modal">
-                                                            <span class="a-button-inner">
-                                                                <input class="a-button-input" type="submit" /><span class="a-button-text" aria-hidden="true"><span>Eliminar</span></span>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <!--<input accept="image/*" id="avatarUploadInput" name="avatar" type="file" /><canvas id="resizingCanvas"></canvas>-->                  
+                        <div class="profile-section updated-profile-image-holder desktop">
+
+
+                            <?php
+                            if ($_SESSION["mode"] === "directo") {
+
+                                if ($_SESSION["picture"] !== "") {
+
+                                    echo '<div
+                                                style="background-image: url("' . $url . $_SESSION["picture"] . '"); background-size: contain;"
+                                                class="profile-section spacing-none circular-avatar-image"
+                                            >
+                                            <img alt="" src="' . $url . $_SESSION["picture"] . '" id="avatar-image" />';
+                                } else {
+
+                                    echo '<div
+                                                style="background-image: url("' . $server . 'views/img/perfiles/default/anonymous.png"); background-size: contain;"
+                                                class="profile-section spacing-none circular-avatar-image"
+                                            >
+                                            <img alt="" src="' . $server . 'views/img/perfiles/default/anonymous460.png" id="avatar-image" />';
+                                }
+                            } else {
+
+                                echo '<div
+                                                style="background-image: url("' . $_SESSION["picture"] . '"); background-size: contain;"
+                                                class="profile-section spacing-none circular-avatar-image"
+                                            >
+                                            <img alt="" src="' . $_SESSION["picture"] . '" id="avatar-image" />';
+                            }
+                            ?>
+
+                            <div class="profile-section">
+                                <div class="profile-row image-edit-popover-trigger-holder">
+                                    <img alt="" data-toggle="modal" data-target="#changeImage" src="<?php echo $server; ?>views/img/perfiles/default/camera.png" />                                                                              
+                                </div>                                                                        
                             </div>
-                        </span>
+
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="desktop padded card-profile name-header-card">
+            <div class="profile-row spacing-none desktop card-header-profile"></div>
+            <div class="profile-row">
+                <div id="customer-profile-name-header" class="profile-section desktop name-header-widget">
+                    <div class="profile-row header"></div>
+                    <div class="profile-row spacing-none name-container">
+                        <span class="profile-name"><?php echo $_SESSION["name"] ?></span>
+                    </div> 
+                    <div class="profile-section desktop inline-edit-container"></div>
+                    <div class="name-header-footer-placeholder"></div>
+                    <div class="profile-row name-header-footer-container">
+                        <a class="a-link-normal name-header-edit-profile-link" href="#">
+                            <span class="primary-btn name-header-edit-profile-button">
+                                <span class="a-button-inner"><button class="button-text" type="button">Editar perfil</button></span>
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="desktop padded card-profile name-header-card">
-                <div class="profile-row spacing-none desktop card-header-profile"></div>
-                <div class="profile-row">
-                    <div id="customer-profile-name-header" class="profile-section desktop name-header-widget">
-                        <div class="profile-row header"></div>
-                        <div class="profile-row spacing-none name-container">
-                            <span class="profile-name"><?php echo $_SESSION["name"] ?></span>
-                        </div> 
-                        <div class="profile-row spacing-none">
-                            <span>Usuario desde: 24 marzo de 2021</span>
-                        </div>   
-                        <div class="profile-section desktop inline-edit-container"></div>
-                        <div class="name-header-footer-placeholder"></div>
-                        <div class="profile-row name-header-footer-container">
-                            <a class="a-link-normal name-header-edit-profile-link" href="#">
-                                <span class="primary-btn name-header-edit-profile-button">
-                                    <span class="a-button-inner"><button class="button-text" type="button">Editar perfil</button></span>
-                                </span>
-                            </a>
+        </div>
+        <div class="profile-section activity-area-container">
+            <div class="deck-container sub" style="width: 320px;">
+                <div class="desktop padded card-profile pw-bio">
+                    <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Información</span></div>
+                    <div class="profile-row">
+                        <div class="profile-section">                                
+                            <div class="profile-section a-spacing-top-base bio-widget-footer">
+                                <div class="profile-row a-spacing-base">
+                                    <div class="a-column a-span12">
+                                        <span class="a-size-base">Número de Cliente</span>
+                                        <div class="profile-row"><span class="a-size-base">#<?php echo $_SESSION["id"] ?></span></div>
+                                    </div>
+                                </div>
+                                <div class="profile-section"></div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="desktop padded card-profile">
+                    <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Mi Lista de Deseos</span></div>
+                    <div class="profile-row">
+                        <div id="customer-profile-lists" class="profile-section lists-component">
+                            <div class="profile-row a-spacing-base list-card-component">
+                                <div class="a-fixed-right-grid-col product-pic-holder" style="float: left;">
+                                    <a class="a-link-normal list-path" href="#">
+                                        <img alt="" src="https://m.media-amazon.com/images/I/31swmrdF8kL.jpg" class="product-pic" width="40px" height="40px" />
+                                    </a>
+                                </div>
+                                <div class="a-fixed-right-grid-col list-name-holder" style="float: left;">
+                                    <a class="a-link-normal list-path" href="#"><span class="a-size-base list-name">Lista de deseos</span></a>
+                                </div>                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="desktop padded card-profile">
+                    <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Mi Cuenta</span></div>
+                    <div class="profile-row">
+                        <div id="customer-profile-your-account" class="profile-section">
+                            <div class="profile-row"><span style="font-size: 12px;">Revisa tus pedidos, agrega métodos de pago, administra tu contraseña y más.</span></div>
+                        </div>
+                    </div>
+                    <div class="profile-row">
+                        <div class="profile-row a-spacing-top-small"><a class="a-link-normal a-text-bold" href="<?php $url; ?>my_account">Ir a mi cuenta</a></div>
                     </div>
                 </div>
             </div>
-            <div class="profile-section activity-area-container">
-                <div class="deck-container sub" style="width: 320px;">
-                    <div class="desktop padded card-profile pw-bio">
-                        <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Información</span></div>
-                        <div class="profile-row">
-                            <div class="profile-section">                                
-                                <div class="profile-section a-spacing-top-base bio-widget-footer">
-                                    <div class="profile-row a-spacing-base">
-                                        <div class="a-column a-span12">
-                                            <span class="a-size-base">Número de Cliente</span>
-                                            <div class="profile-row"><span class="a-size-base">#<?php echo $_SESSION["id"] ?></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="profile-section"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="desktop padded card-profile">
-                        <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Mi Lista de Deseos</span></div>
-                        <div class="profile-row">
-                            <div id="customer-profile-lists" class="profile-section lists-component">
-                                <div class="profile-row a-spacing-base list-card-component">
-                                    <div class="a-fixed-right-grid-col product-pic-holder" style="float: left;">
-                                        <a class="a-link-normal list-path" href="#">
-                                            <img alt="" src="https://m.media-amazon.com/images/I/31swmrdF8kL.jpg" class="product-pic" width="40px" height="40px" />
-                                        </a>
-                                    </div>
-                                    <div class="a-fixed-right-grid-col list-name-holder" style="float: left;">
-                                        <a class="a-link-normal list-path" href="#"><span class="a-size-base list-name">Lista de deseos</span></a>
-                                    </div>                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="desktop padded card-profile">
-                        <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Mi Cuenta</span></div>
-                        <div class="profile-row">
-                            <div id="customer-profile-your-account" class="profile-section">
-                                <div class="profile-row"><span style="font-size: 12px;">Revisa tus pedidos, agrega métodos de pago, administra tu contraseña y más.</span></div>
-                            </div>
-                        </div>
-                        <div class="profile-row">
-                            <div class="profile-row a-spacing-top-small"><a class="a-link-normal a-text-bold" href="<?php $url; ?>my_account">Ir a mi cuenta</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="deck-container main" style="width: 100%;">
-                    <div class="desktop padded card-profile dashboard-desktop-card">
-                        <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Estadísticas</span></div>
-                        <div class="profile-row">
-                            <div class="dashboard-desktop-stats-section">
-                                <div class="dashboard-desktop-stat large-margin-right">
-                                    <a class="dashboard-desktop-stat-link" href="#">
-                                        <div>
-                                            <div class="dashboard-desktop-stat-value"><span class="a-size-large a-color-base">0</span></div>
-                                            <div class="dashboard-desktop-stat-type"><span class="a-size-small a-color-base">votos útiles</span></div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="dashboard-desktop-stat large-margin-right">
-                                    <a class="dashboard-desktop-stat-link" href="#">
-                                        <div>
-                                            <div class="dashboard-desktop-stat-value"><span class="a-size-large a-color-base">3</span></div>
-                                            <div class="dashboard-desktop-stat-type"><span class="a-size-small a-color-base">reseñas</span></div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="dashboard-desktop-stat large-margin-right">
+            <div class="deck-container main" style="width: 100%;">
+                <div class="desktop padded card-profile dashboard-desktop-card">
+                    <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Estadísticas</span></div>
+                    <div class="profile-row">
+                        <div class="dashboard-desktop-stats-section">
+                            <div class="dashboard-desktop-stat large-margin-right">
+                                <a class="dashboard-desktop-stat-link" href="#">
                                     <div>
                                         <div class="dashboard-desktop-stat-value"><span class="a-size-large a-color-base">0</span></div>
-                                        <div class="dashboard-desktop-stat-type"><span class="a-size-small a-color-base">seguidores</span></div>
+                                        <div class="dashboard-desktop-stat-type"><span class="a-size-small a-color-base">votos útiles</span></div>
                                     </div>
+                                </a>
+                            </div>
+                            <div class="dashboard-desktop-stat large-margin-right">
+                                <a class="dashboard-desktop-stat-link" href="#">
+                                    <div>
+                                        <div class="dashboard-desktop-stat-value"><span class="a-size-large a-color-base">3</span></div>
+                                        <div class="dashboard-desktop-stat-type"><span class="a-size-small a-color-base">reseñas</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dashboard-desktop-stat large-margin-right">
+                                <div>
+                                    <div class="dashboard-desktop-stat-value"><span class="a-size-large a-color-base">0</span></div>
+                                    <div class="dashboard-desktop-stat-type"><span class="a-size-small a-color-base">seguidores</span></div>
                                 </div>
                             </div>
                         </div>
-                    </div>                   
-                </div>                                
-            </div>            
+                    </div>
+                </div>                   
+            </div>                                
+        </div>            
+    </div>
+</div>
+</div>
+
+<div id="changeImage" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Actualizar Foto de Perfil</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                    
+                    <?php echo '<input type="hidden" value="'.$_SESSION["picture"].'" name="userPicture" id="userPicture">'; ?>
+                    
+                    <div class="form-group" id="uploadImage">
+                        <label for="dataPicture" class="control-label">Foto:</label>
+                        <input type="file" class="form-control" id="dataPicture" name="dataPicture">
+                    </div>
+                    <button type="submit" class="btn btn-success">Actualizar Foto</button>  
+                    
+                    <?php
+                    /**
+                     * @todo Corregir esta parte del código
+                     * @todo Actualizar Foto de Perfil de Usuario
+                     */
+//                    $updateProfile = new UserController();
+//                    $updateProfile->ctrUpdatePictureUser();                                        
+                    
+                    ?>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-inverse" data-dismiss="modal">Cancelar</button>                
+            </div>
         </div>
     </div>
 </div>

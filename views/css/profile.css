@@ -151,6 +151,14 @@
     right: 90px;
 }
 
+.avatar-image-container.desktop .image-edit-popover-trigger-holder img {    
+   cursor: pointer;
+} 
+
+.avatar-image-container.desktop .image-edit-popover-trigger-holder > input[type="file"] {
+    display: none;
+}
+
 .card-profile.desktop {
     border: 1px solid #d5dbdb;
     border-radius: 3px;
