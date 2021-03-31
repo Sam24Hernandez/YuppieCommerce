@@ -86,4 +86,27 @@ class UserModel {
         $stmt = NULL;
     }
 
+    /** Update User Picture * */
+    static public function mdlUpdateProfile($table, $data) {
+
+        $stmt = Database::connect()->prepare("UPDATE $table SET name = :name, email = :email, password = :password WHERE id = :id");
+
+        $stmt->bindParam(":name", $data["name"], PDO::PARAM_STR);
+        $stmt->bindParam(":email", $data["email"], PDO::PARAM_STR);
+        $stmt->bindParam(":password", $data["password"], PDO::PARAM_STR);
+        $stmt->bindParam(":id", $data["id"], PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
 }

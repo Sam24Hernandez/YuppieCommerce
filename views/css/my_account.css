@@ -106,3 +106,8 @@
 .form-horizontal .input-group .input-group-addon:not(:last-child) {
     border-right: 0;
 }
+
+.input-group > .form-control:focus {
+    z-index: 0 !important;
+}
+

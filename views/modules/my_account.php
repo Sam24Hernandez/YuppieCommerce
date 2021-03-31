@@ -99,7 +99,12 @@ if (!isset($_SESSION["validateSession"])) {
                                 <form method="POST" class="form-horizontal form-material">
 
                                     <?php
-                                    if ($_SESSION["mode"] !== "directo") {
+                                    
+                                    echo '<input type="hidden" value="'.$_SESSION["id"].'" id="idUser" name="idUser">
+                                        <input type="hidden" value="'.$_SESSION["password"].'" name="passUser" id="passUser">
+                                        <input type="hidden" value="'.$_SESSION["mode"].'" name="modeUser" id="modeUser">';
+                                    
+                                    if ($_SESSION["mode"] != "directo") {
                                         echo '<div class="form-group">
                                         <label class="col-md-12">Nombre</label>
                                         <div class="col-md-12">
@@ -136,7 +141,10 @@ if (!isset($_SESSION["validateSession"])) {
                                         <label for="editPassword" class="col-md-12">Contraseña</label>
                                         <div class="col-md-12 input-group">
                                             <div class="input-group-addon"><i class="fa fa-lock"></i></div>
-                                            <input type="password" id="editPassword" name="editPassword" placeholder="Escriba la nueva contraseña" class="form-control form-control-line">
+                                            <input style="padding-right: 3rem;" type="password" id="editPassword" name="editPassword" placeholder="Escriba la nueva contraseña" class="form-control form-control-line">
+                                            <button id="toggle-password-change" class="icon-font-component form-input-icon form-input-right reg-toggle-password-visible" type="button" onclick="TogglePasswordChange()">
+                                                <i style="padding-right: 2rem;" id="show-pass-change" class="fa fa-eye" aria-hidden="true"></i>
+                                            </button>
                                         </div> 
                                     </div>  
                                                 
@@ -146,14 +154,20 @@ if (!isset($_SESSION["validateSession"])) {
                                         </div>
                                     </div>';
                                     }
-                                    ?>                                   
+                                    ?>    
+                                    
+                                    <?php
+                                    
+                                    $updateProfile = new UserController();
+                                    $updateProfile->ctrUpdateProfile();
+                                    
+                                    ?>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Column -->
         </div>
     </div>
 </section>

@@ -235,10 +235,11 @@ class UserController {
     }
 
     /** Update User Picture * */
+
     /**
      * @todo: Corregir errores
      */
-    public function ctrUpdatePictureUser() {
+    public function ctrUpdatePictureUser($id, $item, $valueUser) {
 
         /** Validate Picture * */
         $path = $_POST["userPicture"];
@@ -331,6 +332,65 @@ class UserController {
                 });
 
             </script>';
+        }
+    }
+
+    /** Update Profile (Data) * */
+    public function ctrUpdateProfile() {
+
+        if (isset($_POST["editName"])) {
+
+            if ($_POST["idUser"] == $_SESSION["id"]) {
+
+                if ($_POST["editPassword"] == "") {
+
+                    $password = $_POST["passUser"];
+                } else {
+
+                    $password = crypt($_POST["editPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+                }
+
+                $data = array(
+                    "name" => $_POST["editName"],
+                    "email" => $_POST["editEmail"],
+                    "password" => $password,
+                    "id" => $_POST["idUser"]
+                );
+                
+                $table = "users";
+                
+                $response = UserModel::mdlUpdateProfile($table, $data);
+                
+                if ($response == "ok") {
+                    
+                    $_SESSION["validateSession"] = "ok";
+                    $_SESSION["id"] = $data["id"];
+                    $_SESSION["name"] = $data["name"];
+                    $_SESSION["email"] = $data["email"];
+                    $_SESSION["password"] = $data["password"];
+                    $_SESSION["mode"] = $_POST["modeUser"];
+                    
+                    echo '<script> 
+
+                        swal({
+                            title: "¡Datos Actualizados!",
+                            text: "¡Su cuenta ha sido actualizada correctamente!",
+                            type:"success",
+                            confirmButtonText: "Cerrar",
+                            closeOnConfirm: false
+                          },
+
+                          function(isConfirm){
+
+                          if(isConfirm){
+                                  history.back();
+                          }
+                        });
+
+                    </script>';
+                    
+                }
+            }
         }
     }
 

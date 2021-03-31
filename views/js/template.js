@@ -97,6 +97,24 @@ function ToggleLogin() {
 
 }
 
+// Change the type of input to password or text on Update Password Form
+
+function TogglePasswordChange() {
+
+    var tempProfile = document.getElementById("editPassword");
+
+    if (tempProfile.type === "password") {
+
+        tempProfile.type = "text";
+
+    } else {
+
+        tempProfile.type = "password";
+
+    }
+
+}
+
 
 // Change the icon toggle on click to the register Form
 
@@ -125,6 +143,20 @@ $("#toggle-password-login").click(function () {
     } else {
 
         document.getElementById("show-pass-login").className = "fa fa-eye";
+
+    }
+
+});
+
+$("#toggle-password-change").click(function () {
+
+    if (document.getElementById("show-pass-change").className === "fa fa-eye") {
+
+        document.getElementById("show-pass-change").className = "fa fa-eye-slash";
+
+    } else {
+
+        document.getElementById("show-pass-change").className = "fa fa-eye";
 
     }
 
