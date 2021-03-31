@@ -115,35 +115,38 @@ if (!isset($_SESSION["validateSession"])) {
 
                                 if ($_SESSION["picture"] !== "") {
 
-                                    echo '<div
-                                                style="background-image: url("' . $url . $_SESSION["picture"] . '"); background-size: contain;"
+                                    echo '<div                                                
                                                 class="profile-section spacing-none circular-avatar-image"
                                             >
                                             <img alt="" src="' . $url . $_SESSION["picture"] . '" id="avatar-image" />';
                                 } else {
 
-                                    echo '<div
-                                                style="background-image: url("' . $server . 'views/img/perfiles/default/anonymous.png"); background-size: contain;"
+                                    echo '<div                                                
                                                 class="profile-section spacing-none circular-avatar-image"
                                             >
                                             <img alt="" src="' . $server . 'views/img/perfiles/default/anonymous460.png" id="avatar-image" />';
                                 }
                             } else {
 
-                                echo '<div
-                                                style="background-image: url("' . $_SESSION["picture"] . '"); background-size: contain;"
+                                echo '<div                                                
                                                 class="profile-section spacing-none circular-avatar-image"
                                             >
                                             <img alt="" src="' . $_SESSION["picture"] . '" id="avatar-image" />';
                             }
                             ?>
+                            
+                            <?php
+                                    
+                            if ($_SESSION["mode"] === "directo") {
+                                echo '<div class="profile-section">
+                                    <div class="profile-row image-edit-popover-trigger-holder">
+                                        <img alt="" data-toggle="modal" data-target="#changeImage" src="'.$server.'views/img/perfiles/default/camera.png" />
 
-                            <div class="profile-section">
-                                <div class="profile-row image-edit-popover-trigger-holder">
-                                    <img alt="" data-toggle="modal" data-target="#changeImage" src="<?php echo $server; ?>views/img/perfiles/default/camera.png" />                                                                              
-                                </div>                                                                        
-                            </div>
-
+                                    </div>                                                                        
+                                </div>';
+                            }
+                                    
+                            ?>                           
                         </div>
                     </div>                    
                 </div>
@@ -262,21 +265,21 @@ if (!isset($_SESSION["validateSession"])) {
             <div class="modal-body">
                 <form method="POST" enctype="multipart/form-data">
                     
-                    <?php echo '<input type="hidden" value="'.$_SESSION["picture"].'" name="userPicture" id="userPicture">'; ?>
+                    <?php
+                    echo '<input type="hidden" value="'.$_SESSION["id"].'" name="idUser" id="idUser">
+                        <input type="hidden" value="'.$_SESSION["picture"].'" name="userPicture" id="userPicture">';                    
+                    ?>
                     
                     <div class="form-group" id="uploadImage">
                         <label for="dataPicture" class="control-label">Foto:</label>
-                        <input type="file" class="form-control" id="dataPicture" name="dataPicture">
+                        <input type="file" class="form-control" id="dataPicture" name="dataPicture" required>
                     </div>
                     <button type="submit" class="btn btn-success">Actualizar Foto</button>  
                     
                     <?php
-                    /**
-                     * @todo Corregir esta parte del código
-                     * @todo Actualizar Foto de Perfil de Usuario
-                     */
-//                    $updateProfile = new UserController();
-//                    $updateProfile->ctrUpdatePictureUser();                                        
+                    
+                    $updatePicture = new UserController();
+                    $updatePicture->ctrUpdatePicture();                                        
                     
                     ?>
                 </form>

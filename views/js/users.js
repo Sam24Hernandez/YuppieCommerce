@@ -144,63 +144,42 @@ $("#dataPicture").change(function () {
 
     var picture = this.files[0];
 
-    /** Validate image format **/
-
     if (picture["type"] !== "image/jpeg" && picture["type"] !== "image/png") {
 
         $("#dataPicture").val("");
 
         swal({
-
-            title: "¡Error al subir la foto!",
+            title: "¡Error al subir la imagen!",
             text: "¡La imagen debe estar en formato JPG o PNG!",
             type: "error",
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Cerrar",
-            closeOnConfirm: false
-
+            closeOnConfirm: false,
         },
-                function (isConfirm) {
-
-                    if (isConfirm) {
-                        window.location = hidePath + "profile";
-                    }
-
-                });
+        function (isConfirm) {
+            if (isConfirm) {
+               window.location = hidePath+"profile";
+            }
+        });
 
     } else if (Number(picture["size"]) > 2000000) {
-
+        
         $("#dataPicture").val("");
 
         swal({
-
-            title: "¡Error al subir la foto!",
-            text: "¡La imagen no debe ser mayor a 2MB!",
+            title: "¡Error al subir la imagen!",
+            text: "¡El tamaño de la imagen no puede ser mayor a 2MB!",
             type: "error",
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Cerrar",
-            closeOnConfirm: false
-
+            closeOnConfirm: false,
         },
-                function (isConfirm) {
-
-                    if (isConfirm) {
-                        window.location = hidePath + "profile";
-                    }
-
-                });
-    } else {
-
-        var dataPicture = new FileReader();
-        dataPicture.readAsDataURL(picture);
-
-        $(dataPicture).on("load", function (event) {
-
-            var routePicture = event.target.result;
-            // console.log("routePicture", routePicture);
-
+        function (isConfirm) {
+            if (isConfirm) {
+               window.location = hidePath+"profile";
+            }
         });
-
-    }
+        
+    } 
 
 });

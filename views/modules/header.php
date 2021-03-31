@@ -31,13 +31,12 @@ if ($client->getAccessToken()) {
     $item = $client->verifyIdToken();
     $data = array("name" => $item["name"], "email" => $item["email"], "password" => "null", "picture" => $item["picture"], "mode" => "google", "email_verification" => 0, "encrypted_email" => "null");
     $response = UserController::ctrRegisterSocialMedia($data);
-    
+
     echo '<script>
         setTimeout(function() {
            window.location = localStorage.getItem("actualRoute"); 
         }, 1000);
     </script>';
-    
 }
 ?>
 
@@ -59,47 +58,53 @@ if ($client->getAccessToken()) {
             <!-- == Register Section == -->
             <div class="h-right">
 
-<?php
-if (isset($_SESSION["validateSession"])) {
-    if ($_SESSION["validateSession"] === "ok") {
-        if ($_SESSION["mode"] === "directo") {
-            echo '<a href="' . $url . 'profile" class="user-panel">
-                                    <img class="user-image img-circle" src="' . $server . 'views/img/users/default/anonymous.png" width="10%">
-                                </a>                                
-                                <a href="' . $url . 'signout" class="logout-panel">
-                                    <i class="fa fa-sign-out"></i>
-                                    Cerrar sesión
-                                </a>';
+                <?php
+                if (isset($_SESSION["validateSession"])) {
+                    if ($_SESSION["validateSession"] === "ok") {
+                        if ($_SESSION["mode"] === "directo") {
+                            echo '<a href="' . $url . 'profile" class="user-panel">';
+
+                            if ($_SESSION["picture"] !== "") {
+                                echo '<img class="user-image img-circle" src="' . $url . $_SESSION["picture"] .'" width="10%">';
+                            } else {
+                                echo '<img class="user-image img-circle" src="' . $server . 'views/img/users/default/anonymous.png" width="10%">';
+                            }
+                                                        
+                            echo '</a>
+                            <a href = "' . $url . 'signout" class = "logout-panel">
+                            <i class = "fa fa-sign-out"></i>
+                            Cerrar sesión
+                            </a>';
         }
         if ($_SESSION["mode"] === "facebook") {
-            echo '<a href="' . $url . 'profile" class="user-panel">
-                                    <img class="user-image img-circle" src="' . $_SESSION["picture"] . '" width="10%">
-                                </a>                                
-                                <a href="' . $url . 'signout" class="logout-panel signout">
-                                    <i class="fa fa-sign-out"></i>
-                                    Cerrar sesión
-                                </a>';
+            echo '<a href = "' . $url . 'profile" class = "user-panel">
+                            <img class = "user-image img-circle" src = "' . $_SESSION["picture"] . '" width = "10%">
+                            </a>
+                            <a href = "' . $url . 'signout" class = "logout-panel signout">
+                            <i class = "fa fa-sign-out"></i>
+                            Cerrar sesión
+                            </a>';
         }
         if ($_SESSION["mode"] === "google") {
-            echo '<a href="' . $url . 'profile" class="user-panel">
-                                    <img class="user-image img-circle" src="' . $_SESSION["picture"] . '" width="10%">
-                                </a>                                
-                                <a href="' . $url . 'signout" class="logout-panel">
-                                    <i class="fa fa-sign-out"></i>
-                                    Cerrar sesión
-                                </a>';
+            echo '<a href = "' . $url . 'profile" class = "user-panel">
+                            <img class = "user-image img-circle" src = "' . $_SESSION["picture"] . '" width = "10%">
+                            </a>
+                            <a href = "' . $url . 'signout" class = "logout-panel">
+                            <i class = "fa fa-sign-out"></i>
+                            Cerrar sesión
+                            </a>';
         }
     }
 } else {
-    echo '<a href="#modalLogin" data-toggle="modal" class="login-panel">
-                    <i class="fa fa-user"></i>
-                    Iniciar sesión
-                </a>               
+    echo '<a href = "#modalLogin" data-toggle = "modal" class = "login-panel">
+                            <i class = "fa fa-user"></i>
+                            Iniciar sesión
+                            </a>
 
-                <a href="#modalRegister" data-toggle="modal" class="register-panel">
-                    <i class="fa fa-user-plus"></i>
-                    Regístrarse
-                </a>';
+                            <a href = "#modalRegister" data-toggle = "modal" class = "register-panel">
+                            <i class = "fa fa-user-plus"></i>
+                            Regístrarse
+                            </a>';
 }
 ?>
                 <!-- == Social Section == -->
@@ -139,22 +144,22 @@ $valueCategory = null;
 $categories = ProductController::ctrShowCategories($item, $valueCategory);
 foreach (array_slice($categories, 0, 4) as $key => $value) {
     echo '<td>
-                                                        <h3 class="header-sbc-parent">
-                                                            <a class="pixelCategories" title="' . $value["category_name"] . ' " href="' . $value["route"] . '">
-                                                                ' . $value["category_name"] . '                                                  
-                                                            </a>
-                                                        </h3>
-                                                        <ul class="header-list-sbc">';
+                            <h3 class = "header-sbc-parent">
+                            <a class = "pixelCategories" title = "' . $value["category_name"] . ' " href = "' . $value["route"] . '">
+                            ' . $value["category_name"] . '
+                            </a>
+                            </h3>
+                            <ul class = "header-list-sbc">';
     $item = "category_id";
     $valueSubCategory = $value["id"];
     $subcategories = ProductController::ctrShowSubCategories($item, $valueSubCategory);
     foreach ($subcategories as $key => $value) {
         echo '<li>
-                                                                <a class="pixelSubcategories" title="' . $value["subcategory_name"] . '" href="' . $value["route"] . '">' . $value["subcategory_name"] . '</a>
-                                                            </li>';
+                            <a class = "pixelSubcategories" title = "' . $value["subcategory_name"] . '" href = "' . $value["route"] . '">' . $value["subcategory_name"] . '</a>
+                            </li>';
     }
     echo '</ul>
-                                                    </td>';
+                            </td>';
 }
 ?>                                                                                                                   
 
@@ -220,7 +225,7 @@ $itemCategoryMenu = null;
 $valueCategoryMenu = null;
 $categoriesMenu = ProductController::ctrShowCategories($itemCategoryMenu, $valueCategoryMenu);
 foreach (array_slice($categoriesMenu, 0, 3) as $key => $value) {
-    echo '<li><a href="' . $url . $value["route"] . '">' . $value["category_name"] . '</a></li>';
+    echo '<li><a href = "' . $url . $value["route"] . '">' . $value["category_name"] . '</a></li>';
 }
 ?>
                     <li><a href="#">Ofertas</a></li>

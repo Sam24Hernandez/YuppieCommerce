@@ -67,11 +67,12 @@ class UserModel {
     }
 
     /** Update User Picture * */
-    static public function mdlUpdatePictureUser($table, $data) {
+    static public function mdlUpdatePicture($table, $data) {
 
         $stmt = Database::connect()->prepare("UPDATE $table SET picture = :picture WHERE id = :id");
 
         $stmt->bindParam(":picture", $data["picture"], PDO::PARAM_STR);
+        $stmt->bindParam(":id", $data["id"], PDO::PARAM_INT);
 
         if ($stmt->execute()) {
 

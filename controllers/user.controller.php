@@ -239,99 +239,118 @@ class UserController {
     /**
      * @todo: Corregir errores
      */
-    public function ctrUpdatePictureUser($id, $item, $valueUser) {
+    static public function ctrUpdatePicture() {
 
         /** Validate Picture * */
-        $path = $_POST["userPicture"];
+        if (isset($_POST["userPicture"])) {
 
-        if (isset($_FILES["dataPicture"]["tmp_name"]) && !empty($_FILES["dataPicture"]["tmp_name"])) {
+            if ($_POST["idUser"] == $_SESSION["id"]) {
 
-            # Create the directory path to save the image on the frontend            
-            $dirPath = "views/img/users/" . $_POST["idUser"];
+                $path = $_POST["userPicture"];
 
-            if (!empty($_POST["userPicture"])) {
+                if (isset($_FILES["dataPicture"]["tmp_name"]) && !empty($_FILES["dataPicture"]["tmp_name"])) {
 
-                unlink($_POST["userPicture"]);
-            } else {
+                    # Create the directory path to save the image on the frontend            
+                    $dirPath = "views/img/users/" . $_POST["idUser"];
 
-                mkdir($dirPath, 0755);
-            }
+                    if (!empty($_POST["userPicture"])) {
 
-            /** Save Image on the Dir Path * */
-            list($width, $height) = getimagesize($_FILES["dataPicture"]["tmp_name"]);
+                        if (file_exists($_POST["userPicture"])) {
+                            unlink($_POST["userPicture"]);
+                        } else {
+                            mkdir($dirPath, 0755);
+                        }
+                        
+                    } else {
 
-            $newWidth = 460;
-            $newHeight = 460;
-
-            $random = mt_rand(100, 999);
-
-            if ($_FILES["dataPicture"]["type"] === "image/jpeg") {
-
-                $path = "views/img/users/" . $_POST["idUser"] . "/" . $random . ".jpg";
-
-                /** Change the size of the picture * */
-                $origin = imagecreatefromjpeg($_FILES["dataPicture"]["tmp_name"]);
-
-                $allocate = imagecreatetruecolor($newWidth, $newHeight);
-
-                imagecopyresized($allocate, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-                imagejpeg($allocate, $path);
-            }
-
-            if ($_FILES["dataPicture"]["type"] === "image/png") {
-
-                $path = "views/img/users/" . $_POST["idUser"] . "/" . $random . ".png";
-
-                /** Change the size of the picture * */
-                $origin = imagecreatefrompng($_FILES["dataPicture"]["tmp_name"]);
-
-                $allocate = imagecreatetruecolor($newWidth, $newHeight);
-
-                imagealphablending($allocate, FALSE);
-
-                imagesavealpha($allocate, TRUE);
-
-                $transparent = imagecolorallocatealpha($allocate, 255, 255, 255, 0);
-
-                imagefilledrectangle($allocate, 0, 0, $newWidth, $newHeight, $transparent);
-
-                # Cut the image with the new measurements
-
-                imagecopyresized($allocate, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-
-                /* send the image to the route */
-
-                imagepng($allocate, $path);
-            }
-        }
-
-        $data = array("picture" => $path);
-
-        $table = "users";
-
-        $response = UserModel::mdlUpdatePictureUser($table, $data);
-
-        if (response === "ok") {
-
-            $_SESSION["validateSession"] = "ok";
-            $_SESSION["picture"] = $data["picture"];
-
-            echo '<script> 
-                swal({
-                    title: "¡Foto Actualizada!",
-                    type:"success",
-                    confirmButtonText: "Cerrar",
-                    closeOnConfirm: false
-                },
-
-                function(isConfirm){
-                    if(isConfirm){
-                        history.back();
+                        mkdir($dirPath, 0755);
                     }
-                });
+                    
 
-            </script>';
+                    /** Save Image on the Dir Path * */
+                    list($width, $height) = getimagesize($_FILES["dataPicture"]["tmp_name"]);
+
+                    $newWidth = 460;
+                    $newHeight = 460;
+                    
+                    $random = mt_rand(100, 999);
+
+                    /** Change the size of the picture */
+                    if ($_FILES["dataPicture"]["type"] === "image/jpeg") {
+
+                        $path = "views/img/users/" . $_POST["idUser"] . "/" . $random . ".jpg";
+
+                        /** Change the size of the picture * */
+                        $origin = imagecreatefromjpeg($_FILES["dataPicture"]["tmp_name"]);
+
+                        $allocate = imagecreatetruecolor($newWidth, $newHeight);
+
+                        imagecopyresized($allocate, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+                        imagejpeg($allocate, $path);
+                    }
+                    if ($_FILES["dataPicture"]["type"] === "image/png") {
+
+                        $path = "views/img/users/" . $_POST["idUser"] . "/" . $random . ".png";
+
+                        /** Change the size of the picture * */
+                        $origin = imagecreatefrompng($_FILES["dataPicture"]["tmp_name"]);
+
+                        $allocate = imagecreatetruecolor($newWidth, $newHeight);
+
+                        imagealphablending($allocate, FALSE);
+
+                        imagesavealpha($allocate, TRUE);
+
+                        $transparent = imagecolorallocatealpha($allocate, 255, 255, 255, 0);
+
+                        imagefilledrectangle($allocate, 0, 0, $newWidth, $newHeight, $transparent);
+
+                        # Cut the image with the new measurements
+
+                        imagecopyresized($allocate, $origin, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+                        /* send the image to the route */
+
+                        imagepng($allocate, $path);
+                    }
+                }
+
+                $data = array(
+                    "picture" => $path,
+                    "id" => $_POST["idUser"]
+                );
+
+                $table = "users";
+
+                $response = UserModel::mdlUpdatePicture($table, $data);
+
+                if ($response == "ok") {
+
+                    $_SESSION["validateSession"] = "ok";
+                    $_SESSION["id"] = $data["id"];
+                    $_SESSION["picture"] = $data["picture"];
+
+                    echo '<script> 
+
+                        swal({
+                            title: "¡Foto Actualizada!",
+                            text: "¡Tú foto de perfil ha sido actualizada correctamente!",
+                            type:"success",
+                            confirmButtonText: "Cerrar",
+                            closeOnConfirm: false
+                          },
+
+                          function(isConfirm){
+
+                          if(isConfirm){
+                                  history.back();
+                          }
+                        });
+
+                    </script>';
+                }
+            }
         }
     }
 
@@ -356,20 +375,20 @@ class UserController {
                     "password" => $password,
                     "id" => $_POST["idUser"]
                 );
-                
+
                 $table = "users";
-                
+
                 $response = UserModel::mdlUpdateProfile($table, $data);
-                
+
                 if ($response == "ok") {
-                    
+
                     $_SESSION["validateSession"] = "ok";
                     $_SESSION["id"] = $data["id"];
                     $_SESSION["name"] = $data["name"];
                     $_SESSION["email"] = $data["email"];
                     $_SESSION["password"] = $data["password"];
                     $_SESSION["mode"] = $_POST["modeUser"];
-                    
+
                     echo '<script> 
 
                         swal({
@@ -388,7 +407,6 @@ class UserController {
                         });
 
                     </script>';
-                    
                 }
             }
         }

@@ -128,11 +128,13 @@
 .avatar-image-container .circular-avatar-image #avatar-image {
     min-height: 96px;
     min-width: 96px;
+    background-color: #000;
 }
 
 .avatar-image-container.desktop .circular-avatar-image #avatar-image {
     min-height: 220px;
     min-width: 220px;
+    background-color: #000;
 }
 
 .avatar-image-container .image-edit-popover-trigger-holder {
