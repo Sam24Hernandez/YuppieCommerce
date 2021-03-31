@@ -260,19 +260,18 @@ class UserController {
                         } else {
                             mkdir($dirPath, 0755);
                         }
-                        
                     } else {
 
                         mkdir($dirPath, 0755);
                     }
-                    
+
 
                     /** Save Image on the Dir Path * */
                     list($width, $height) = getimagesize($_FILES["dataPicture"]["tmp_name"]);
 
                     $newWidth = 460;
                     $newHeight = 460;
-                    
+
                     $random = mt_rand(100, 999);
 
                     /** Change the size of the picture */
@@ -408,6 +407,78 @@ class UserController {
 
                     </script>';
                 }
+            }
+        }
+    }
+
+    /** Show Shopping * */
+    static public function ctrShowShopping($item, $valueUser) {
+
+        $table = "shopping";
+
+        $response = UserModel::mdlShowShopping($table, $item, $valueUser);
+
+        return $response;
+    }
+
+    /** Update Rating Comment * */
+    public function ctrUpdateComment() {
+
+        if (isset($_POST["idComment"])) {
+
+            if ($_POST["comment"] != "") {
+
+                $table = "comments";
+
+                $data = array(
+                    "id" => $_POST["idComment"],
+                    "rating" => $_POST["rating"],
+                    "comment" => $_POST["comment"]
+                );
+                
+                $response = UserModel::mdlUpdateComment($table, $data);
+                
+                if ($response === "ok") {
+                    
+                     echo '<script> 
+
+                        swal({
+                            title: "Reseña enviada - ¡Gracias!",
+                            text: "¡Estamos procesando su opinión. Esto puede tardar varios días, así que apreciamos su paciencia.!",
+                            type:"success",
+                            confirmButtonText: "Cerrar",
+                            closeOnConfirm: false
+                          },
+
+                          function(isConfirm){
+
+                          if(isConfirm){
+                                history.back();
+                          }
+                        });
+
+                    </script>';
+                    
+                }
+            } else {
+                
+                echo '<script>
+
+                    swal({
+                        title: "¡Error al enviar su reseña!",
+                        text: "¡Algo salió mal durante el envío, intentalo de nuevo!",
+                        type: "error",
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Cerrar",
+                        closeOnConfirm: false,
+                      },
+                      function(isConfirm){
+                        if (isConfirm) {
+                            history.back();
+                        } 
+                      });
+                </script>';
+                
             }
         }
     }

@@ -183,3 +183,5 @@ $("#dataPicture").change(function () {
     } 
 
 });
+
+/** Change Stars Value **/

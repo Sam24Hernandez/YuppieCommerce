@@ -1,0 +1,52 @@
+/* 
+    Created on : 15/03/2021, 10:05:26 AM
+    Author     : Sam Hernández
+    Version: 1.0
+    Repository: https://github.com/Sam24Hernandez/YuppieCommerce
+*/
+
+.rating-section {
+    margin-bottom: 22px;
+}
+
+.a-spacing-top-micro.rating-section {
+    padding-top: 4px;
+    margin-top: 0 !important;
+}
+
+.ryp__star__button {
+    margin-right: 2px;
+    border: none;
+    background: 0 0;
+    padding: 0;
+}
+
+.rpy__star {
+    cursor: pointer;
+}
+
+.ryp__star--large {
+    width: 35px;
+}
+
+.button-text-shopping {
+    background: linear-gradient(to bottom,#f7f8fa,#e7e9ec);
+    border-radius: 3px;
+    border-color: #ADB1B8 #A2A6AC #8D9096;
+    border-style: solid;
+    border-width: 1px;
+    text-decoration: none !important;
+    position: relative;
+    box-shadow: 0 1px 0 rgba(255,255,255,.6);
+    padding: 0 10px 0 11px;
+    text-align: center;
+    display: block;
+    margin: 0;
+    outline: 0;
+    white-space: nowrap;
+    height: 29px;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 29px;
+    color: #111 !important;
+}

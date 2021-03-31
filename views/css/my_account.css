@@ -45,7 +45,8 @@
     display: block;
 }
 
-.card-whole-card-link:hover {
+.card-whole-card-link:hover,
+.card-whole-card-link:focus { 
     background: #eee;
     text-decoration: none;
 }

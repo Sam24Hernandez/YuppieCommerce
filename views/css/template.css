@@ -264,6 +264,15 @@ ol {
     }
 }
 
+.text-bold {
+    font-weight: 700 !important;
+}
+
+.small-title {
+    font-size: 18px !important;
+    line-height: 24px;
+}
+
 /* Error 404 Page */
 
 .error-box {
@@ -316,6 +325,24 @@ ol {
 
 .spad-featured {
     padding-bottom: 50px;
+}
+
+.dispatched {
+    color: #e7ab3c;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.shipped {
+    color: #C7511F;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.delivered {
+    color: #007600;
+    font-size: 13px;
+    font-weight: 700;
 }
 
 

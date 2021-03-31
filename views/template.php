@@ -41,6 +41,7 @@
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/infoproduct.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/profile.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/my_account.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/my_shopping.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/footer.css" type="text/css">
 
         <!-- ============================================================== -->
@@ -123,7 +124,7 @@
                 include "modules/products.php";
             } elseif ($infoProduct != NULL) {
                 include "modules/infoproduct.php";
-            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile" || $routes[0] === "my_account") {
+            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile" || $routes[0] === "my_account" || $routes[0] === "my_shopping") {
                 include "modules/" . $routes[0] . ".php";
             } else {
                 include "modules/error404.php";

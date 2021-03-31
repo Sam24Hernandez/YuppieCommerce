@@ -17,7 +17,7 @@ if (!isset($_SESSION["validateSession"])) {
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text product-more">
-                    <a class="text-uppercase" href="<?php $url; ?>"><i class="fa fa-home"></i> Inicio</a>
+                    <a class="text-uppercase" href="<?php echo $url; ?>"><i class="fa fa-home"></i> Inicio</a>
                     <span class="text-uppercase active-page">Mi Cuenta</span>
                 </div>
             </div>
@@ -54,7 +54,7 @@ if (!isset($_SESSION["validateSession"])) {
                 </div>
 
                 <div class="card m-b-20">
-                    <a href="#" class="card-whole-card-link">
+                    <a href="<?php $url; ?>my_shopping" class="card-whole-card-link">
                         <div class="card-body"> 
                             <div class="column-account a-span3">
                                 <h2>Mis compras</h2>
