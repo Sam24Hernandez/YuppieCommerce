@@ -111,18 +111,138 @@ $server = Route::ctrRouteServer();
                                 <i class="fa fa-heart-o"></i>
                             </a>
                         </div>
-                        <div class="pd-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                            &nbsp;
-                            <span>
-                                <a href="#">
-                                    <span>125 calificaciones</span>
-                                </a>
-                            </span>
+                        <div class="pd-rating">';
+                    
+                            $data = array(
+                                "idUser" => "",
+                                "idProduct" => $infoproduct["id"]
+                            );
+                            
+                            $califications = UserController::ctrShowProfileComments($data);
+                            $quantityCal = 0;
+                            
+                            foreach ($califications as $key => $value){
+				
+				if($value["comment"] != ""){
+
+                                    $quantityCal += 1;
+
+				}
+                            }
+                            
+                            $quantityCalification = 0;
+                            
+                            if ($quantityCal == 0) {
+                                echo '<span>
+                                    <span>Aún no tiene calificaciones</span>
+                                </span>';
+                            } else {
+                                echo '<span>
+                                    <a href="#">
+                                        <span>'.$quantityCal.' calificaciones</span>
+                                    </a>
+                                </span>';
+                                
+                                $sumRating = 0;
+                                
+                                foreach ($califications as $key => $value) {
+
+                                    if ($value["rating"] != 0) {
+                                        
+                                        $quantityCalification++;
+
+                                        $sumRating += $value["rating"];                                                                                
+
+                                    }
+
+                                }
+
+                                $average = round($sumRating / $quantityCalification, 1);
+
+                                if ($average >= 0 && $average < 0.5) {
+
+                                    echo '<i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                } elseif ($average >= 0.5 && $average < 1) {
+
+                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                } elseif ($average >= 1 && $average < 1.5) {
+
+                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-half-o " aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                } elseif ($average >= 1.5 && $average < 2) {
+
+                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                } elseif ($average >= 2 && $average < 2.5) {
+
+                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                } elseif ($average >= 2.5 && $average < 3) {
+
+                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                } elseif ($average >= 3 && $average < 3.5) {
+
+                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                } elseif ($average >= 3.5 && $average < 4) {
+
+                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                } elseif ($average >= 4 && $average < 4.5) {
+
+                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>';
+
+                                } else {
+
+                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>';
+
+                                }       
+                            }
+                                                                             
+                            echo '&nbsp;                            
                         </div>
                         <hr>
                         <div class="pd-desc">
@@ -432,97 +552,185 @@ $server = Route::ctrRouteServer();
                     </div>
                     <div class="tab-pane fade" id="tab-3" role="tabpanel">
                         <div class="customer-review-option">
-                            <h4>2 Comments</h4>
+                            
+                            <?php
+                            
+                            $data = array(
+                                "idUser" => "",
+                                "idProduct" => $infoproduct["id"]
+                            );
+                            
+                            $comments = UserController::ctrShowProfileComments($data);
+                            $quantity = 0;
+                            
+                            foreach ($comments as $key => $value) {
+                                if ($value["comment"] != "") {
+                                    $quantity += 1;
+                                }
+                            }
+                            
+                            ?>
+                            
+                            <?php
+                            
+                            $quantityRating = 0;
+                            
+                            if ($quantity == 0) {
+                                
+                                echo '<h4>Este producto aún no tiene comentarios</h4>';
+                                
+                            } else {
+                                echo '<h4>'.$quantity.' Comentario(s)</h4>';
+                                                                                                
+                            }
+                            
+                            ?> 
+                            
                             <div class="comment-option">
-                                <div class="co-item">
-                                    <div class="avatar-pic">
-                                        <img src="<?php echo $server; ?>views/img/users/default/anonymous.png" alt="">
-                                    </div>
-                                    <div class="avatar-text">
-                                        <div class="at-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
+                            <?php
+                            
+                            foreach ($comments as $key => $value) {
+                                
+                                if ($value["comment"] != "") {
+                                    
+                                    $item = "id";                                    
+                                    $valueUser = $value["user_id"];
+                                    
+                                    $user = UserController::ctrShowUser($item, $valueUser);
+                                    
+                                    echo '<div class="co-item">
+                                        <div class="avatar-pic">';
+                                            
+                                        if ($user["mode"] == "directo") {
+                                            
+                                            if ($user["picture"] == "") {
+                                                echo '<img src="'.$server.'views/img/users/default/anonymous.png" alt="user">';
+                                            } else {
+                                                echo '<img src="'.$url.$user["picture"].'" alt="user">';
+                                            }
+                                            
+                                        } else {
+                                            echo '<img src="'.$user["picture"].'" alt="user">';
+                                        }                                                                             
+                                        echo '</div>
+                                        <div class="avatar-text">
+                                            <div class="at-rating">';
+                                            switch ($value["rating"]) {
+                                                case 0.5:
+                                                    echo '<i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                                    break;
+
+                                                 case 1.0:
+                                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                                    break;
+
+                                                 case 1.5:
+                                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                                    break;
+
+                                                 case 2.0:
+                                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                                    break;
+
+                                                 case 2.5:
+                                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                                    break;
+                                                 case 3.0:
+                                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                                    break;
+
+                                                 case 3.5:
+                                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                                    break;
+
+                                                 case 4.0:
+                                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-o" aria-hidden="true"></i>';
+
+                                                    break;
+
+                                                 case 4.5:
+                                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>';
+
+                                                    break;
+
+                                                 case 5.0:
+                                                    echo '<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>';
+
+                                                    break;
+                                            }
+                                            echo '</div>
+                                            <h5>'.$user["name"].' <span>Revisado el '. date_format(new DateTime($value["date"]), "l jS F Y") .'</span></h5>
+                                            <div class="at-reply">'.$value["comment"].'</div>
+                                            <span class="cr-vote-success" style="display: none;">
+                                                <div class="alert alert-success">
+                                                    <i class="fa fa-check-circle"></i>
+                                                    Gracias por su comentario.
+                                                </div>
+                                            </span>
+                                            <span class="cr-vote-text">A 15 personas les resultó útil</span>
+                                            <p>
+                                                <a href="#">
+                                                    <span>
+                                                        <i class="fa fa-thumbs-up"></i>
+                                                        Me gusta
+                                                    </span>
+                                                </a>
+                                            </p>
                                         </div>
-                                        <h5>Brandon Kelley <span>Revisado el 4 de febrero de 2021</span></h5>
-                                        <div class="at-reply">Increíble producto!</div>
-                                        <span class="cr-vote-success" style="display: none;">
-                                            <div class="alert alert-success">
-                                                <i class="fa fa-check-circle"></i>
-                                                Gracias por su comentario.
-                                            </div>
-                                        </span>
-                                        <span class="cr-vote-text">A 15 personas les resultó útil</span>
-                                        <p>
-                                            <a href="#">
-                                                <span>
-                                                    <i class="fa fa-thumbs-up"></i>
-                                                    Me gusta
-                                                </span>
-                                            </a>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="co-item">
-                                    <div class="avatar-pic">
-                                        <img src="<?php echo $server; ?>views/img/users/default/anonymous.png" alt="">
-                                    </div>
-                                    <div class="avatar-text">
-                                        <div class="at-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <h5>Roy Banks <span>Revisado el 4 de febrero de 2021</span></h5>
-                                        <div class="at-reply">¡Genial, quedamos muy contentos!</div>
-                                        <span class="cr-vote-text">A 15 personas les resultó útil</span>
-                                        <p>
-                                            <a href="#">
-                                                <span>
-                                                    <i class="fa fa-thumbs-up"></i>
-                                                    Me gusta
-                                                </span>
-                                            </a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="leave-comment">
-                                <h4>Escribir una opinión</h4>
-                                <form action="#" class="comment-form">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <label for="rating">Calificación general</label>
-                                            <div class="rating-section a-spacing-top-micro">
-                                                <button type="button" class="ryp__star__button" data-hook="ryp-star">
-                                                    <img alt="seleccionar para darle una calificación de una estrella a este artículo." src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzgiIGhlaWdodD0iMzUiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjUwJSIgeDI9IjUwJSIgeTE9IjI3LjY1JSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkNFMDAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkE3MDAiLz48L2xpbmVhckdyYWRpZW50PjxwYXRoIGlkPSJiIiBkPSJNMTkgMGwtNS44NyAxMS41MkwwIDEzLjM3bDkuNSA4Ljk3TDcuMjYgMzUgMTkgMjkuMDIgMzAuNzUgMzVsLTIuMjQtMTIuNjYgOS41LTguOTctMTMuMTMtMS44NXoiLz48L2RlZnM+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48dXNlIGZpbGw9InVybCgjYSkiIHhsaW5rOmhyZWY9IiNiIi8+PHBhdGggc3Ryb2tlPSIjQTI2QTAwIiBzdHJva2Utb3BhY2l0eT0iLjc1IiBkPSJNMTkgMS4xbC01LjU0IDEwLjg4TDEuMSAxMy43Mmw4Ljk0IDguNDRMNy45MiAzNC4xIDE5IDI4LjQ2bDExLjA4IDUuNjQtMi4xMS0xMS45NCA4Ljk0LTguNDQtMTIuMzYtMS43NEwxOSAxLjF6Ii8+PC9nPjwvc3ZnPg==" class="ryp__review-stars__star ryp__star ryp__star--large">
-                                                </button>
-                                                <button type="button" class="ryp__star__button" data-hook="ryp-star">
-                                                    <img alt="seleccionar para darle una calificación de una estrella a este artículo." src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzgiIGhlaWdodD0iMzUiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjUwJSIgeDI9IjUwJSIgeTE9IjI3LjY1JSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkNFMDAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkE3MDAiLz48L2xpbmVhckdyYWRpZW50PjxwYXRoIGlkPSJiIiBkPSJNMTkgMGwtNS44NyAxMS41MkwwIDEzLjM3bDkuNSA4Ljk3TDcuMjYgMzUgMTkgMjkuMDIgMzAuNzUgMzVsLTIuMjQtMTIuNjYgOS41LTguOTctMTMuMTMtMS44NXoiLz48L2RlZnM+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48dXNlIGZpbGw9InVybCgjYSkiIHhsaW5rOmhyZWY9IiNiIi8+PHBhdGggc3Ryb2tlPSIjQTI2QTAwIiBzdHJva2Utb3BhY2l0eT0iLjc1IiBkPSJNMTkgMS4xbC01LjU0IDEwLjg4TDEuMSAxMy43Mmw4Ljk0IDguNDRMNy45MiAzNC4xIDE5IDI4LjQ2bDExLjA4IDUuNjQtMi4xMS0xMS45NCA4Ljk0LTguNDQtMTIuMzYtMS43NEwxOSAxLjF6Ii8+PC9nPjwvc3ZnPg==" class="ryp__review-stars__star ryp__star ryp__star--large">
-                                                </button>
-                                                <button type="button" class="ryp__star__button" data-hook="ryp-star">
-                                                    <img alt="seleccionar para darle una calificación de una estrella a este artículo." src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzgiIGhlaWdodD0iMzUiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjUwJSIgeDI9IjUwJSIgeTE9IjI3LjY1JSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkNFMDAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkE3MDAiLz48L2xpbmVhckdyYWRpZW50PjxwYXRoIGlkPSJiIiBkPSJNMTkgMGwtNS44NyAxMS41MkwwIDEzLjM3bDkuNSA4Ljk3TDcuMjYgMzUgMTkgMjkuMDIgMzAuNzUgMzVsLTIuMjQtMTIuNjYgOS41LTguOTctMTMuMTMtMS44NXoiLz48L2RlZnM+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48dXNlIGZpbGw9InVybCgjYSkiIHhsaW5rOmhyZWY9IiNiIi8+PHBhdGggc3Ryb2tlPSIjQTI2QTAwIiBzdHJva2Utb3BhY2l0eT0iLjc1IiBkPSJNMTkgMS4xbC01LjU0IDEwLjg4TDEuMSAxMy43Mmw4Ljk0IDguNDRMNy45MiAzNC4xIDE5IDI4LjQ2bDExLjA4IDUuNjQtMi4xMS0xMS45NCA4Ljk0LTguNDQtMTIuMzYtMS43NEwxOSAxLjF6Ii8+PC9nPjwvc3ZnPg==" class="ryp__review-stars__star ryp__star ryp__star--large">
-                                                </button>
-                                                <button type="button" class="ryp__star__button" data-hook="ryp-star">
-                                                    <img alt="seleccionar para darle una calificación de una estrella a este artículo." src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzgiIGhlaWdodD0iMzUiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjUwJSIgeDI9IjUwJSIgeTE9IjI3LjY1JSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkNFMDAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkE3MDAiLz48L2xpbmVhckdyYWRpZW50PjxwYXRoIGlkPSJiIiBkPSJNMTkgMGwtNS44NyAxMS41MkwwIDEzLjM3bDkuNSA4Ljk3TDcuMjYgMzUgMTkgMjkuMDIgMzAuNzUgMzVsLTIuMjQtMTIuNjYgOS41LTguOTctMTMuMTMtMS44NXoiLz48L2RlZnM+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48dXNlIGZpbGw9InVybCgjYSkiIHhsaW5rOmhyZWY9IiNiIi8+PHBhdGggc3Ryb2tlPSIjQTI2QTAwIiBzdHJva2Utb3BhY2l0eT0iLjc1IiBkPSJNMTkgMS4xbC01LjU0IDEwLjg4TDEuMSAxMy43Mmw4Ljk0IDguNDRMNy45MiAzNC4xIDE5IDI4LjQ2bDExLjA4IDUuNjQtMi4xMS0xMS45NCA4Ljk0LTguNDQtMTIuMzYtMS43NEwxOSAxLjF6Ii8+PC9nPjwvc3ZnPg==" class="ryp__review-stars__star ryp__star ryp__star--large">
-                                                </button>
-                                                <button type="button" class="ryp__star__button" data-hook="ryp-star">
-                                                    <img alt="seleccionar para darle una calificación de una estrella a este artículo." src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzgiIGhlaWdodD0iMzUiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjUwJSIgeDI9IjUwJSIgeTE9IjI3LjY1JSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGRkNFMDAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRkE3MDAiLz48L2xpbmVhckdyYWRpZW50PjxwYXRoIGlkPSJiIiBkPSJNMTkgMGwtNS44NyAxMS41MkwwIDEzLjM3bDkuNSA4Ljk3TDcuMjYgMzUgMTkgMjkuMDIgMzAuNzUgMzVsLTIuMjQtMTIuNjYgOS41LTguOTctMTMuMTMtMS44NXoiLz48L2RlZnM+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48dXNlIGZpbGw9InVybCgjYSkiIHhsaW5rOmhyZWY9IiNiIi8+PHBhdGggc3Ryb2tlPSIjQTI2QTAwIiBzdHJva2Utb3BhY2l0eT0iLjc1IiBkPSJNMTkgMS4xbC01LjU0IDEwLjg4TDEuMSAxMy43Mmw4Ljk0IDguNDRMNy45MiAzNC4xIDE5IDI4LjQ2bDExLjA4IDUuNjQtMi4xMS0xMS45NCA4Ljk0LTguNDQtMTIuMzYtMS43NEwxOSAxLjF6Ii8+PC9nPjwvc3ZnPg==" class="ryp__review-stars__star ryp__star ryp__star--large">
-                                                </button>
-                                            </div>
-                                        </div> 
-                                        <div class="col-lg-12">
-                                            <label for="description">Agrega un comentario escrito</label>
-                                            <textarea placeholder="¿Qué te gustó o qué no te gustó? ¿Para qué usaste este producto?"></textarea>
-                                            <button type="submit" class="primary-btn">Enviar</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </div>';
+                                    
+                                }
+                                
+                            }                                                        
+                            
+                            ?>
                             </div>
                         </div>
                     </div>
