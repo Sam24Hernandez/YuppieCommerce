@@ -233,8 +233,10 @@
     opacity: 0;
 }
 
-.product-item .pi-pic .icon a {
-    color: #252525;
+.product-item .pi-pic .icon button {
+    color: #e7ab3c;
+    border: none;
+    background: 0 0;
 }
 
 .product-item .pi-pic ul {
@@ -488,7 +490,7 @@
 .single-grid-product .links-text .price span {
     font-size: 14px;
     font-weight: 400;
-    color: #636363;
+    color: #b2b2b2;
     text-decoration: line-through;
 }
 

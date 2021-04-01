@@ -69,7 +69,7 @@ if (!isset($_SESSION["validateSession"])) {
                 </div>
 
                 <div class="card m-b-20">
-                    <a href="#" class="card-whole-card-link">
+                    <a href="<?php $url; ?>my_list" class="card-whole-card-link">
                         <div class="card-body"> 
                             <div class="column-account a-span3">
                                 <h2>Mi Lista</h2>

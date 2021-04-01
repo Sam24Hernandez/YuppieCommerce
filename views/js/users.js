@@ -64,6 +64,8 @@ $("#regEmail").change(function () {
 /** Validation to User Register **/
 
 function registerUser() {
+    
+    $(".alert").fadeOut();
 
     // Validated name
 
@@ -186,10 +188,10 @@ $("#dataPicture").change(function () {
 
 /** Comment ID **/
 
-$(".rateProduct").click(function() {
-   var idComment = $(this).attr("idComment");
-   
-   $("#idComment").val(idComment);
+$(".rateProduct").click(function () {
+    var idComment = $(this).attr("idComment");
+
+    $("#idComment").val(idComment);
 });
 
 /** Change Stars Value **/
@@ -286,16 +288,173 @@ $("input[name='rating']").change(function () {
 /** Validate Comment **/
 
 function validateComment() {
-    
+
     var comment = $("#comment").val();
-    
+
     if (comment == "") {
-        
+
         $("#comment").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> Debes escribir una reseña.</div>');
-        
+
         return false;
     }
-    
+
     return true;
-    
+
 }
+
+/** Wish List **/
+
+$(".wishes").click(function () {
+
+    var idProduct = $(this).attr("idProduct");
+    // console.log("ID del Producto: ", idProduct);
+
+    var idUser = localStorage.getItem("user");
+    // console.log("ID del Usuario: ", idUser);
+
+    if (idUser === null) {
+
+        swal({
+            title: '¡Debes iniciar sesión!',
+            text: '¡Para agregar un producto a la lista de deseos, debes primero iniciar sesión!',
+            type: "warning",
+            html: '<a href="#modalLogin" data-toggle="modal" data-dismiss="modal">Iniciar sesión</a>'
+        });
+
+    } else {        
+
+        var data = new FormData();
+        data.append("idUser", idUser);
+        data.append("idProduct", idProduct);
+
+        $.ajax({
+            url: hidePath + "ajax/user.ajax.php",
+            method: "POST",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                // console.log(response);
+                if (response === "existe") {
+                    
+                    swal({
+                       title: "Producto en la Lista de Deseos" ,
+                       text: "¡Este producto ya fue añadido recientemente a la lista de deseos!",
+                       type: "warning",
+                       confirmButtonText: "Cerrar",
+                       closeOnConfirm: false
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            window.location = actualRoute;
+                        }
+                    });
+                    
+                } else if (response === "ok") {
+                    
+                    swal({
+                       title: "Añadido" ,
+                       text: "¡Producto añadido a la lista de deseos!",
+                       type: "success",
+                       confirmButtonText: "Cerrar",
+                       closeOnConfirm: false
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            window.location = actualRoute;
+                        }
+                    });
+                    
+                }
+            }
+        });
+    }
+
+});
+
+/** Add wish list in info product **/
+
+$(".addToWishList").click(function() {
+    
+    var idProduct = $(this).attr("idProduct");    
+    var idUser = localStorage.getItem("user");
+    
+    if (idUser === null) {
+        
+        swal({
+            title: '¡Debes iniciar sesión!',
+            text: '¡Para agregar un producto a la lista de deseos, debes primero iniciar sesión!',
+            type: "warning",
+            html: '<a href="#modalLogin" data-toggle="modal" data-dismiss="modal">Iniciar sesión</a>'
+        });
+        
+    } else {    
+    
+        $(this).addClass("wish-fav");       
+        
+        var data = new FormData();
+        data.append("idUser", idUser);
+        data.append("idProduct", idProduct);
+        
+        $.ajax({
+            url: hidePath + "ajax/user.ajax.php",
+            method: "POST",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                // console.log(response);
+                if (response === "existe") {                                        
+                    
+                    swal({
+                       title: "Producto en la Lista de Deseos" ,
+                       text: "¡Este producto ya fue añadido recientemente a la lista de deseos!",
+                       type: "warning",
+                       confirmButtonText: "Cerrar"
+                    });                                        
+                    
+                } else if (response === "ok") {
+                    
+                    swal({
+                       title: "Añadido" ,
+                       text: "¡Producto añadido a la lista de deseos!",
+                       type: "success",
+                       confirmButtonText: "Cerrar",
+                       closeOnConfirm: false
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            window.location = actualRoute;
+                        }
+                    });
+                    
+                }
+            }
+        });
+    }      
+   
+});
+
+/** Remove Producto To Wish List **/
+
+$(".removeWish").click(function() {
+   
+   var idWish = $(this).attr("idWish");
+   
+   $(this).parent().parent().parent().parent().parent().remove();
+   
+   var data = new FormData();
+   data.append("idWish", idWish);
+   
+   $.ajax({
+      
+      url: hidePath + "ajax/user.ajax.php",
+      method: "POST",
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function(response){}
+        
+   });
+   
+});

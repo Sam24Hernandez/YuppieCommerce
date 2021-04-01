@@ -102,12 +102,11 @@ $server = Route::ctrRouteServer();
                         echo '<div class="col-lg-6">';
                     }
                     ?>
-
                     <?php
                     echo '<div class="product-details">
                         <div class="pd-title">                                                                                                                                           
                             <h3>' . $infoproduct["product_title"] . '</h3>
-                            <a href="#" class="heart-icon" title="Agregar a la lista de deseos" data-toggle="tooltip">
+                            <a style="cursor: pointer;" class="heart-icon addToWishList" idProduct="'.$infoproduct["id"].'" title="Agregar a la lista de deseos" data-toggle="tooltip">
                                 <i class="fa fa-heart-o"></i>
                             </a>
                         </div>
@@ -781,35 +780,10 @@ $server = Route::ctrRouteServer();
                     echo '<div class="col-lg-3 col-sm-6">
                             <div class="product-item">
                             <div class="pi-pic">
-                                <img src="' . $server . $value["product_image"] . '" alt="">                        
-                                <div class="icon">
-                                    <a href="#" class="wishes" title="Agregar a mi lista de deseos"><i class="fa fa-heart-o"></i></a>
-                                </div>
-                                <ul>';
+                                <a href="' . $url . $value["route"] . '"><img src="' . $server . $value["product_image"] . '" alt=""></a>
+                            </div>';
 
-                    if ($value["sort"] == "virtual" && $value["price"] != 0) {
-                        if ($value["offer"] != 0) {
-                            echo '<li class="w-icon active"><a href="#" title="Agregar al carrito de compras"><i class="fa fa-shopping-bag"></i></a></li>                                                    
-                                                <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
-                                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
-                        } else {
-                            echo '<li class="w-icon active"><a href="#" title="Agregar al carrito de compras"><i class="fa fa-shopping-bag"></i></a></li>
-                                                <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
-                                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
-                        }
-                    } else if ($value["sort"] == "virtual" && $value["price"] == 0) {
-                        echo '<li class="w-icon active"><a href="#" title="Visualizar curso"><i class="fa fa-play"></i></a></li>
-                                            <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
-                                            <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
-                    } else {
-                        echo '<li class="w-icon active"><a href="#" title="Agregar al carrito de compras"><i class="fa fa-shopping-bag"></i></a></li>
-                                            <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
-                                            <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
-                    }
-
-                    echo '</ul>
-                            </div>
-                            <div class="pi-text">';
+                    echo '<div class="pi-text">';
 
                     if ($value["offer"] != 0 && $value["price"] != 0) {
                         echo '<div class="discount-name">' . $value["offer_discount"] . '% de Descuento</div>';

@@ -177,4 +177,74 @@ class UserModel {
         $stmt = NULL;
     }
 
+    /** Add Product To Wish List * */
+    static public function mdlAddToWishList($table, $data) {
+
+        $stmt = Database::connect()->prepare("SELECT COUNT(*) total FROM $table WHERE user_id = :user_id AND product_id = :product_id");
+
+        $stmt->bindParam(":user_id", $data["idUser"], PDO::PARAM_INT);
+        $stmt->bindParam(":product_id", $data["idProduct"], PDO::PARAM_INT);
+        
+        $stmt->execute();
+        $total = $stmt->fetchColumn();
+
+        if ($total > 0) {
+            return "existe";
+        } else {
+
+            $stmt1 = Database::connect()->prepare("INSERT INTO $table (user_id, product_id) VALUES (:user_id, :product_id)");
+
+            $stmt1->bindParam(":user_id", $data["idUser"], PDO::PARAM_INT);
+            $stmt1->bindParam(":product_id", $data["idProduct"], PDO::PARAM_INT);
+
+            if ($stmt1->execute()) {
+                return "ok";
+            } else {
+                return "error";
+            }
+            
+            $stmt1->close();
+
+            $stmt1 = NULL;
+        }
+        
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
+    /** Show Wish List * */
+    static public function mdlShowWishList($table, $item) {
+
+        $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE user_id = :user_id ORDER BY id DESC");
+
+        $stmt->bindParam(":user_id", $item, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
+    /** Remove Product To Wish List * */
+    static public function mdlRemoveToWishList($table, $data) {
+
+        $stmt = Database::connect()->prepare("DELETE FROM $table WHERE id = :id");
+
+        $stmt->bindParam(":id", $data, PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
 }

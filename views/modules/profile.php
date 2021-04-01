@@ -31,76 +31,16 @@ if (!isset($_SESSION["validateSession"])) {
                             <div class="profile-row desktop cover-photo-edit-icon">
                                 <img alt="" src="<?php echo $server; ?>views/img/perfiles/default/camera.png" />
                                 <span
-                                    class="a-declarative"
-                                    data-action="a-popover"
-                                    data-a-popover='{"name":"cover-photo-edit-image-popover","dataStrategy":"preload","position":"triggerBottom","activate":"onclick","closeButton":"false","closeButtonLabel":"cover-photo-upload-popover-close"}'
+                                    class="a-declarative"                                    
                                     >
                                     <div id="cover-photo-edit-popover-trigger" class="profile-section edit-popover-trigger"></div>
                                 </span>
                             </div>
                             <span
-                                class="a-declarative"
-                                data-action="a-modal"
-                                data-a-modal='{"name":"cover-photo-desktop-crop-popover","dataStrategy":"preload","header":"Sube una foto de portada","padding":"none","closeButtonLabel":"cover-photo-desktop-crop-popover-close"}'
+                                class="a-declarative"                                
                                 >
                                 <div id="cover-photo-desktop-crop-trigger" class="profile-section"></div>
-                            </span>
-                            <div class="a-popover-preload" id="a-popover-cover-photo-edit-image-popover">
-                                <div class="profile-section spacing-none">
-                                    <div class="profile-section spacing-none">
-                                        <div class="profile-row">
-                                            <label class="imageUploadLabel"><span class="a-size-small a-color-base upload-photo">Cargar</span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="a-popover-preload" id="a-popover-cover-photo-delete-popover">
-                                <div class="profile-section desktop delete-modal-content">
-                                    <div class="profile-row delete-modal-message"><span>¿Estás seguro de que quieres eliminar tu foto de portada?</span></div>
-                                    <div class="profile-row delete-modal-footer">
-                                        <div class="profile-section desktop delete-modal-buttons">
-                                            <span class="a-button desktop cancel-button-delete-modal">
-                                                <span class="a-button-inner">
-                                                    <input class="a-button-input" type="submit" /><span class="a-button-text" aria-hidden="true"><span>Cancelar</span></span>
-                                                </span>
-                                            </span>
-                                            <span class="a-button a-button-primary desktop delete-button-delete-modal">
-                                                <span class="a-button-inner">
-                                                    <input class="a-button-input" type="submit" /><span class="a-button-text" aria-hidden="true"><span>Eliminar</span></span>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="a-popover-preload" id="a-popover-cover-photo-desktop-crop-popover">
-                                <div class="profile-section cover-photo-crop-container">
-                                    <div class="profile-row cover-photo-crop-image-message"><span>Usa un archivo JPG o PNG. Tu foto debe ser al menos 640 por 244 px.</span></div>
-                                    <div id="cover-photo-desktop-crop-container" class="profile-row"></div>
-                                    <div class="profile-row cover-photo-desktop-crop-popover-bottom">
-                                        <div class="profile-section">
-                                            <span class="a-button cancel-button">
-                                                <span class="a-button-inner">
-                                                    <input class="a-button-input" type="submit" /><span class="a-button-text" aria-hidden="true"><span>Cancelar</span></span>
-                                                </span>
-                                            </span>
-                                            <div class="profile-section upload-pick-photo-container">
-                                                <span class="a-button pick-photo-button">
-                                                    <span class="a-button-inner">
-                                                        <input class="a-button-input" type="submit" /><span class="a-button-text" aria-hidden="true"><span>Elige otra foto</span></span>
-                                                    </span>
-                                                </span>
-                                                <span class="a-button a-button-primary upload-button">
-                                                    <span class="a-button-inner">
-                                                        <input class="a-button-input" type="submit" /><span class="a-button-text" aria-hidden="true"><span>Cargar</span></span>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="cover-photo-mobile-crop-container" class="profile-section"></div>
+                            </span>                                                                              
                         </div>
                     </div>
                 </div>
@@ -196,12 +136,12 @@ if (!isset($_SESSION["validateSession"])) {
                         <div id="customer-profile-lists" class="profile-section lists-component">
                             <div class="profile-row a-spacing-base list-card-component">
                                 <div class="a-fixed-right-grid-col product-pic-holder" style="float: left;">
-                                    <a class="a-link-normal list-path" href="#">
+                                    <a class="a-link-normal list-path" href="<?php $url; ?>my_list">
                                         <img alt="" src="https://m.media-amazon.com/images/I/31swmrdF8kL.jpg" class="product-pic" width="40px" height="40px" />
                                     </a>
                                 </div>
                                 <div class="a-fixed-right-grid-col list-name-holder" style="float: left;">
-                                    <a class="a-link-normal list-path" href="#"><span class="a-size-base list-name">Lista de deseos</span></a>
+                                    <a class="a-link-normal list-path" href="<?php $url; ?>my_list"><span class="a-size-base list-name">Lista de deseos</span></a>
                                 </div>                                    
                             </div>
                         </div>

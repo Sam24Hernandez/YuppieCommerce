@@ -491,4 +491,34 @@ class UserController {
         }
     }
 
+    /** Add Product To Wish List * */
+    static public function ctrAddToWishList($data) {
+
+        $table = "wish_list";
+
+        $response = UserModel::mdlAddToWishList($table, $data);
+
+        return $response;
+    }
+    
+    /** Show Wish List * */
+    static public function ctrShowWishList($item) {
+
+        $table = "wish_list";
+
+        $response = UserModel::mdlShowWishList($table, $item);
+
+        return $response;
+    }
+    
+    /** Remove Product To Wish List * */
+    static public function ctrRemoveToWishList($data) {
+
+        $table = "wish_list";
+
+        $response = UserModel::mdlRemoveToWishList($table, $data);
+
+        return $response;
+    }
+
 }

@@ -39,6 +39,34 @@ class UserAjax {
         echo $response;
     }
 
+    /** Add to Wish List * */
+    public $idUser;
+    public $idProduct;
+
+    public function ajaxAddToWishList() {
+
+        $data = array(
+            "idUser" => $this->idUser,
+            "idProduct" => $this->idProduct
+        );
+
+        $response = UserController::ctrAddToWishList($data);
+
+        echo $response;
+    }
+
+    /** Remove Product To Wish List * */
+    public $idWish;
+
+    public function ajaxRemoveToWishList() {
+
+        $data = $this->idWish;
+
+        $response = UserController::ctrRemoveToWishList($data);
+
+        echo $response;
+    }
+
 }
 
 /* =============================================
@@ -63,4 +91,27 @@ if (isset($_POST["email"])) {
     $regFacebook->email = $_POST["email"];
     $regFacebook->picture = $_POST["picture"];
     $regFacebook->ajaxFacebookRegsiter();
+}
+
+/* =============================================
+  Add Product To Wish List
+  ============================================= */
+
+if (isset($_POST["idUser"])) {
+
+    $wish = new UserAjax();
+    $wish->idUser = $_POST["idUser"];
+    $wish->idProduct = $_POST["idProduct"];
+    $wish->ajaxAddToWishList();
+}
+
+/* =============================================
+  Remove Product To Wish List
+  ============================================= */
+
+if (isset($_POST["idWish"])) {
+
+    $removeWish = new UserAjax();
+    $removeWish->idWish = $_POST["idWish"];
+    $removeWish->ajaxRemoveToWishList();
 }

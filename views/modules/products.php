@@ -292,7 +292,9 @@ if($banner != null) {
                                 <div class="pi-pic">
                                     <img src="' . $server . $value["product_image"] . '">
                                     <div class="icon">
-                                        <a href="#" class="wishes" title="Agregar a mi lista de deseos"><i class="fa fa-heart-o"></i></a>
+                                        <button type="button" class="wishes" idProduct="'.$value["id"].'" title="Agregar a mi lista de deseos">
+                                            <i class="fa fa-heart-o"></i>
+                                        </button>                                        
                                     </div>
                                     <ul>
                                         <li class="w-icon active"><a href="#" title="Agregar al carrito de compras"><i class="fa fa-shopping-bag"></i></a></li>

@@ -62,15 +62,7 @@ $server = Route::ctrRouteServer();
                         
                         echo '<div class="product-item">
                         <div class="pi-pic">
-                            <img src="'.$server.$value["product_image"].'">
-                            <div class="icon">
-                                <a href="#" class="wishes" title="Agregar a mi lista de deseos"><i class="fa fa-heart-o"></i></a>
-                            </div>
-                            <ul>
-                                <li class="w-icon active"><a href="#" title="Agregar al carrito de compras"><i class="fa fa-shopping-bag"></i></a></li>
-                                <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
-                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>
-                            </ul>
+                            <img src="'.$server.$value["product_image"].'">                                                      
                         </div>
                         <div class="pi-text">';
                             if ($value["offer"] != 0 && $value["price"] != 0) {
@@ -95,76 +87,7 @@ $server = Route::ctrRouteServer();
                         </div>
                     </div>';
                     }
-                    ?>
-
-                    <!-- item 1 -->                    
-                    
-<!--                     item 2 
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="<?php echo $server; ?>views/img/products/ropa/ropa03.jpg">
-                            <div class="icon">
-                                <a href="#" class="wishes" title="Agregar a mi lista de deseos"><i class="fa fa-heart-o"></i></a>
-                            </div>
-                            <ul>
-                                <li class="w-icon active"><a href="#" title="Agregar al carrito de compras"><i class="fa fa-shopping-bag"></i></a></li>
-                                <li class="quick-view"><a href="#" title="Ver producto">+ Ver</a></li>
-                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <a href="#">
-                                <h5>Nombre del Producto</h5>
-                            </a>
-                            <div class="product-price">
-                                MXN $14.00
-                            </div>
-                        </div>
-                    </div>
-                     item 3 
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="<?php echo $server; ?>views/img/products/ropa/ropa04.jpg">
-                            <div class="icon">
-                                <a href="#" class="wishes" title="Agregar a mi lista de deseos"><i class="fa fa-heart-o"></i></a>
-                            </div>
-                            <ul>
-                                <li class="w-icon active"><a href="#" title="Agregar al carrito de compras"><i class="fa fa-shopping-bag"></i></a></li>
-                                <li class="quick-view"><a href="#" title="Ver producto">+ Ver</a></li>
-                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <a href="#">
-                                <h5>Nombre del Producto</h5>
-                            </a>
-                            <div class="product-price">
-                                MXN $14.00 
-                            </div>
-                        </div>
-                    </div>
-                     item 4 
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <img src="<?php echo $server; ?>views/img/products/ropa/ropa05.jpg">
-                            <div class="icon">
-                                <a href="#" class="wishes" title="Agregar a mi lista de deseos"><i class="fa fa-heart-o"></i></a>
-                            </div>
-                            <ul>
-                                <li class="w-icon active"><a href="#" title="Agregar al carrito de compras"><i class="fa fa-shopping-bag"></i></a></li>
-                                <li class="quick-view"><a href="#" title="Ver producto">+ Ver</a></li>
-                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="pi-text">
-                            <a href="#">
-                                <h5>Nombre del Producto</h5>
-                            </a>
-                            <div class="product-price">
-                                MXN $14.00
-                            </div>
-                        </div>
-                    </div>-->
+                    ?>                    
                 </div>
             </div>
         </div>
@@ -296,7 +219,7 @@ for ($i = 0; $i < count($titleModules); $i++) {
         }
 
         echo '<a href="' . $value["route"] . '" class="pixelProduct">
-                                <h5>' . $value["product_title"] . '</h5>
+                                <h5>' . substr($value["product_title"], 0, 30) . "..." . '</h5>
                             </a>
                             
                             <p class="price">';

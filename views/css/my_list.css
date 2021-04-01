@@ -1,0 +1,82 @@
+/* 
+    Created on : 15/03/2021, 10:05:26 AM
+    Author     : Sam Hernández
+    Version: 1.0
+    Repository: https://github.com/Sam24Hernandez/YuppieCommerce
+*/
+
+.wl-price-ppu-delivery-badge-row {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.price-section {
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+    white-space: nowrap;
+    display: block;
+}
+
+.price-wl {
+    font-size: 17px;
+    color: #0F1111;
+    position: relative;
+    line-height: normal;
+}
+
+.wl-item-delivery-badge {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.off-screen small {
+    color: #b2b2b2;
+    text-decoration: line-through;
+}
+
+.separation-end-section {
+    margin-bottom: 22px;
+}
+
+.btn-declarative {
+    margin-top: 20px;
+}
+
+.btn-declarative button {
+    margin-right: 5px;
+}
+
+.divider.divider-break {
+    text-align: center;
+    position: relative;
+    top: 2px;
+    padding-top: 1px;
+    margin-bottom: 14px;
+    line-height: 0;
+}
+
+.divider.divider-break::after {
+    content: "";
+    width: 100%;
+    background-color: transparent;
+    display: block;
+    height: 1px;
+    border-top: 1px solid #e7e7e7;
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    z-index: 1;
+}
+
+.divider.divider-break h5 {
+    line-height: 1;
+    font-size: 14px;
+    color: #767676;
+    font-weight: 400;
+    z-index: 2;
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    padding: 0 8px 0 7px;
+}
