@@ -22,6 +22,14 @@ if (activePage != null) {
     $(".active-page").html(regActivePage);
 }
 
+/** Back to top button **/
+
+$.scrollUp({
+   scrollText: "",
+   scrollSpeed: 2000,
+   easingType: "easeOutQuint"
+});
+
 /** Active Pagination Button - Products Page **/
 
 var url = window.location.href;

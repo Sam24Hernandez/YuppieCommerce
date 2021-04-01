@@ -264,6 +264,16 @@ ol {
     }
 }
 
+/** Back to top button */
+
+#scrollUp {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: url(../img/template/flecha.jpg);
+}
+
 .text-bold {
     font-weight: 700 !important;
 }

@@ -59,6 +59,7 @@
         <script src="<?php echo $url; ?>views/js/plugins/sweetalert.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.slicknav.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.zoom.min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/jquery.scrollUp.js" type="text/javascript"></script>
     </head>
     <body>       
 
@@ -138,7 +139,7 @@
         include "modules/footer.php";
 
         /* == End Header Section  == */
-        ?>
+        ?>       
 
         <input type="hidden" value="<?php echo $url; ?>" id="hidePath">               
 
