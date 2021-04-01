@@ -109,45 +109,72 @@ class UserModel {
 
         $stmt = NULL;
     }
-    
-    /** Show Shopping from User **/
-    
+
+    /** Show Shopping from User * */
     static public function mdlShowShopping($table, $item, $valueUser) {
-        
+
         $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
-        
+
         $stmt->bindParam(":" . $item, $valueUser, PDO::PARAM_STR);
-        
+
         $stmt->execute();
-        
+
         return $stmt->fetchAll();
-        
+
         $stmt->close();
 
         $stmt = NULL;
-        
     }
-    
-    /** Update Rating Comment **/
-    
+
+    /** Show Comments to Profile * */
+    static public function mdlShowProfileComments($table, $data) {
+
+        if ($data["idUser"] != "") {
+
+            $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE user_id = :user_id AND product_id = :product_id");
+
+            $stmt->bindParam(":user_id", $data["idUser"], PDO::PARAM_INT);
+            $stmt->bindParam(":product_id", $data["idProduct"], PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return $stmt->fetch();
+        } else {
+
+            $stmt = Database::connect()->prepare("SELECT * FROM $table WHERE product_id = :product_id ORDER BY Rand()");
+
+            $stmt->bindParam(":product_id", $data["idProduct"], PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+        }
+
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+
+    /** Update Rating Comment * */
     static public function mdlUpdateComment($table, $data) {
-        
-        $stmt = Database::connect()->prepare("UPDATE $table SET rating = :rating, comment = :comment  WHERE $item = :$item");
-        
+
+        $stmt = Database::connect()->prepare("UPDATE $table SET rating = :rating, comment = :comment WHERE id = :id");
+
         $stmt->bindParam(":rating", $data["rating"], PDO::PARAM_STR);
         $stmt->bindParam(":comment", $data["comment"], PDO::PARAM_STR);
         $stmt->bindParam(":id", $data["id"], PDO::PARAM_INT);
-        
+
         if ($stmt->execute()) {
+
             return "ok";
         } else {
+
             return "error";
         }
-        
+
         $stmt->close();
 
         $stmt = NULL;
-        
     }
 
 }

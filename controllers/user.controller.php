@@ -421,6 +421,16 @@ class UserController {
         return $response;
     }
 
+    /** Show Profile Comments * */
+    static public function ctrShowProfileComments($data) {
+
+        $table = "comments";
+
+        $response = UserModel::mdlShowProfileComments($table, $data);
+
+        return $response;
+    }
+
     /** Update Rating Comment * */
     public function ctrUpdateComment() {
 
@@ -435,16 +445,16 @@ class UserController {
                     "rating" => $_POST["rating"],
                     "comment" => $_POST["comment"]
                 );
-                
+
                 $response = UserModel::mdlUpdateComment($table, $data);
-                
-                if ($response === "ok") {
-                    
-                     echo '<script> 
+
+                if ($response == "ok") {
+
+                    echo '<script> 
 
                         swal({
                             title: "Reseña enviada - ¡Gracias!",
-                            text: "¡Estamos procesando su opinión. Esto puede tardar varios días, así que apreciamos su paciencia.!",
+                            text: "¡Estamos procesando su opinión. Esto puede tardar varios días, así que apreciamos su paciencia!",
                             type:"success",
                             confirmButtonText: "Cerrar",
                             closeOnConfirm: false
@@ -458,10 +468,9 @@ class UserController {
                         });
 
                     </script>';
-                    
                 }
             } else {
-                
+
                 echo '<script>
 
                     swal({
@@ -478,7 +487,6 @@ class UserController {
                         } 
                       });
                 </script>';
-                
             }
         }
     }

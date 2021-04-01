@@ -32,7 +32,7 @@ $("#regEmail").change(function () {
         cache: false,
         contentType: false,
         processData: false,
-        success: function (response) {
+        principal: function (response) {
 
             if (response === "false") {
 
@@ -156,14 +156,14 @@ $("#dataPicture").change(function () {
             confirmButtonText: "Cerrar",
             closeOnConfirm: false,
         },
-        function (isConfirm) {
-            if (isConfirm) {
-               window.location = hidePath+"profile";
-            }
-        });
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.location = hidePath + "profile";
+                    }
+                });
 
     } else if (Number(picture["size"]) > 2000000) {
-        
+
         $("#dataPicture").val("");
 
         swal({
@@ -174,14 +174,128 @@ $("#dataPicture").change(function () {
             confirmButtonText: "Cerrar",
             closeOnConfirm: false,
         },
-        function (isConfirm) {
-            if (isConfirm) {
-               window.location = hidePath+"profile";
-            }
-        });
-        
-    } 
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.location = hidePath + "profile";
+                    }
+                });
+
+    }
 
 });
 
+/** Comment ID **/
+
+$(".rateProduct").click(function() {
+   var idComment = $(this).attr("idComment");
+   
+   $("#idComment").val(idComment);
+});
+
 /** Change Stars Value **/
+$("input[name='rating']").change(function () {
+
+    var rating = $(this).val();
+
+    switch (rating) {
+
+        case "0.5":
+            $("#ratingStars").html('<i class="fa fa-star-half-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+        case "1.0":
+            $("#ratingStars").html('<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+        case "1.5":
+            $("#ratingStars").html('<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-half-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+        case "2.0":
+            $("#ratingStars").html('<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+        case "2.5":
+            $("#ratingStars").html('<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-half-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+        case "3.0":
+            $("#ratingStars").html('<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+        case "3.5":
+            $("#ratingStars").html('<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-half-o fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+        case "4.0":
+            $("#ratingStars").html('<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-o fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+        case "4.5":
+            $("#ratingStars").html('<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star-half-o fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+        case "5.0":
+            $("#ratingStars").html('<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i> ' +
+                    '<i class="fa fa-star fa-2x text-principal" aria-hidden="true"></i>');
+            break;
+
+    }
+
+});
+
+/** Validate Comment **/
+
+function validateComment() {
+    
+    var comment = $("#comment").val();
+    
+    if (comment == "") {
+        
+        $("#comment").parent().before('<div class="alert alert-warning"><strong>ERROR:</strong> Debes escribir una reseña.</div>');
+        
+        return false;
+    }
+    
+    return true;
+    
+}
