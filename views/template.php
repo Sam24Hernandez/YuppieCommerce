@@ -38,11 +38,13 @@
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/header.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/slide.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/products.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/search.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/infoproduct.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/profile.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/my_account.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/my_shopping.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/my_list.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/shopping_cart.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/footer.css" type="text/css">
 
         <!-- ============================================================== -->
@@ -126,7 +128,7 @@
                 include "modules/products.php";
             } elseif ($infoProduct != NULL) {
                 include "modules/infoproduct.php";
-            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile" || $routes[0] === "my_account" || $routes[0] === "my_shopping" || $routes[0] === "my_list") {
+            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile" || $routes[0] === "my_account" || $routes[0] === "my_shopping" || $routes[0] === "my_list" || $routes[0] === "shopping_cart") {
                 include "modules/" . $routes[0] . ".php";
             } else {
                 include "modules/error404.php";
@@ -156,6 +158,7 @@
         <script src="<?php echo $url; ?>views/js/infoproduct.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/users.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/registerFacebook.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/shopping-cart.js" type="text/javascript"></script>
 
         <!--=====================================
         https://developers.facebook.com/

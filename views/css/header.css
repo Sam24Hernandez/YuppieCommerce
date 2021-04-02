@@ -695,6 +695,20 @@ div.h-category {
     #header-sbc #shop-see-all {
         font-size: 10px;
     }
+    
+    .h-top .h-right .user-panel {
+        float: none;
+    }
+    
+    .h-top .h-right .logout-panel {
+        position: relative;
+        bottom: -2px;
+        right: 0;
+    }
+    
+    .social {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 991px) {
@@ -714,10 +728,6 @@ div.h-category {
         padding-left: 10px;
     }
 
-    .h-top .h-right .social {
-        padding-right: 10px;
-    }
-
     .h-top .h-left .mail-service {
         padding-right: 10px;
     }
@@ -726,8 +736,18 @@ div.h-category {
         padding-left: 10px;
     }
 
-    .h-top .h-right .social a {
-        margin-left: 10px;
+    .h-top .h-right .user-panel {
+        float: none;
+    }
+    
+    .h-top .h-right .logout-panel {
+        position: relative;
+        bottom: -2px;
+        right: 0;
+    }
+    
+    .social {
+        display: none;
     }
 
     .inner-header .advanced-search-box .category-btn {
@@ -875,5 +895,21 @@ div.h-category {
     .modal-footer {
         display: inline;
         font-size: 14px;
+    }
+    
+    .h-top .h-right .user-panel {
+        float: none;
+    }
+    
+    .h-top .h-right .user-panel img {
+        position: relative;
+        bottom: 7px;
+    }
+    
+    .h-top .h-right .logout-panel {
+        position: relative;
+        padding-bottom: 8px;
+        bottom: 3px;
+        right: 0;
     }
 }

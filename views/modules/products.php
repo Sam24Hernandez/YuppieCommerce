@@ -6,22 +6,21 @@ $route = $routes[0];
 
 $banner = ProductController::ctrShowBanner($route);
 
-if($banner != null) {
-    
+if ($banner != null) {
+
     $backgroundBanner = json_decode($banner["banner_bg"], true);
-    
-    echo '<section id="bannerProduct" class="y-row zg-banner text-center" style="background:'.$backgroundBanner["background"].'; height:'.$backgroundBanner["height"].'px; color:'.$backgroundBanner["color"].';">
+
+    echo '<section id="bannerProduct" class="y-row zg-banner text-center" style="background:' . $backgroundBanner["background"] . '; height:' . $backgroundBanner["height"] . 'px; color:' . $backgroundBanner["color"] . ';">
             <div class="y-row y-spacing-top-small">
                 <span class="zg-banner-text">
-                    '.$banner["title"].'
+                    ' . $banner["title"] . '
                 </span>
                 <span class="zg-banner-subtext">
-                    '.$banner["subtitle"].'
+                    ' . $banner["subtitle"] . '
                 </span>
             </div>
     </section>';
 }
-
 ?>
 
 <!-- Breadcrumb Section Begin -->
@@ -45,7 +44,92 @@ if($banner != null) {
 <section class="product-shop spad-sec">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 product-sidebar-filter">
+
+
+            <?php
+            /** Call to Pagination * */
+            if (isset($routes[1]) && preg_match('/^[0-9]+$/', $routes[1])) {
+
+                if (isset($routes[2])) {
+
+                    if ($routes[2] == "antiguos") {
+                        $mode = "ASC";
+                        $_SESSION["order"] = "ASC";
+                    } else {
+                        $mode = "DESC";
+                        $_SESSION["order"] = "DESC";
+                    }
+                } else {
+                    if (isset($_SESSION["order"])) {
+                        $mode = $_SESSION["order"];
+                    } else {
+                        $mode = "DESC";
+                    }
+                }
+
+                $base = ($routes[1] - 1) * 12;
+                $limit = 12;
+            } else {
+
+                $routes[1] = 1;
+                $base = 0;
+                $limit = 12;
+                $mode = "DESC";
+                $_SESSION["order"] = "DESC";
+            }
+
+            /** Call Categories, Subcategories, Featured Products * */
+            if ($routes[0] === "articulos-gratis") {
+
+                $item2 = "price";
+                $valueProduct = 0;
+                $order = "id";
+            } elseif ($routes[0] === "lo-mas-vendido") {
+
+                $item2 = NULL;
+                $valueProduct = NULL;
+                $order = "sales";
+            } elseif ($routes[0] === "lo-mas-visto") {
+
+                $item2 = NULL;
+                $valueProduct = NULL;
+                $order = "views";
+            } else {
+
+                $order = "id";
+                $item1 = "route";
+                $valueCategory = $routes[0];
+                $valueSubCategory = $routes[0];
+
+                $category = ProductController::ctrShowCategories($item1, $valueCategory);
+
+                if (!$category) {
+                    $subcategory = ProductController::ctrShowSubCategories($item1, $valueSubCategory);
+
+                    $item2 = "subcategory_id";
+                    $valueProduct = $subcategory[0]["id"];
+                } else {
+                    $item2 = "category_id";
+                    $valueProduct = $category["id"];
+                }
+            }
+
+            $products = ProductController::ctrShowProducts($order, $item2, $valueProduct, $base, $limit, $mode);
+            $listProducts = ProductController::ctrListProducts($order, $item2, $valueProduct);
+
+            if (!$products) {
+                echo '<div class="error-search-section result-list">
+                            <div class="error-box-search">
+                                <div class="error-body-search text-center">
+                                    <h3>Aún no hay productos en esta categoría</h3>
+                                    <p>Revisa nuestros productos disponibles en las categoría de productos.</p>
+                                    <a class="btn btn-primary btn-rounded" href="' . $url . 'all-categories">Ver Categorías</a>
+                                </div>
+                            </div>
+                        </div>';
+            } else {
+
+                echo '<div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 product-sidebar-filter">
                 <div class="filter-widget">
                     <h4 class="fw-title">Departamento</h4>  
                     <h6 class="fw-category">Categoría</h6>
@@ -191,8 +275,8 @@ if($banner != null) {
                                 <select class="sorting" onchange="location = this.value;">
                                     <option value="">Ordenar Productos</option>
                                     <?php
-                                    echo '<option value="' . $url . $routes[0] . '/1/recientes">Más reciente</option>
-                                        <option value="' . $url . $routes[0] . '/1/antiguos">Más antiguo</option>';
+                                    echo "<option value="' . $url . $routes[0] . '/1/recientes">Más reciente</option>
+                                        <option value="' . $url . $routes[0] . '/1/antiguos">Más antiguo</option>";
                                     ?>
                                 </select>
                             </div>
@@ -200,160 +284,92 @@ if($banner != null) {
                     </div>
                 </div>
                 <div class="product-list">
-                    <div class="row">
+                    <div class="row">';
 
-                        <?php
-                        /** Call to Pagination * */
-                        if (isset($routes[1]) && preg_match('/^[0-9]+$/', $routes[1])) {
-
-                            if (isset($routes[2])) {
-
-                                if ($routes[2] == "antiguos") {
-                                    $mode = "ASC";
-                                    $_SESSION["order"] = "ASC";
-                                } else {
-                                    $mode = "DESC";
-                                    $_SESSION["order"] = "DESC";
-                                }
-                            } else {
-                                if (isset($_SESSION["order"])) {
-                                    $mode = $_SESSION["order"];
-                                } else {
-                                    $mode = "DESC";
-                                }
-                            }
-
-                            $base = ($routes[1] - 1) * 12;
-                            $limit = 12;
-                        } else {
-
-                            $routes[1] = 1;
-                            $base = 0;
-                            $limit = 12;
-                            $mode = "DESC";
-                            $_SESSION["order"] = "DESC";
-                        }
-
-                        /** Call Categories, Subcategories, Featured Products * */
-                        if ($routes[0] === "articulos-gratis") {
-
-                            $item2 = "price";
-                            $valueProduct = 0;
-                            $order = "id";
-                        } elseif ($routes[0] === "lo-mas-vendido") {
-
-                            $item2 = NULL;
-                            $valueProduct = NULL;
-                            $order = "sales";
-                        } elseif ($routes[0] === "lo-mas-visto") {
-
-                            $item2 = NULL;
-                            $valueProduct = NULL;
-                            $order = "views";
-                        } else {
-
-                            $order = "id";
-                            $item1 = "route";
-                            $valueCategory = $routes[0];
-                            $valueSubCategory = $routes[0];
-
-                            $category = ProductController::ctrShowCategories($item1, $valueCategory);
-
-                            if (!$category) {
-                                $subcategory = ProductController::ctrShowSubCategories($item1, $valueSubCategory);
-
-                                $item2 = "subcategory_id";
-                                $valueProduct = $subcategory[0]["id"];
-                            } else {
-                                $item2 = "category_id";
-                                $valueProduct = $category["id"];
-                            }
-                        }
-
-                        $products = ProductController::ctrShowProducts($order, $item2, $valueProduct, $base, $limit, $mode);
-                        $listProducts = ProductController::ctrListProducts($order, $item2, $valueProduct);
-
-                        if (!$products) {
-                            echo '<section class="error-section">
-                            <div class="error-box">
-                                <div class="error-body text-center">
-                                    <h1>¡Oops!</h1>
-                                    <h3 class="text-uppercase">Aún no hay productos en esta sección</h3>
-                                    <p>Estamos trabajando en ofrecerle productos.</p>
-                                    <a class="btn btn-primary btn-rounded" href="' . $url . 'all-categories">Ir a Categorías</a>
-                                </div>
-                            </div>
-                        </section>';
-                        } else {
-
-                            foreach ($products as $key => $value) {
-                                echo '<div class="col-lg-4 col-sm-6">
+                foreach ($products as $key => $value) {
+                    echo '<div class="col-lg-4 col-sm-6">
                                     <div class="product-item">
                                 <div class="pi-pic">
                                     <img src="' . $server . $value["product_image"] . '">
                                     <div class="icon">
-                                        <button type="button" class="wishes" idProduct="'.$value["id"].'" title="Agregar a mi lista de deseos">
+                                        <button type="button" class="wishes" idProduct="' . $value["id"] . '" title="Agregar a mi lista de deseos">
                                             <i class="fa fa-heart-o"></i>
                                         </button>                                        
                                     </div>
-                                    <ul>
-                                        <li class="w-icon active"><a href="#" title="Agregar al carrito de compras"><i class="fa fa-shopping-bag"></i></a></li>
-                                        <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
-                                        <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>
-                                    </ul>
+                                    <ul>';
+                    if ($value["price"] == 0) {
+
+                        if ($value["sort"] == "virtual") {
+                            echo '<li class="w-icon active"><a href="#" title="Acceder al curso"><i class="fa fa-play"></i></a></li>
+                                                <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
+                                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
+                        }
+                    } else {
+
+                        if ($value["offer"] != 0) {
+                            echo '<li class="w-icon active"><button type="button" class="addToCart" title="Agregar al carrito de compras" idProduct="' . $value["id"] . '" product_image="' . $server . $value["product_image"] . '" product_title="' . $value["product_title"] . '" price="' . $value["offer_price"] . '" sort="' . $value["sort"] . '" product_weight="' . $value["product_weight"] . '"><i class="fa fa-shopping-cart"></i></button></li>
+                                                <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
+                                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
+                        } else {
+                            echo '<li class="w-icon active"><button type="button" class="addToCart" title="Agregar al carrito de compras" idProduct="' . $value["id"] . '" product_image="' . $server . $value["product_image"] . '" product_title="' . $value["product_title"] . '" price="' . $value["price"] . '" sort="' . $value["sort"] . '" product_weight="' . $value["product_weight"] . '"><i class="fa fa-shopping-cart"></i></button></li>
+                                                <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
+                                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
+                        }
+                    }
+                    echo'</ul>
                                 </div>
                                 <div class="pi-text">';
 
-                                if ($value["offer"] != 0 && $value["price"] != 0) {
-                                    echo '<div class="discount-name">' . $value["offer_discount"] . '% de Descuento</div>';
-                                }
+                    if ($value["offer"] != 0 && $value["price"] != 0) {
+                        echo '<div class="discount-name">' . $value["offer_discount"] . '% de Descuento</div>';
+                    }
 
-                                echo '<a href="' . $url . $value["route"] . '">
+                    echo '<a href="' . $url . $value["route"] . '">
                                         <h5>' . substr($value["product_title"], 0, 30) . "..." . '</h5>
                                     </a>
                                 
                                 <div class="product-price">';
 
-                                if ($value["price"] == 0) {
-                                    echo 'Gratis';
-                                } else {
-                                    if ($value["offer"] != 0) {
-                                        echo 'MXN $' . $value["offer_price"] . '
+                    if ($value["price"] == 0) {
+                        echo 'Gratis';
+                    } else {
+                        if ($value["offer"] != 0) {
+                            echo 'MXN $' . $value["offer_price"] . '
                                                 <span>$' . $value["price"] . '</span>';
-                                    } else {
-                                        echo 'MXN $' . $value["price"] . '';
-                                    }
-                                }
-                                echo '</div>                                    
+                        } else {
+                            echo 'MXN $' . $value["price"] . '';
+                        }
+                    }
+                    echo '</div>                                    
                                     </div>
                                 </div>
                             </div>';
-                            }
-                        }
-                        ?>                        
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <!-- == Pagination Buttons == -->
+                }
+            }
+            ?>                        
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- == Pagination Buttons == -->
 
-                <div class="pagination-more">
+    <div class="pagination-more">
 
-                    <?php
-                    if (count($listProducts) != 0) {
+        <?php
+        if (count($listProducts) != 0) {
 
-                        $pageProducts = ceil(count($listProducts) / 12);
+            $pageProducts = ceil(count($listProducts) / 12);
 
-                        if ($pageProducts > 4) {
+            if ($pageProducts > 4) {
 
-                            if ($routes[1] == 1) {
+                if ($routes[1] == 1) {
 
-                                echo '<ul class="pagination justify-content-center">';
+                    echo '<ul class="pagination justify-content-center">';
 
-                                for ($i = 1; $i <= 4; $i++) {
-                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
-                                }
+                    for ($i = 1; $i <= 4; $i++) {
+                        echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
+                    }
 
-                                echo '<li class="page-item disabled"><a class="page-link">...</a></li>
+                    echo '<li class="page-item disabled"><a class="page-link">...</a></li>
                                 <li id="item' . $pageProducts . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $pageProducts . '">' . $pageProducts . '</a></li>
                                 <li class="page-item">
                                     <a class="page-link" href="' . $url . $routes[0] . '/2">
@@ -362,15 +378,15 @@ if($banner != null) {
                                     </a>
                                 </li>
                             </ul>';
-                            } elseif ($routes[1] != $pageProducts &&
-                                    $routes[1] != 1 &&
-                                    $routes[1] < ($pageProducts / 2) &&
-                                    $routes[1] < ($pageProducts - 3)
-                            ) {
+                } elseif ($routes[1] != $pageProducts &&
+                        $routes[1] != 1 &&
+                        $routes[1] < ($pageProducts / 2) &&
+                        $routes[1] < ($pageProducts - 3)
+                ) {
 
-                                $numActualPage = $routes[1];
+                    $numActualPage = $routes[1];
 
-                                echo '<ul class="pagination justify-content-center">
+                    echo '<ul class="pagination justify-content-center">
                                     <li class="page-item">
                                     <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage - 1) . '">
                                         <span aria-hidden="true">&laquo;</span>
@@ -378,11 +394,11 @@ if($banner != null) {
                                     </a>
                                 </li>';
 
-                                for ($i = $numActualPage; $i <= ($numActualPage + 3); $i++) {
-                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
-                                }
+                    for ($i = $numActualPage; $i <= ($numActualPage + 3); $i++) {
+                        echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
+                    }
 
-                                echo '<li class="page-item disabled"><a class="page-link">...</a></li>
+                    echo '<li class="page-item disabled"><a class="page-link">...</a></li>
                                 <li id="item' . $pageProducts . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $pageProducts . '">' . $pageProducts . '</a></li>
                                 <li class="page-item">
                                     <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage + 1) . '">
@@ -391,15 +407,15 @@ if($banner != null) {
                                     </a>
                                 </li>
                             </ul>';
-                            } elseif ($routes[1] != $pageProducts &&
-                                    $routes[1] != 1 &&
-                                    $routes[1] >= ($pageProducts / 2) &&
-                                    $routes[1] < ($pageProducts - 3)
-                            ) {
+                } elseif ($routes[1] != $pageProducts &&
+                        $routes[1] != 1 &&
+                        $routes[1] >= ($pageProducts / 2) &&
+                        $routes[1] < ($pageProducts - 3)
+                ) {
 
-                                $numActualPage = $routes[1];
+                    $numActualPage = $routes[1];
 
-                                echo '<ul class="pagination justify-content-center">
+                    echo '<ul class="pagination justify-content-center">
                                     <li class="page-item">
                                     <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage - 1) . '">
                                         <span aria-hidden="true">&laquo;</span>
@@ -409,22 +425,22 @@ if($banner != null) {
                                 <li id="item1" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/1">1</a></li>
                                 <li class="page-item disabled"><a class="page-link">...</a></li>';
 
-                                for ($i = $numActualPage; $i <= ($numActualPage + 3); $i++) {
-                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
-                                }
+                    for ($i = $numActualPage; $i <= ($numActualPage + 3); $i++) {
+                        echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
+                    }
 
-                                echo '<li class="page-item">
+                    echo '<li class="page-item">
                                     <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage + 1) . '">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Siguiente</span>
                                     </a>
                                 </li>
                             </ul>';
-                            } else {
+                } else {
 
-                                $numActualPage = $routes[1];
+                    $numActualPage = $routes[1];
 
-                                echo '<ul class="pagination justify-content-center">
+                    echo '<ul class="pagination justify-content-center">
                                     <li class="page-item">
                                     <a class="page-link" href="' . $url . $routes[0] . '/' . ($numActualPage - 1) . '">
                                         <span aria-hidden="true">&laquo;</span>
@@ -434,29 +450,29 @@ if($banner != null) {
                                 <li id="item1" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/1">1</a></li>
                                 <li class="page-item disabled"><a class="page-link">...</a></li>';
 
-                                for ($i = ($pageProducts - 3); $i <= $pageProducts; $i++) {
-                                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
-                                }
-
-                                echo '</ul>';
-                            }
-                        } else {
-
-                            echo '<ul class="pagination justify-content-center">';
-
-                            for ($i = 1; $i <= $pageProducts; $i++) {
-
-                                echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
-                            }
-
-                            echo '</ul>';
-                        }
+                    for ($i = ($pageProducts - 3); $i <= $pageProducts; $i++) {
+                        echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
                     }
-                    ?>
-                </div>
 
-            </div>
+                    echo '</ul>';
+                }
+            } else {
 
-        </div>
+                echo '<ul class="pagination justify-content-center">';
+
+                for ($i = 1; $i <= $pageProducts; $i++) {
+
+                    echo '<li id="item' . $i . '" class="page-item"><a class="page-link" href="' . $url . $routes[0] . '/' . $i . '">' . $i . '</a></li>';
+                }
+
+                echo '</ul>';
+            }
+        }
+        ?>
     </div>
+
+</div>
+
+</div>
+</div>
 </section>

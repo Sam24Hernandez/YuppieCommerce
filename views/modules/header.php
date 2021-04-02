@@ -189,13 +189,13 @@ foreach (array_slice($categories, 0, 4) as $key => $value) {
                 <div class="col-lg-3 text-right col-md-3" id="cart">
                     <ul class="nav-right">
                         <li class="heart-icon">
-                            <a href="#" data-toggle="tooltip" title="Lista de Deseos">
+                            <a href="<?php echo$url; ?>my_list" data-toggle="tooltip" title="Lista de Deseos">
                                 <i class="fa fa-heart" aria-hidden="true"></i>
                                 <span>1</span>
                             </a>
                         </li> 
                         <li class="cart-icon">
-                            <a href="#" data-toggle="tooltip" title="Cesta">
+                            <a href="<?php echo$url; ?>shopping_cart" data-toggle="tooltip" title="Cesta">
                                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                 <span>3</span>
                             </a>

@@ -345,12 +345,12 @@ $server = Route::ctrRouteServer();
                             </button>';
 
                                 if ($infoproduct["offer"] != 0) {
-                                    echo '<button class="btn btn-warning pd-cart addCart" role="button" idProduct="' . $infoproduct["id"] . '" product_image="' . $server . $infoproduct["product_image"] . '" product_title="' . $infoproduct["product_title"] . '" price="' . $infoproduct["price"] . '" sort="' . $infoproduct["sort"] . '" product_weight="' . $infoproduct["product_weight"] . '">
+                                    echo '<button class="btn btn-warning pd-cart addToCart" role="button" idProduct="' . $infoproduct["id"] . '" product_image="' . $server . $infoproduct["product_image"] . '" product_title="' . $infoproduct["product_title"] . '" price="' . $infoproduct["offer_price"] . '" sort="' . $infoproduct["sort"] . '" product_weight="' . $infoproduct["product_weight"] . '">
                                         Agregar al Carrito
                                         <i class="fa fa-shopping-cart"></i>
                                 </button>';
                                 } else {
-                                    echo '<button class="btn btn-warning pd-cart addCart" role="button" idProduct="' . $infoproduct["id"] . '" product_image="' . $server . $infoproduct["product_image"] . '" product_title="' . $infoproduct["product_title"] . '" price="' . $infoproduct["price"] . '" sort="' . $infoproduct["sort"] . '" product_weight="' . $infoproduct["product_weight"] . '">
+                                    echo '<button class="btn btn-warning pd-cart addToCart" role="button" idProduct="' . $infoproduct["id"] . '" product_image="' . $server . $infoproduct["product_image"] . '" product_title="' . $infoproduct["product_title"] . '" price="' . $infoproduct["price"] . '" sort="' . $infoproduct["sort"] . '" product_weight="' . $infoproduct["product_weight"] . '">
                                         Agregar al Carrito
                                         <i class="fa fa-shopping-cart"></i>
                                 </button>';
@@ -358,12 +358,12 @@ $server = Route::ctrRouteServer();
                             } else {
 
                                 if ($infoproduct["offer"] != 0) {
-                                    echo '<button class="btn btn-warning pd-cart addCart" role="button" idProduct="' . $infoproduct["id"] . '" product_image="' . $server . $infoproduct["product_image"] . '" product_title="' . $infoproduct["product_title"] . '" price="' . $infoproduct["offer_price"] . '" sort="' . $infoproduct["sort"] . '" product_weight="' . $infoproduct["product_weight"] . '">
+                                    echo '<button class="btn btn-warning pd-cart addToCart" role="button" idProduct="' . $infoproduct["id"] . '" product_image="' . $server . $infoproduct["product_image"] . '" product_title="' . $infoproduct["product_title"] . '" price="' . $infoproduct["offer_price"] . '" sort="' . $infoproduct["sort"] . '" product_weight="' . $infoproduct["product_weight"] . '">
                                     Agregar al Carrito
                                     <i class="fa fa-shopping-cart"></i>
                                 </button>';
                                 } else {
-                                    echo '<button class="btn btn-warning pd-cart addCart" role="button" idProduct="' . $infoproduct["id"] . '" product_image="' . $server . $infoproduct["product_image"] . '" product_title="' . $infoproduct["product_title"] . '" price="' . $infoproduct["price"] . '" sort="' . $infoproduct["sort"] . '" product_weight="' . $infoproduct["product_weight"] . '">
+                                    echo '<button class="btn btn-warning pd-cart addToCart" role="button" idProduct="' . $infoproduct["id"] . '" product_image="' . $server . $infoproduct["product_image"] . '" product_title="' . $infoproduct["product_title"] . '" price="' . $infoproduct["price"] . '" sort="' . $infoproduct["sort"] . '" product_weight="' . $infoproduct["product_weight"] . '">
                                     Agregar al Carrito
                                     <i class="fa fa-shopping-cart"></i>
                                 </button>';

@@ -261,6 +261,11 @@
     color: #fff;
 }
 
+.product-item .pi-pic ul li.w-icon.active button {
+    background: #e7ab3c;
+    color: #fff;
+}
+
 .product-item .pi-pic ul li a {
     font-size: 16px;
     font-weight: 700;
@@ -271,6 +276,15 @@
 
 .product-item .pi-pic ul li a:hover {
     text-decoration: none;
+}
+
+.product-item .pi-pic ul li button {
+    font-size: 16px;
+    font-weight: 700;
+    color: #252525;
+    display: block;
+    padding: 16px 18px 12px 19px;
+    border: none;
 }
 
 .product-item .pi-text .discount-name {

@@ -1,0 +1,38 @@
+/* 
+    Created on : 15/03/2021, 10:05:26 AM
+    Author     : Sam Hernández
+    Version: 1.0
+    Repository: https://github.com/Sam24Hernandez/YuppieCommerce
+*/
+
+.error-search-section {
+    margin: 0 auto;
+    padding: 0;
+    display: grid;
+    align-items: stretch;
+    justify-items: stretch;    
+}
+
+.result-list {
+    grid-auto-flow: dense;
+    width: auto;
+}
+
+.error-box-search {
+    grid-column: 1/-1;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.error-body-search h3 {
+    margin-bottom: 12px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+}
+
+.error-body-search p {
+    font-size: 14px;
+    line-height: 20px;
+}
+

@@ -39,13 +39,13 @@ if (!isset($_SESSION["validateSession"])) {
             <!-- Column -->
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="card m-b-20">
-                    <a href="#" class="card-whole-card-link">
+                    <a href="<?php echo $url; ?>shopping_cart" class="card-whole-card-link">
                         <div class="card-body"> 
                             <div class="column-account a-span3">
-                                <h2>Mis pedidos</h2>
+                                <h2>Mi Carrito de Compras</h2>
                                 <div>
                                     <span class="text-muted text-light">
-                                        Ver mis pedidos o devolver pedidos
+                                        Ver mi carrito de compras
                                     </span>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@ if (!isset($_SESSION["validateSession"])) {
                     <a href="<?php $url; ?>my_shopping" class="card-whole-card-link">
                         <div class="card-body"> 
                             <div class="column-account a-span3">
-                                <h2>Mis compras</h2>
+                                <h2>Mis Compras</h2>
                                 <div>
                                     <span class="text-muted text-light">
                                         Ver mis compras, comprar de nuevo
