@@ -305,16 +305,23 @@ if ($banner != null) {
                                                 <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
                         }
                     } else {
-
-                        if ($value["offer"] != 0) {
-                            echo '<li class="w-icon active"><button type="button" class="addToCart" title="Agregar al carrito de compras" idProduct="' . $value["id"] . '" product_image="' . $server . $value["product_image"] . '" product_title="' . $value["product_title"] . '" price="' . $value["offer_price"] . '" sort="' . $value["sort"] . '" product_weight="' . $value["product_weight"] . '"><i class="fa fa-shopping-cart"></i></button></li>
-                                                <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
-                                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
+                        
+                        if ($value["sort"] == "virtual") {
+                            if ($value["offer"] != 0) {
+                                echo '<li class="w-icon active"><button type="button" class="addToCart" title="Agregar al carrito de compras" idProduct="' . $value["id"] . '" product_image="' . $server . $value["product_image"] . '" product_title="' . $value["product_title"] . '" price="' . $value["offer_price"] . '" sort="' . $value["sort"] . '" product_weight="' . $value["product_weight"] . '"><i class="fa fa-shopping-cart"></i></button></li>
+                                                    <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
+                                                    <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
+                            } else {
+                                echo '<li class="w-icon active"><button type="button" class="addToCart" title="Agregar al carrito de compras" idProduct="' . $value["id"] . '" product_image="' . $server . $value["product_image"] . '" product_title="' . $value["product_title"] . '" price="' . $value["price"] . '" sort="' . $value["sort"] . '" product_weight="' . $value["product_weight"] . '"><i class="fa fa-shopping-cart"></i></button></li>
+                                                    <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
+                                                    <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
+                            }
                         } else {
-                            echo '<li class="w-icon active"><button type="button" class="addToCart" title="Agregar al carrito de compras" idProduct="' . $value["id"] . '" product_image="' . $server . $value["product_image"] . '" product_title="' . $value["product_title"] . '" price="' . $value["price"] . '" sort="' . $value["sort"] . '" product_weight="' . $value["product_weight"] . '"><i class="fa fa-shopping-cart"></i></button></li>
-                                                <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
-                                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
+                            echo '<li class="w-icon active"><a href="#" title="Ver más productos"><i class="fa fa-shopping-bag"></i></a></li>
+                                <li class="quick-view"><a href="' . $url . $value["route"] . '" title="Ver producto">+ Ver</a></li>
+                                <li class="w-icon"><a href="#" title="Productos relacionados"><i class="fa fa-random"></i></a></li>';
                         }
+                        
                     }
                     echo'</ul>
                                 </div>

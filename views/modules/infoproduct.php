@@ -271,29 +271,29 @@ $server = Route::ctrRouteServer();
                             if ($details["Color"] != NULL) {
                                 echo '<div class="pd-color">
                                     <h6>Color:</h6>
-                                <div class="pd-color-choose">';
+                                    <select class="form-control selectDetail" id="selectColor">
+                                        <option value="">Seleccionar</option>';
 
-                                for ($i = 0; $i < count($details["Color"]); $i++) {
-                                    echo '<div class="cc-item">
-                                        <input type="radio" id="cc-' . $details["Color"][$i] . '">
-                                        <label for="cc-' . $details["Color"][$i] . '" class="cc-' . $details["Color"][$i] . '"></label>
-                                    </div>';
-                                }
+                                    for ($i = 0; $i < count($details["Color"]); $i++) {
+                                        echo '<option value="' . $details["Color"][$i] . '">' . $details["Color"][$i] . '</option>';
+                                    }
 
-                                echo '</div>
-                            </div>';
+                                echo '</select>
+                                </div>';
                             }
 
                             if ($details["Talla"] != NULL) {
-                                echo '<div class="pd-size-choose">';
+                                echo '<div class="pd-size-choose">
+                                    <h6>Talla:</h6>
+                                    <select class="form-control selectDetail" id="selectSize">
+                                        <option value="">Seleccionar</option>';
 
-                                for ($i = 0; $i < count($details["Talla"]); $i++) {
-                                    echo '<div class="sc-item">
-                                        <input type="radio" id="' . $details["Talla"][$i] . '-size">
-                                        <label for="' . $details["Talla"][$i] . '-size">' . $details["Talla"][$i] . '</label>
-                                    </div>';
-                                }
-                                echo '</div>';
+                                    for ($i = 0; $i < count($details["Talla"]); $i++) {
+                                        echo '<option value="' . $details["Talla"][$i] . '">' . $details["Talla"][$i] . '</option>';
+                                    }
+                                  
+                                echo '</select>
+                                </div>';
                             }
                         } else {
                             echo '<div class="pd-courses-info">

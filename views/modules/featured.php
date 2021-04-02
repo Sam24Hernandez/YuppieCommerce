@@ -255,18 +255,6 @@ for ($i = 0; $i < count($titleModules); $i++) {
             }
         }
 
-        if ($value["sort"] == "fisico" && $value["price"] != 0) {
-            if ($value["offer"] != 0) {
-                echo '<button type="button" class="btn btn-warning btn-sm addToCart" idProduct="' . $value["id"] . '" product_image="' . $server . $value["product_image"] . '" product_title="' . $value["product_title"] . '" price="' . $value["offer_price"] . '" sort="' . $value["sort"] . '" product_weight="' . $value["product_weight"] . '" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>                                            
-                                            </button>&nbsp;';
-            } else {
-                echo '<button type="button" class="btn btn-warning btn-sm addToCart" idProduct="' . $value["id"] . '" product_image="' . $server . $value["product_image"] . '" product_title="' . $value["product_title"] . '" price="' . $value["price"] . '" sort="' . $value["sort"] . '" product_weight="' . $value["product_weight"] . '" data-toggle="tooltip" title="Agregar a mi carrito de compras">
-                                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>                                            
-                                            </button>&nbsp;';
-            }
-        }
-
         echo '<button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="Ver producto">
                                         <a href="' . $value["route"] . '" class="pixelProduct">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
