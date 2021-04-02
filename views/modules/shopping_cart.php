@@ -25,78 +25,26 @@ BREADCRUMB SHOPPING CART
 <section class="shopping-cart spad-sec">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 sc-content-section">                                
+                
                 <div class="cart-table">
                     <table>
                         <thead>
                             <tr>
                                 <th>Foto</th>
-                                <th class="p-name">Product</th>
+                                <th class="p-name">Producto</th>
                                 <th>Precio</th>
                                 <th>Cantidad</th>
                                 <th>Total</th>
                                 <th><i class="fa fa-times fa-2x"></i></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="cart-pic first-row"><img></td>
-                                <td class="cart-title first-row">
-                                    <a href="#">
-                                        <h5>Title Name Producto</h5>
-                                    </a>
-                                </td>
-                                <td class="p-price first-row">$60.00</td>
-                                <td class="qua-col first-row">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input class="form-control quantityItem" type="number" min="1" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="total-price first-row">$60.00</td>
-                                <td class="close-td first-row"><i class="fa fa-times fa-2x"></i></td>
-                            </tr>
-                            <tr>
-                                <td class="cart-pic first-row"><img></td>
-                                <td class="cart-title first-row">
-                                    <a href="#">
-                                        <h5>Title Name Producto</h5>
-                                    </a>
-                                </td>
-                                <td class="p-price first-row">$60.00</td>
-                                <td class="qua-col first-row">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input class="form-control quantityItem" type="number" min="1" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="total-price first-row">$60.00</td>
-                                <td class="close-td first-row"><i class="fa fa-times fa-2x"></i></td>
-                            </tr>
-                            <tr>
-                                <td class="cart-pic first-row"><img></td>
-                                <td class="cart-title first-row">
-                                    <a href="#">
-                                        <h5>Title Name Producto</h5>
-                                    </a>
-                                </td>
-                                <td class="p-price first-row">$60.00</td>
-                                <td class="qua-col first-row">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input class="form-control quantityItem" type="number" min="1" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="total-price first-row">$60.00</td>
-                                <td class="close-td first-row"><i class="fa fa-times fa-2x"></i></td>
-                            </tr>
+                        <tbody class="bodyCart">
+                            <!-- products item -->
                         </tbody>
                     </table>
                 </div>
-                <div class="row">
+                <div class="row final-checkout">
                     <div class="col-lg-4">
                         <div class="cart-buttons">
                             <a href="#" class="continue-shop">Continuar comprando</a>

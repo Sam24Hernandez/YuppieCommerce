@@ -226,6 +226,74 @@
     text-decoration: none !important;
 }
 
+/** Empty Shopping Cart **/
+
+.sc-section {
+    margin-top: -40px;
+    margin-bottom: 22px;
+}
+
+.maple-banner {
+    display: block;
+    min-width: 100px;
+    border: 1px solid #eaeded;
+}
+
+.aok-block {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sc-cardui {
+    margin-bottom: 20px;
+    background-color: #eaeded;
+    overflow: auto;
+    padding: 20px 0 15px 0;
+}
+
+.sc-card-style {
+    margin-top: 0 !important;
+}
+
+.sc-cardui .sc-cardui-body {
+    padding: 0 20px;
+    position: relative;
+}
+
+.sc-cardui .sc-cardui-body:last-child {
+    padding-bottom: 5px;
+}
+
+.sc-row {
+    width: 100%;
+}
+
+.sc-row::after,
+.sc-row::before {
+    display: table;
+    content: "";
+    line-height: 0;
+    font-size: 0;
+}
+
+.sc-spacing-mini {
+    margin-bottom: 4px !important;
+}
+
+.sc-spacing-top-base {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 36px;
+}
+
+.sc-empty-cart p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+}
+
 /* ------------------------------ Responsive Media Styles ---------------------------- */
 
 @media only screen and (min-width: 1200px) and (max-width: 1920px) {}

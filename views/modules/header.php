@@ -197,10 +197,10 @@ foreach (array_slice($categories, 0, 4) as $key => $value) {
                         <li class="cart-icon">
                             <a href="<?php echo$url; ?>shopping_cart" data-toggle="tooltip" title="Cesta">
                                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                <span>3</span>
+                                <span class="quantity-basket"></span>
                             </a>
                         </li>                        
-                        <li class="basket-price">$150.00</li>
+                        <li>$<span class="basket-price"></span></li>
                     </ul>
                 </div>
             </div>

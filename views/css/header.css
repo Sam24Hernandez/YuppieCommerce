@@ -371,7 +371,7 @@ div.h-category {
     line-height: 15px;
 }
 
-.inner-header .nav-right li.basket-price {
+.inner-header .nav-right li {
     font-size: 1.125em;
     font-weight: 700;
     color: #0F1111;
