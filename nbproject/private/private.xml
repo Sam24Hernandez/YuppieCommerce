@@ -2,18 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
-            <url>views/css/products.css</url>
-            <bookmark id="1">
-                <name/>
-                <line>398</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
             <url>views/modules/infoproduct.php</url>
             <bookmark id="2">
                 <name/>
                 <line>585</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>views/css/products.css</url>
+            <bookmark id="1">
+                <name/>
+                <line>398</line>
                 <key/>
             </bookmark>
         </file>

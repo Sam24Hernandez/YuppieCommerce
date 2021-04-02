@@ -113,7 +113,7 @@ if (!isset($_SESSION["validateSession"])) {
             </div>
         </div>
         <div class="profile-section activity-area-container">
-            <div class="deck-container sub" style="width: 320px;">
+            <div class="deck-container sub">
                 <div class="desktop padded card-profile pw-bio">
                     <div class="profile-row spacing-none desktop card-header-profile"><span class="desktop card-title-profile">Información</span></div>
                     <div class="profile-row">

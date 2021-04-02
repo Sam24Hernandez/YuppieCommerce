@@ -365,12 +365,12 @@ $login->ctrLoginUser();
                     </button>
                 </div> 
 
-                <div class="google">
-                    <button id="login_google" class="google-login">
-                        <a href="<?php echo $googleRoute; ?>">
+                <div class="google">                    
+                    <a href="<?php echo $googleRoute; ?>">
+                        <button id="login_google" class="google-login">
                             Continuar con Google
-                        </a> 
-                    </button>   
+                        </button>
+                    </a>                       
                 </div>
             </div>
 

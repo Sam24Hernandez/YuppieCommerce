@@ -505,6 +505,11 @@ div.h-category {
     color: #444;
 }
 
+.modalForm .google button a {
+    color: #444 !important;  
+    text-decoration: none !important;
+}
+
 .modalForm .facebook button::before {
     content: "";
     position: absolute;
