@@ -112,6 +112,11 @@
     width: 8%;
 }
 
+.removeItemCart {
+    border: none;
+    background: 0 0;
+}
+
 .cart-table table tr td.close-td i {
     cursor: pointer;
 }

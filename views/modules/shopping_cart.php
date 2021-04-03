@@ -35,7 +35,7 @@ BREADCRUMB SHOPPING CART
                                 <th class="p-name">Producto</th>
                                 <th>Precio</th>
                                 <th>Cantidad</th>
-                                <th>Total</th>
+                                <th>SubTotal</th>
                                 <th><i class="fa fa-times fa-2x"></i></th>
                             </tr>
                         </thead>
@@ -47,7 +47,7 @@ BREADCRUMB SHOPPING CART
                 <div class="row final-checkout">
                     <div class="col-lg-4">
                         <div class="cart-buttons">
-                            <a href="#" class="continue-shop">Continuar comprando</a>
+                            <a href="<?php echo $url; ?>" class="continue-shop">Continuar comprando</a>
                         </div>
                         <div class="discount-coupon">
                             <h6>Código de Descuento</h6>
@@ -60,8 +60,8 @@ BREADCRUMB SHOPPING CART
                     <div class="col-lg-4 offset-lg-4">
                         <div class="proceed-checkout">
                             <ul>
-                                <li class="subtotal">Subtotal <span>$240.00</span></li>
-                                <li class="cart-total">Total <span>$240.00</span></li>
+                                <li class="subtotal sumSubtotal"></li>
+                                <li class="cart-total"></li>
                             </ul>
                             <a href="#" class="proceed-btn">PROCEDER AL PAGO</a>
                         </div>

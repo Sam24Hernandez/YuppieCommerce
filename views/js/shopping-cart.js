@@ -11,33 +11,7 @@ if (localStorage.getItem("quantityBasket") !== null) {
 if (localStorage.getItem("listProducts") !== null) {
 
     var listCart = JSON.parse(localStorage.getItem("listProducts"));
-    
-    listCart.forEach(forEachFunction);
-    
-    function forEachFunction(item, index) {
         
-        $(".bodyCart").append(
-          '<tr>'+
-            '<td class="cart-pic first-row"><img src="'+item.product_image+'" class="img-thumbnail" width="180" height="180" alt=""></td>'+
-            '<td class="cart-title first-row">'+                
-                '<h5>'+item.product_title+'</h5>'+                
-            '</td>'+
-            '<td class="p-price first-row">$'+item.price+'</td>'+
-            '<td class="qua-col first-row">'+
-                '<div class="quantity">'+
-                    '<div class="pro-qty">'+
-                        '<input class="form-control quantityItem" type="number" min="1" value="'+item.quantity+'" sort="'+item.sort+'" price="'+item.price+'" idProduct="'+item.idProduct+'">'+
-                    '</div>'+
-                '</div>'+
-            '</td>'+
-            '<td class="total-price first-row">$100</td>'+
-            '<td class="close-td first-row"><i class="fa fa-times fa-2x"></i></td>'+
-        '</tr>');
-
-        // Avoid to manipulate the quantity on virtual products
-        $(".quantityItem[sort='virtual']").attr("readonly", "true");
-                        
-    }
 } else {        
     $(".sc-content-section").html(
         '<div class="sc-section maple-banner">'+
@@ -64,6 +38,44 @@ if (localStorage.getItem("listProducts") !== null) {
         '</div>');
     $(".cart-table").hide();
     $(".final-checkout").hide();
+}
+
+for (var i = 0; i < index.length; i++) {
+    
+    if (index[i] === "shopping_cart") {
+        listCart.forEach(forEachFunction);
+    
+        function forEachFunction(item, index) {                       
+
+            $(".bodyCart").append(
+              '<tr>'+
+                '<td class="cart-pic first-row"><img src="'+item.product_image+'" class="img-thumbnail" width="180" height="180" alt=""></td>'+
+                '<td class="cart-title first-row"><h5>'+item.product_title+'</h5></td>'+
+                '<td class="p-price first-row">$<span>'+item.price+'</span></td>'+
+                '<td class="qua-col first-row">'+
+                    '<div class="quantity">'+
+                        '<div class="pro-qty">'+
+                            '<input class="form-control quantityItem" type="number" min="1" value="'+item.quantity+'" sort="'+item.sort+'" price="'+item.price+'" idProduct="'+item.idProduct+'" item="'+index+'">'+
+                        '</div>'+
+                    '</div>'+
+                '</td>'+
+                '<td class="total-price first-row subtotal'+index+' subtotals">$<span>'+(Number(item.quantity)*Number(item.price)).toFixed(2)+'</span></td>'+
+                '<td class="close-td first-row"><button type="button" class="removeItemCart" idProduct="'+item.idProduct+'" weight="'+item.product_weight+'"><i class="fa fa-times fa-2x"></i></button></td>'+
+            '</tr>');
+
+            // Avoid to manipulate the quantity on virtual products
+            $(".quantityItem[sort='virtual']").attr("readonly", "true");
+
+            // Update subtotal
+            var priceShoppingCart = $(".bodyCart .p-price span");
+
+            // console.log(priceShoppingCart);
+
+            sumSubtotals();
+
+        }
+    }
+    
 }
 
 /** Add Producto To Shopping Cart **/
@@ -192,9 +204,168 @@ $(".addToCart").click(function () {
             }
         });
     }
-
-
 });
+
+/** Remove Product To Shopping Cart **/
+
+$(document).on("click", ".removeItemCart", function(){
+   
+   $(this).parent().parent().remove();
+   
+   var idProduct = $(".bodyCart button");
+   var image = $(".bodyCart img");
+   var title = $(".bodyCart .cart-title");
+   var price = $(".bodyCart .p-price span");
+   var quantity = $(".bodyCart .quantityItem");
+   
+   listCart = [];
+   
+   if (idProduct.length !== 0) {
+       
+       for (var i = 0; i < idProduct.length; i++) {
+           
+           var idProductArray = $(idProduct[i]).attr("idProduct");
+           var imageArray = $(image[i]).attr("src");
+           var titleArray = $(title[i]).html();
+           var priceArray = $(price[i]).html();
+           var weightArray = $(idProduct[i]).attr("weight");
+           var sortArray = $(quantity[i]).attr("sort");
+           var quantityArray = $(quantity[i]).val();
+           
+           listCart.push({
+                "idProduct": idProductArray,
+                "product_image": imageArray,
+                "product_title": titleArray,
+                "price": priceArray,
+                "sort": sortArray,
+                "product_weight": weightArray,
+                "quantity": quantityArray
+            });   
+            
+            // console.log("Carrito de Compras: ", listCart);
+           
+       }
+             
+        localStorage.setItem("listProducts", JSON.stringify(listCart));
+        
+        sumSubtotals();
+   } else {
+       
+        localStorage.removeItem("listProducts");
+       
+        localStorage.setItem("quantityBasket", "0");
+       
+        localStorage.setItem("basketPrice", "0");
+       
+        $(".quantity-basket").html("0");
+        $(".basket-price").html("0");
+        
+        $(".sc-content-section").html(
+            '<div class="sc-section maple-banner">'+
+                '<a class="sc-link aok-block align-content-lg-center" href="#">'+
+                    '<img src="https://images-na.ssl-images-amazon.com/images/G/33/PAE/PayCode/MX/Onsite/MAPLE/PayCode_MX_MAPLE_Desktop_664X87._CB416544705_.png">'+
+                '</a>'+
+            '</div>'+
+            '<div class="sc-cardui sc-card-style sc-list">'+
+                '<div class="sc-cardui-body">'+
+                    '<div class="sc-row sc-cart-header">'+
+                        '<div class="sc-row">'+
+                            '<h1 class="sc-spacing-mini sc-spacing-top-base">Tu carrito de Yuppie está vacío.</h1>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="sc-empty-cart">'+
+                        '<p>'+
+                            'Tu carrito de compras estará disponible. Dale un propósito, llénalo de provisiones.'+
+                            '<br>'+
+                            'Continúa comprando en '+
+                            '<a class="sc-first-link" href="#">Yuppie</a> o visita tu <a class="sc-second-link" href="#">Wish List</a>.'+
+                        '</p>'+
+                    '</div>'+
+                '</div>'+
+            '</div>');
+        $(".cart-table").hide();
+        $(".final-checkout").hide();
+   }       
+});
+
+/** Generate subtotal after change the quantity **/
+
+$(document).on("change", ".quantityItem", function() {
+   
+   var quantity = $(this).val();
+   var price = $(this).attr("price");
+   var idProduct = $(this).attr("idProduct");
+   var item = $(this).attr("item");
+   
+   $(".subtotal"+item).html('$<span>'+(quantity*price)+'</span>');
+   
+   // Update LocalStorage
+   var idProduct = $(".bodyCart button");
+   var image = $(".bodyCart img");
+   var title = $(".bodyCart .cart-title");
+   var price = $(".bodyCart .p-price span");
+   var quantity = $(".bodyCart .quantityItem");
+   
+   listCart = [];
+   
+   for (var i = 0; i < idProduct.length; i++) {
+           
+        var idProductArray = $(idProduct[i]).attr("idProduct");
+        var imageArray = $(image[i]).attr("src");
+        var titleArray = $(title[i]).html();
+        var priceArray = $(price[i]).html();
+        var weightArray = $(idProduct[i]).attr("weight");
+        var sortArray = $(quantity[i]).attr("sort");
+        var quantityArray = $(quantity[i]).val();
+
+        listCart.push({
+            "idProduct": idProductArray,
+            "product_image": imageArray,
+            "product_title": titleArray,
+            "price": priceArray,
+            "sort": sortArray,
+            "product_weight": weightArray,
+            "quantity": quantityArray
+         });   
+
+         // console.log("Carrito de Compras: ", listCart);
+
+    }
+    
+    localStorage.setItem("listProducts", JSON.stringify(listCart));
+    
+    sumSubtotals();
+    
+});
+
+/** Sum of All SubTotal **/
+
+function sumSubtotals() {
+    
+    var subtotals = $(".subtotals span");
+    var arraySumSubtotals = [];
+    
+    for (var i = 0; i < subtotals.length; i++) {
+        
+        var subtotalsArray = $(subtotals[i]).html();
+        arraySumSubtotals.push(Number(subtotalsArray));
+    }
+    
+    function sumArraySubtotals(total, num) {
+        
+        return total + num;
+    }
+    
+    var sumTotal = arraySumSubtotals.reduce(sumArraySubtotals, 0);
+    
+    $(".sumSubtotal").html('Subtotal <span>$'+(sumTotal).toFixed(2)+'</span>');
+    $(".cart-total").html('Total <span>$'+(sumTotal).toFixed(2)+'</span>');
+    
+    $(".basket-price").html((sumTotal).toFixed(2));
+    
+    localStorage.setItem("basketPrice", (sumTotal).toFixed(2));
+    
+}
 
 
 
