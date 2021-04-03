@@ -252,12 +252,12 @@ $server = Route::ctrRouteServer();
                     if ($infoproduct["offer"] == 0) {
 
                         if ($infoproduct["price"] != 0) {
-                            echo '<h4>MXN $' . $infoproduct["price"] . '</h4>';
+                            echo '<h4>MXN $' . number_format($infoproduct["price"], 2) . '</h4>';
                         } else {
                             echo '<h4>Gratis</h4>';
                         }
                     } else {
-                        echo '<h4>MXN $' . $infoproduct["offer_price"] . ' <span>$' . $infoproduct["price"] . '</span></h4>
+                        echo '<h4>MXN $' . $infoproduct["offer_price"] . ' <span>$' . number_format($infoproduct["price"], 2) . '</span></h4>
                                 <small class="dealprice">Ahorras:</small>
                                 <span class="dealprice-saving">$44.33 (' . $infoproduct["offer_discount"] . '% de descuento)</span>';
                     }
@@ -798,9 +798,9 @@ $server = Route::ctrRouteServer();
                     } else {
                         if ($value["offer"] != 0) {
                             echo 'MXN $' . $value["offer_price"] . '
-                                                    <span>$' . $value["price"] . '</span>';
+                                                    <span>$' . number_format($value["price"], 2) . '</span>';
                         } else {
-                            echo 'MXN $' . $value["price"] . '';
+                            echo 'MXN $' . number_format($value["price"], 2) . '';
                         }
                     }
                     echo '</div>

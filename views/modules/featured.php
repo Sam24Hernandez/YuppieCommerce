@@ -77,10 +77,10 @@ $server = Route::ctrRouteServer();
                                     echo 'Gratis';
                                 } else {
                                     if ($value["offer"] != 0) {
-                                        echo 'MXN $' . $value["offer_price"] . '
-                                                <span>$' . $value["price"] . '</span>';
+                                        echo 'MXN $' . number_format($value["offer_price"], 2) . '
+                                                <span>$' . number_format($value["price"], 2) . '</span>';
                                     } else {
-                                        echo 'MXN $' . $value["price"] . '';
+                                        echo 'MXN $' . number_format($value["price"], 2) . '';
                                     }
                                 }
                             echo '</div>
@@ -228,10 +228,10 @@ for ($i = 0; $i < count($titleModules); $i++) {
             echo 'Gratis';
         } else {
             if ($value["offer"] != 0) {
-                echo 'MXN $' . $value["offer_price"] . ''
-                . '<span>$' . $value["price"] . '</span>';
+                echo 'MXN $' . number_format($value["offer_price"], 2) . ''
+                . '<span>$' . number_format($value["price"], 2) . '</span>';
             } else {
-                echo 'MXN $' . $value["price"] . '';
+                echo 'MXN $' . number_format($value["price"], 2) . '';
             }
         }
 

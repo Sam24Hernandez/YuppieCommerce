@@ -299,6 +299,74 @@
     color: #0F1111;
 }
 
+/** Content Checkout **/
+
+.contentCheckout, .contentCheckout .row {
+    padding: 0px 20px;
+}
+
+.formDelivery {
+    display: none;
+    margin-bottom: 30px;
+}
+
+.selectState {
+    margin-top: 30px;
+}
+
+.modalForm h4 {
+    color: #252525;
+    font-weight: 700;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.methodPayment {
+    margin-top: 30px;
+}
+
+.order-table {
+    margin-top: 30px;
+}
+
+.currency {
+    margin-bottom: 20px;
+}
+
+.place-order .order-total .order-table li {
+    list-style: none;
+    color: #252525;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 5px;
+    padding-top: 30px;
+}
+
+.place-order .order-total .order-table li:first-child {
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 20px;
+    padding-top: 0;
+}
+
+.place-order .order-total .order-table li.fw-normal {
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.place-order .order-total .order-table li.fw-normal span {
+    font-weight: 700;
+}
+
+.place-order .order-total .order-table li.total-price span {
+    color: #e7ab3c;
+}
+
+.place-order .order-total .order-table li span {
+    float: right;
+}
+
 /* ------------------------------ Responsive Media Styles ---------------------------- */
 
 @media only screen and (min-width: 1200px) and (max-width: 1920px) {}
@@ -320,15 +388,15 @@
     .cart-table {
         overflow: auto;
     }
-    
+
     .cart-table table tr th {
         font-size: 12px;
     }
-    
+
     .cart-table table tr td.cart-title h5 {
         font-size: 14px;
     }
-    
+
     .cart-table table tr td {
         font-size: 12px;
     }
