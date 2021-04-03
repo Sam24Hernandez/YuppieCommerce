@@ -70,6 +70,7 @@ for (var i = 0; i < index.length; i++) {
             var priceShoppingCart = $(".bodyCart .p-price span");
 
             // console.log(priceShoppingCart);
+            basketQuantity(priceShoppingCart.length);
 
             sumSubtotals();
 
@@ -249,6 +250,7 @@ $(document).on("click", ".removeItemCart", function(){
         localStorage.setItem("listProducts", JSON.stringify(listCart));
         
         sumSubtotals();
+        basketQuantity(listCart.length);
    } else {
        
         localStorage.removeItem("listProducts");
@@ -335,6 +337,7 @@ $(document).on("change", ".quantityItem", function() {
     localStorage.setItem("listProducts", JSON.stringify(listCart));
     
     sumSubtotals();
+    basketQuantity(listCart.length);
     
 });
 
@@ -364,6 +367,35 @@ function sumSubtotals() {
     $(".basket-price").html((sumTotal).toFixed(2));
     
     localStorage.setItem("basketPrice", (sumTotal).toFixed(2));
+    
+}
+
+/** Update the Shopping Basket Item */
+
+function basketQuantity(quantityProducts) {
+    
+    if (quantityProducts !== 0) {
+        
+        var quantityItem = $(".bodyCart .quantityItem");
+        
+        var arraySumQuantities = [];
+        
+        for (var i = 0; i < quantityItem.length; i++) {
+            
+            var quantityItemArray = $(quantityItem[i]).val();
+            arraySumQuantities.push(Number(quantityItemArray));
+        }
+        
+        function sumArrayQuantities(total, num) {
+            
+            return total + num;
+        }
+        
+        var sumTotalQuantities = arraySumQuantities.reduce(sumArrayQuantities, 0);
+        
+        $(".quantity-basket").html(sumTotalQuantities);
+        localStorage.setItem("quantityBasket", sumTotalQuantities);
+    }
     
 }
 
