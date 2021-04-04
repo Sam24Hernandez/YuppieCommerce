@@ -1,5 +1,6 @@
 <?php
 
+require_once "../models/routes.php";
 require_once "../models/cart.model.php";
 
 use PayPal\Api\Amount;
@@ -66,7 +67,8 @@ class Paypal {
                     ->setInvoiceNumber(uniqid());
         
         # Redirect urls - Set the urls that the buyer must be redirected to after payment approval/cancellation
-        $baseUrl = "http://localhost/yuppie_frontend";        
+        
+        $baseUrl = Route::getBaseUrl();        
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl("$baseUrl/index.php?route=finalise_purchase&paypal=true&products=" . $idProducts . "&quantity=" . $quantityProducts . "&payment=" . $paymentProducts)
                      ->setCancelUrl("$baseUrl/shopping_cart");

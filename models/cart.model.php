@@ -18,4 +18,30 @@ class CartModel {
         
         $stmt = NULL;
     }
+    
+    /** New Purchases **/
+    
+    static public function mdlNewPurchases($table, $data) {
+        
+        $stmt = Database::connect()->prepare("INSERT INTO $table (user_id, product_id, payment_method, email_buyer, address, country) VALUES (:user_id, :product_id, :payment_method, :email_buyer, :address, :country)");
+        
+        $stmt->bindParam(":user_id", $data["idUser"], PDO::PARAM_INT);
+        $stmt->bindParam(":product_id", $data["idProduct"], PDO::PARAM_INT);
+        $stmt->bindParam(":payment_method", $data["payment_method"], PDO::PARAM_STR);
+        $stmt->bindParam(":email_buyer", $data["email_buyer"], PDO::PARAM_STR);
+        $stmt->bindParam(":address", $data["address"], PDO::PARAM_STR);
+        $stmt->bindParam(":country", $data["country"], PDO::PARAM_STR);
+        
+        if ($stmt->execute()) {
+            
+            return "ok";
+        } else {
+            
+            return "error";
+        }
+        
+        $stmt->close();
+        
+        $stmt = NULL;
+     }
 }

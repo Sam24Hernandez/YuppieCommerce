@@ -12,5 +12,23 @@ class CartController {
         
         return $response;
     }
+    
+    /* New purchases ***/
+    
+    static public function ctrNewPurchases($data) {
+        
+        $table = "shopping";
+        
+        $response = CartModel::mdlNewPurchases($table, $data);
+        
+        if ($response == "ok") {
+            
+            $table = "commments";
+            
+            UserModel::mdlInsertComments($table, $data);            
+        }
+        
+        return $response;
+    }
 }
 

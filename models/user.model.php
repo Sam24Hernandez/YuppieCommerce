@@ -1,4 +1,4 @@
-<?php
+33<?php
 
 require_once "database.php";
 
@@ -242,6 +242,27 @@ class UserModel {
             return "error";
         }
 
+        $stmt->close();
+
+        $stmt = NULL;
+    }
+    
+    /** Insert comments on change purchase **/    
+    static public function mdlInsertComments($table, $data) {
+        
+        $stmt = Database::connect()->prepare("INSERT INTO $table (user_id, product_id) VALUES (:user_id, :product_id)");
+        
+        $stmt->bindParam(":user_id", $data["idUser"], PDO::PARAM_INT);
+        $stmt->bindParam(":product_id", $data["idProduct"], PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+            
+            return "ok";
+        } else {
+            
+            return "error";
+        }
+        
         $stmt->close();
 
         $stmt = NULL;

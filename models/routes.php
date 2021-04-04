@@ -10,5 +10,10 @@ class Route {
     static public function ctrRouteServer() {
         return "http://localhost/yuppie_backend/";
     }
+    
+    /*== Public Route Paypal ==*/
+    static public function getBaseUrl() {
+        return "http://localhost/yuppie_frontend";
+    }
 }
 
