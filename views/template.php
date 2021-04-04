@@ -63,6 +63,7 @@
         <script src="<?php echo $url; ?>views/js/plugins/jquery.slicknav.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.zoom.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.scrollUp.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/md5-min.js" type="text/javascript"></script>
     </head>
     <body>       
 

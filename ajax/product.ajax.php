@@ -21,6 +21,20 @@ class ProductAjax {
 
         echo $response;
     }
+    
+    /** Get the product to id **/
+    
+    public $id;
+    
+    public function ajaxGetProduct() {
+        
+        $item = "id";
+        $valueProduct = $this->id;
+        
+        $response = ProductController::ctrShowInfoProduct($item, $valueProduct);
+        
+        echo json_encode($response);
+    }
 
 }
 
@@ -30,6 +44,13 @@ if (isset($_POST["valueProduct"])) {
     $view->item = $_POST["item"];
     $view->route = $_POST["route"];
     $view->productViewAjax();
+}
+
+if (isset($_POST["id"])) {
+    
+    $product = new ProductAjax();
+    $product->id = $_POST["id"];
+    $product->ajaxGetProduct();
 }
 
 
