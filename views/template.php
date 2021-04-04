@@ -128,7 +128,7 @@
                 include "modules/products.php";
             } elseif ($infoProduct != NULL) {
                 include "modules/infoproduct.php";
-            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile" || $routes[0] === "my_account" || $routes[0] === "my_shopping" || $routes[0] === "my_list" || $routes[0] === "shopping_cart" || $routes[0] === "error" || $routes[0] === "finalise_purchase") {
+            } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile" || $routes[0] === "my_account" || $routes[0] === "my_shopping" || $routes[0] === "my_list" || $routes[0] === "shopping_cart" || $routes[0] === "error" || $routes[0] === "finalise_purchase" || $routes[0] === "course") {
                 include "modules/" . $routes[0] . ".php";
             } else {
                 include "modules/error404.php";

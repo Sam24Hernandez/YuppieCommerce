@@ -5,9 +5,7 @@ $server = Route::ctrRouteServer();
 if (!isset($_SESSION["validateSession"])) {
 
     echo '<script>
-	
             window.location = "' . $url . '";
-
 	</script>';
 
     exit();
@@ -105,7 +103,7 @@ if (!isset($_SESSION["validateSession"])) {
                                                             <td>';
 
                                             if ($value2["sort"] === "virtual") {
-                                                echo '';
+                                                echo '<span class="delivered">Comprado</span>';
                                             } else {
                                                 if ($value1["delivery"] == 0) {
                                                     echo '<span class="dispatched">Despachado</span>';
@@ -181,8 +179,8 @@ if (!isset($_SESSION["validateSession"])) {
                                             
                                                             if ($value2["sort"] == "virtual") {
                                                                 
-                                                                echo '<a href="'.$url.'/course">
-                                                                    <button class="btn btn-inverse pull-left">Ir al curso</button>
+                                                                echo '<a href="'.$url.'course/'.$value1["id"].'/'.$value1["user_id"].'/'.$value1["product_id"].'/'.$value2["route"].'">
+                                                                    <button class="btn btn-primary">Ir al curso</button>
                                                                 </a>';
                                                                 
                                                             } else {

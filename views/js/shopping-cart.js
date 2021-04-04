@@ -422,10 +422,10 @@ $("#btnCheckout").click(function() {
     $("#checkPaypal").prop("checked", true);
 
     var idUser = $(this).attr("idUser");
-    var weight = $(".bodyCart button");
-    var title = $(".bodyCart .titleCartPurchase");
-    var quantity = $(".bodyCart .quantityItem");
-    var subtotal = $(".bodyCart .subtotals span");
+    var weight = $(".bodyCart button, .shopNow button");
+    var title = $(".bodyCart .titleCartPurchase, .shopNow .titleCartPurchase");
+    var quantity = $(".bodyCart .quantityItem, .shopNow .quantityItem");
+    var subtotal = $(".bodyCart .subtotals span, .shopNow .subtotals span");
     var sortArray = [];
     var quantityWeight = [];   
 
@@ -615,7 +615,7 @@ $(".btnPay").click(function() {
     var title = $(".valueTitle");
     var quantity = $(".valueQuantity");
     var valueItem = $(".valueItem");
-    var idProduct = $(".bodyCart button");
+    var idProduct = $(".bodyCart button, .shopNow button");
     
     var titleArray = [];
     var quantityArray = [];
