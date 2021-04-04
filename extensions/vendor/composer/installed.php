@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd249d66cec6d42dad4e91fdc5734b96e16acf729',
+    'reference' => '84f68cb25f6380eaecf9109241f76fff4ffca23a',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd249d66cec6d42dad4e91fdc5734b96e16acf729',
+      'reference' => '84f68cb25f6380eaecf9109241f76fff4ffca23a',
     ),
     'firebase/php-jwt' => 
     array (
@@ -110,23 +110,14 @@
       ),
       'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
     ),
-    'paypal/paypal-checkout-sdk' => 
+    'paypal/rest-api-sdk-php' => 
     array (
-      'pretty_version' => '1.0.1',
-      'version' => '1.0.1.0',
+      'pretty_version' => '1.14.0',
+      'version' => '1.14.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ed6a55075448308b87a8b59dcb7fedf04a048cb1',
-    ),
-    'paypal/paypalhttp' => 
-    array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '1ad9b846a046f09d6135cbf2cbaa7701bbc630a3',
+      'reference' => '72e2f2466975bf128a31e02b15110180f059fc04',
     ),
     'phpseclib/phpseclib' => 
     array (

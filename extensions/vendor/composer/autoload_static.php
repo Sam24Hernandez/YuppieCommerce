@@ -20,18 +20,12 @@ class ComposerStaticInit3b894b9cc2fa188e25789cd230efe506
         array (
             'phpseclib3\\' => 11,
         ),
-        'S' => 
-        array (
-            'Sample\\' => 7,
-        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Cache\\' => 10,
-            'PayPalHttp\\' => 11,
-            'PayPalCheckoutSdk\\' => 18,
             'ParagonIE\\ConstantTime\\' => 23,
         ),
         'M' => 
@@ -57,10 +51,6 @@ class ComposerStaticInit3b894b9cc2fa188e25789cd230efe506
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
-        'Sample\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/paypal/paypal-checkout-sdk/samples',
-        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
@@ -76,14 +66,6 @@ class ComposerStaticInit3b894b9cc2fa188e25789cd230efe506
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
-        ),
-        'PayPalHttp\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/paypal/paypalhttp/lib/PayPalHttp',
-        ),
-        'PayPalCheckoutSdk\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/paypal/paypal-checkout-sdk/lib/PayPalCheckoutSdk',
         ),
         'ParagonIE\\ConstantTime\\' => 
         array (
@@ -120,6 +102,13 @@ class ComposerStaticInit3b894b9cc2fa188e25789cd230efe506
     );
 
     public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PayPal' => 
+            array (
+                0 => __DIR__ . '/..' . '/paypal/rest-api-sdk-php/lib',
+            ),
+        ),
         'G' => 
         array (
             'Google_Service_' => 

@@ -610,7 +610,7 @@ $(".btnPay").click(function() {
     var currency = $("#defaultCurrency").val();
     var total = $(".valueTotalShopping").html();
     var tax = $(".valueTotalTax").html();
-    var delivery = $(".valueTotalDelivery").html();
+    var shipping = $(".valueTotalDelivery").html();
     var subtotal = $(".valueSubtotal").html();
     var title = $(".valueTitle");
     var quantity = $(".valueQuantity");
@@ -629,32 +629,32 @@ $(".btnPay").click(function() {
         valueItemArray[i] = $(valueItem[i]).html();
         idProductArray[i] = $(idProduct[i]).attr("idProduct");
     }
-//    
-//    var data = new FormData();
-//    
-//    data.append("currency", currency);
-//    data.append("total", total);
-//    data.append("tax", tax);
-//    data.append("delivery", delivery);
-//    data.append("subtotal", subtotal);
-//    data.append("titleArray", titleArray);
-//    data.append("quantityArray", quantityArray);
-//    data.append("valueItemArray", valueItemArray);
-//    data.append("idProductArray", idProductArray);
-//    
-//    $.ajax({
-//       
-//       url: hidePath + "ajax/cart.ajax.php",
-//       method: "POST",
-//       data: data,
-//       cache: false,
-//       contentType: false,
-//       processData: false,
-//       success: function(response) {
-//           window.location = response;
-//       }
-//        
-//    });
+    
+    var data = new FormData();
+    
+    data.append("currency", currency);
+    data.append("total", total);
+    data.append("tax", tax);
+    data.append("shipping", shipping);
+    data.append("subtotal", subtotal);
+    data.append("titleArray", titleArray);
+    data.append("quantityArray", quantityArray);
+    data.append("valueItemArray", valueItemArray);
+    data.append("idProductArray", idProductArray);
+    
+    $.ajax({
+       
+       url: hidePath + "ajax/cart.ajax.php",
+       method: "POST",
+       data: data,
+       cache: false,
+       contentType: false,
+       processData: false,
+       success: function(response) {
+            window.location = response;
+       }
+        
+    });
         
     
 });
