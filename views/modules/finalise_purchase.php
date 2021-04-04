@@ -20,7 +20,7 @@ if (isset($_GET["paypal"]) && $_GET["paypal"] == "true") {
 
     $products = explode("-", $_GET["products"]);
     $quantity = explode("-", $_GET['quantity']);
-//    $pay = explode("-", $_GET['payment']);
+    $pay = explode("-", $_GET['payment']);
     
     $paymentId = $_GET["paymentId"];
     
@@ -51,7 +51,10 @@ if (isset($_GET["paypal"]) && $_GET["paypal"] == "true") {
             "payment_method" => "paypal",
             "email_buyer" => $emailBuyer,
             "address" => $address,
-            "country" => $country
+            "country" => $country,
+            "quantity" => $quantity[$i],
+            "detail" => $dataUser->transactions[0]->item_list->items[$i]->name,
+            "payment" => $pay[$i]
         );
         
         $response = CartController::ctrNewPurchases($data);

@@ -45,8 +45,41 @@ class CartAjax {
 
 }
 
-if (isset($_POST["currency"])) {
+/** Paypal Method Payment **/
 
+if (isset($_POST["currency"])) {
+    
+    $idProducts = explode(",", $_POST["idProductArray"]);
+    $quantityProducts = explode(",", $_POST["quantityArray"]);
+    $priceProducts = explode(",", $_POST["valueItemArray"]);
+    
+    $item = "id";
+    
+    for ($i = 0; $i < count($idProducts); $i++) {
+        
+        $valueProduct = $idProducts[$i];
+        
+        $verifyProducts = ProductController::ctrShowInfoProduct($item, $valueProduct);
+        
+        if ($verifyProducts["offer_price"] == 0) {
+            
+            $price = number_format($verifyProducts["price"], 2);
+        } else {
+            
+            $price = number_format($verifyProducts["offer_price"], 2);
+        }
+        
+        $verifySubTotal = $quantityProducts[$i] * $price;
+        
+        if ($verifySubTotal != $priceProducts[$i]) {
+            
+            echo 'shopping_cart';
+            
+            return;
+        }
+        
+    }
+    
     $paypal = new CartAjax();
     $paypal->currency = $_POST["currency"];
     $paypal->total = $_POST["total"];

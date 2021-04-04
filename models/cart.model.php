@@ -23,7 +23,7 @@ class CartModel {
     
     static public function mdlNewPurchases($table, $data) {
         
-        $stmt = Database::connect()->prepare("INSERT INTO $table (user_id, product_id, payment_method, email_buyer, address, country) VALUES (:user_id, :product_id, :payment_method, :email_buyer, :address, :country)");
+        $stmt = Database::connect()->prepare("INSERT INTO $table (user_id, product_id, payment_method, email_buyer, address, country, quantity, detail, payment) VALUES (:user_id, :product_id, :payment_method, :email_buyer, :address, :country, :quantity, :detail, :payment)");
         
         $stmt->bindParam(":user_id", $data["idUser"], PDO::PARAM_INT);
         $stmt->bindParam(":product_id", $data["idProduct"], PDO::PARAM_INT);
@@ -31,6 +31,9 @@ class CartModel {
         $stmt->bindParam(":email_buyer", $data["email_buyer"], PDO::PARAM_STR);
         $stmt->bindParam(":address", $data["address"], PDO::PARAM_STR);
         $stmt->bindParam(":country", $data["country"], PDO::PARAM_STR);
+        $stmt->bindParam(":quantity", $data["quantity"], PDO::PARAM_INT);
+        $stmt->bindParam(":detail", $data["detail"], PDO::PARAM_STR);
+        $stmt->bindParam(":payment", $data["payment"], PDO::PARAM_STR);
         
         if ($stmt->execute()) {
             

@@ -668,6 +668,7 @@ $(".btnPay").click(function () {
         processData: false,
         success: function (response) {
             window.location = response;
+            // console.log(response);
         }
 
     });
