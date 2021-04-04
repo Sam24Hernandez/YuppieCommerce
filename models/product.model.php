@@ -202,16 +202,18 @@ class ProductModel {
     }
 
     /** UPDATE VIEW COUNTER FOR PRODUCTS * */
-    static public function mdlUpdateProduct($table, $data, $item) {
+    static public function mdlUpdateProduct($table, $item1, $value1, $item2, $value2) {
 
-        $stmt = Database::connect()->prepare("UPDATE $table SET $item = :$item WHERE route = :route");
+        $stmt = Database::connect()->prepare("UPDATE $table SET $item1 = :$item1 WHERE $item2 = :$item2");
 
-        $stmt->bindParam(":route", $data["route"], PDO::PARAM_STR);
-        $stmt->bindParam(":" . $item, $data["valueProduct"], PDO::PARAM_STR);
+        $stmt->bindParam(":" . $item1, $value1, PDO::PARAM_STR);
+        $stmt->bindParam(":" . $item2, $value2, PDO::PARAM_STR);
         
         if ($stmt->execute()) {
+            
             return "ok";
         } else {
+            
             return "error";
         }
         

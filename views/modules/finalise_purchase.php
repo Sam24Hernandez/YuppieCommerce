@@ -19,7 +19,7 @@ use PayPal\Api\PaymentExecution;
 if (isset($_GET["paypal"]) && $_GET["paypal"] == "true") {
 
     $products = explode("-", $_GET["products"]);
-//    $quantity = explode("-", $_GET['quantity']);
+    $quantity = explode("-", $_GET['quantity']);
 //    $pay = explode("-", $_GET['payment']);
     
     $paymentId = $_GET["paymentId"];
@@ -55,5 +55,30 @@ if (isset($_GET["paypal"]) && $_GET["paypal"] == "true") {
         );
         
         $response = CartController::ctrNewPurchases($data);
+        
+        $order = "id";
+        $item = "id";
+        $valueProduct = $products[$i];
+        
+        $productsShopping = ProductController::ctrListProducts($order, $item, $valueProduct);
+        
+        foreach ($productsShopping as $key => $value) {
+            
+            $item1 = "sales";
+            $value1 = $value["sales"] + $quantity[$i];
+            $item2 = "id";
+            $value2 = $value["id"];
+            
+            $updateShopping = ProductController::ctrUpdateProduct($item1, $value1, $item2, $value2);
+        }
+        
+        if ($response == "ok" && $updateShopping == "ok") {
+            echo '<script>
+                localStorage.removeItem("listProducts");
+                localStorage.removeItem("quantityBasket");
+                localStorage.removeItem("basketPrice");
+                window.location = "'.$url.'my_shopping";
+            </script>';
+        }
     }
 }

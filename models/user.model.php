@@ -1,4 +1,4 @@
-33<?php
+<?php
 
 require_once "database.php";
 

@@ -114,11 +114,11 @@ class ProductController {
     
     /* UPDATE VIEW COUNTER FOR PRODUCTS */
     
-    static public function ctrUpdateProduct($data, $item) {
+    static public function ctrUpdateProduct($item1, $value1, $item2, $value2) {
         
         $table = "products";
         
-        $response = ProductModel::mdlUpdateProduct($table, $data, $item);
+        $response = ProductModel::mdlUpdateProduct($table, $item1, $value1, $item2, $value2);
         
         return $response;
         

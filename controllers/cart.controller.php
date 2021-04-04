@@ -23,7 +23,7 @@ class CartController {
         
         if ($response == "ok") {
             
-            $table = "commments";
+            $table = "comments";
             
             UserModel::mdlInsertComments($table, $data);            
         }

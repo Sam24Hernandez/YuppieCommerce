@@ -11,12 +11,13 @@ class ProductAjax {
 
     public function productViewAjax() {
 
-        $data = array("valueProduct" => $this->valueProduct,
-        "route" => $this->route);
+        $item1 = $this->item;
+        $value1 = $this->valueProduct;
         
-        $item = $this->item;
+        $item2 = "route";
+        $value2 = $this->route;
 
-        $response = ProductController::ctrUpdateProduct($data, $item);
+        $response = ProductController::ctrUpdateProduct($item1, $value1, $item2, $value2);
 
         echo $response;
     }
