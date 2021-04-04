@@ -67,8 +67,8 @@
     width: 16%;
 }
 
-.cart-table table tr td.p-price,
-.cart-table table tr td.total-price {
+.cart-table table tr td.p-price p,
+.cart-table table tr td.total-price p {
     color: #e7ab3c;
     font-size: 16px;
     font-weight: 700;

@@ -1,5 +1,6 @@
 <?php
 $url = Route::ctrRoute();
+$server = Route::ctrRouteServer();
 ?>
 
 <!--=====================================
@@ -93,10 +94,15 @@ BREADCRUMB SHOPPING CART
             <div class="modal-body ">
                 <div class="contentCheckout">
                     <?php
-                    echo ' <input type="hidden" id="rateTax" value="">
-                                <input type="hidden" id="nationalShipping" value="">
-                                <input type="hidden" id="minimumNationalRate" value="">
-                                <input type="hidden" id="countryRate" value="">';
+                    
+                    $response = CartController::ctrShowRates();
+                    
+                    echo ' <input type="hidden" id="rateTax" value="'.$response["tax"].'">
+                        <input type="hidden" id="nationalShipping" value="'.$response["national_shipping"].'">
+                        <input type="hidden" id="stateShipping" value="'.$response["state_shipping"].'">
+                        <input type="hidden" id="minimumNationalRate" value="'.$response["national_minimum_rate"].'">
+                        <input type="hidden" id="minimumStateRate" value="'.$response["state_minimum_rate"].'">
+                        <input type="hidden" id="countryRate" value="'.$response["country"].'">';
                     ?>
 
                     <div class="formDelivery row">
@@ -116,7 +122,6 @@ BREADCRUMB SHOPPING CART
                             <center>
                                 <input id="checkPaypal" type="radio" name="payment" checked>
                             </center>
-
 
                             <center>
                                 <img src="<?php echo $server; ?>views/img/template/paypal.jpg" class="img-thumbnail">

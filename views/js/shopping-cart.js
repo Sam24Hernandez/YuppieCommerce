@@ -54,7 +54,7 @@ for (var i = 0; i < index.length; i++) {
               '<tr>'+
                 '<td class="cart-pic first-row"><img src="'+item.product_image+'" class="img-thumbnail" width="180" height="180" alt=""></td>'+
                 '<td class="cart-title first-row"><h5 class="titleCartPurchase">'+item.product_title+'</h5></td>'+
-                '<td class="p-price first-row">$<span>'+Number(item.price).toFixed(2)+'</span></td>'+
+                '<td class="p-price first-row"><p class="priceShoppingCart">MXN $<span>'+Number(item.price).toFixed(2)+'</span></p></td>'+
                 '<td class="qua-col first-row">'+
                     '<div class="quantity">'+
                         '<div class="pro-qty">'+
@@ -62,7 +62,7 @@ for (var i = 0; i < index.length; i++) {
                         '</div>'+
                     '</div>'+
                 '</td>'+
-                '<td class="total-price first-row subtotal'+index+' subtotals">$<span>'+(Number(item.quantity)*Number(item.price)).toFixed(2)+'</span></td>'+
+                '<td class="total-price first-row"><p class="subTotal'+index+' subtotals">MXN $<span>'+(Number(item.quantity)*Number(item.price)).toFixed(2)+'</span></p></td>'+
                 '<td class="close-td first-row"><button type="button" class="removeItemCart" idProduct="'+item.idProduct+'" weight="'+item.product_weight+'"><i class="fa fa-times fa-2x"></i></button></td>'+
             '</tr>');
 
@@ -70,7 +70,7 @@ for (var i = 0; i < index.length; i++) {
             $(".quantityItem[sort='virtual']").attr("readonly", "true");
 
             // Update subtotal
-            var priceShoppingCart = $(".bodyCart .p-price span");
+            var priceShoppingCart = $(".bodyCart .priceShoppingCart span");
 
             // console.log(priceShoppingCart);
             basketQuantity(priceShoppingCart.length);
@@ -218,7 +218,7 @@ $(document).on("click", ".removeItemCart", function(){
    var idProduct = $(".bodyCart button");
    var image = $(".bodyCart img");
    var title = $(".bodyCart .titleCartPurchase");
-   var price = $(".bodyCart .p-price span");
+   var price = $(".bodyCart .priceShoppingCart span");
    var quantity = $(".bodyCart .quantityItem");
    
    listCart = [];
@@ -301,13 +301,13 @@ $(document).on("change", ".quantityItem", function() {
    var idProduct = $(this).attr("idProduct");
    var item = $(this).attr("item");
    
-   $(".subtotal"+item).html('$<span>'+(quantity*price).toFixed(2)+'</span>');
+   $(".subTotal"+item).html('MXN $<span>'+(quantity*price).toFixed(2)+'</span>');
    
    // Update LocalStorage
    var idProduct = $(".bodyCart button");
    var image = $(".bodyCart img");
    var title = $(".bodyCart .titleCartPurchase");
-   var price = $(".bodyCart .p-price span");
+   var price = $(".bodyCart .priceShoppingCart span");
    var quantity = $(".bodyCart .quantityItem");
    
    listCart = [];
@@ -363,8 +363,8 @@ function sumSubtotals() {
     
     var sumTotal = arraySumSubtotals.reduce(sumArraySubtotals, 0);
     
-    $(".sumSubtotal").html('Subtotal <span>$'+(sumTotal).toFixed(2)+'</span>');
-    $(".cart-total").html('Total <span>$'+(sumTotal).toFixed(2)+'</span>');
+    $(".sumSubtotal").html('Subtotal: MXN $<span>'+(sumTotal).toFixed(2)+'</span>');
+    $(".cart-total").html('Total: MXN $<span>'+(sumTotal).toFixed(2)+'</span>');
     
     $(".basket-price").html((sumTotal).toFixed(2));
     
@@ -376,6 +376,7 @@ function sumSubtotals() {
 
 function basketQuantity(quantityProducts) {
     
+    /** Product Cart */
     if (quantityProducts !== 0) {
         
         var quantityItem = $(".bodyCart .quantityItem");
@@ -418,9 +419,21 @@ $("#btnCheckout").click(function() {
 
     var sumSubTotal = $(".sumSubtotal span");
     
-    $(".valueSubtotal").html($(sumSubTotal).html());
-    $(".valueSubtotal").attr("valueTotal", $(sumSubTotal).html());
+    $(".valueSubtotal").html((sumSubTotal).html());
+    $(".valueSubtotal").attr("valueTotal", (sumSubTotal).html());
     
+    /*** Taxes **/
+    
+    var taxTotal = ($(".valueSubtotal").html() * $("#rateTax").val()) / 100;
+    
+    $(".valueTotalTax").html((taxTotal).toFixed(2));
+    $(".valueTotalTax").attr("valueTotal", (taxTotal).toFixed(2));
+    
+    sumTotalShopping();
+    
+    /*=============================================
+     VARIABLES ARRAY 
+    =============================================*/
     
     for (var i = 0; i < title.length; i++) {
         
@@ -484,8 +497,66 @@ $("#btnCheckout").click(function() {
                 }
             }
         });
+        
+        /** Evaluate shipping rates **/
+        
+        $("#selectState").change(function() {
+            
+            $(".alert").fadeOut();
+            
+            var country = $(this).val();
+            var rateCountry = $("#countryRate").val();
+            
+            if (country === rateCountry) {
+                
+                var resultWeight = sumTotalWeight * $("#nationalShipping").val();      
+                
+                if (resultWeight < $("#minimumNationalRate").val()) {
+                    
+                    $(".valueTotalDelivery").html($("#minimumNationalRate").val());
+                    $(".valueTotalDelivery").attr("valueTotal", $("#minimumNationalRate").val());
+                } else {
+                    
+                    $(".valueTotalDelivery").html(resultWeight);
+                    $(".valueTotalDelivery").attr("valueTotal", resultWeight);
+                }
+            } else {
+                
+                var resultWeight = sumTotalWeight * $("#stateShipping").val();      
+                
+                if (resultWeight < $("#minimumStateRate").val()) {
+                    
+                    $(".valueTotalDelivery").html($("#minimumStateRate").val());
+                    $(".valueTotalDelivery").attr("valueTotal", $("#minimumStateRate").val());
+                } else {
+                    
+                    $(".valueTotalDelivery").html(resultWeight);
+                    $(".valueTotalDelivery").attr("valueTotal", resultWeight);
+                }
+                
+            }
+            
+            sumTotalShopping();
+            
+        });
+    } else {
+        $(".btnPay").attr("sort", "virtual");
     }
    
 });
+
+/** Sum Total of Shopping **/
+
+function sumTotalShopping() {
+    
+    var sumTotalRates = Number($(".valueSubtotal").html())+
+                        Number($(".valueTotalDelivery").html())+
+                        Number($(".valueTotalTax").html());
+    
+    $(".valueTotalShopping").html((sumTotalRates).toFixed(2));
+    $(".valueTotalShopping").attr("valueTotal", (sumTotalRates).toFixed(2));
+    
+    // localStorage.setItem("total", hex_);
+}
 
 
