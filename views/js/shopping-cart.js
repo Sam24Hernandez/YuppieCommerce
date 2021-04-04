@@ -58,7 +58,7 @@ for (var i = 0; i < index.length; i++) {
                 '<td class="qua-col first-row">'+
                     '<div class="quantity">'+
                         '<div class="pro-qty">'+
-                            '<input class="form-control quantityItem" type="number" min="1" value="'+item.quantity+'" sort="'+item.sort+'" price="'+item.price+'" idProduct="'+item.idProduct+'" item="'+index+'">'+
+                            '<input id="numberQ" class="form-control quantityItem" type="number" min="1" max="30" value="'+item.quantity+'" sort="'+item.sort+'" price="'+item.price+'" idProduct="'+item.idProduct+'" item="'+index+'">'+
                         '</div>'+
                     '</div>'+
                 '</td>'+
@@ -68,6 +68,18 @@ for (var i = 0; i < index.length; i++) {
 
             // Avoid to manipulate the quantity on virtual products
             $(".quantityItem[sort='virtual']").attr("readonly", "true");
+            
+            var number = document.getElementById("numberQ");
+            
+            // Listen for input event on quantityItem
+            number.onkeydown = function(e) {
+                
+                if (!((e.keyCode > 95 && e.keyCode < 106)
+                    || (e.keyCode > 47 && e.keyCode < 58)
+                    || e.keyCode === 8)) {
+                    return false;
+                }
+            }
 
             // Update subtotal
             var priceShoppingCart = $(".bodyCart .priceShoppingCart span");
@@ -406,6 +418,8 @@ function basketQuantity(quantityProducts) {
 $("#btnCheckout").click(function() {
    
     $(".listProducts table.tableProducts tbody").html("");
+    
+    $("#checkPaypal").prop("checked", true);
 
     var idUser = $(this).attr("idUser");
     var weight = $(".bodyCart button");
@@ -502,7 +516,9 @@ $("#btnCheckout").click(function() {
         
         $("#selectState").change(function() {
             
-            $(".alert").fadeOut();
+            $(".alert").remove();
+            
+            document.querySelector(".btnPay").disabled = false;
             
             var country = $(this).val();
             var rateCountry = $("#countryRate").val();
@@ -558,5 +574,90 @@ function sumTotalShopping() {
     
     // localStorage.setItem("total", hex_);
 }
+
+var paymentMethod = "paypal";
+defaultCurrency(paymentMethod);
+
+/** Currency Default **/
+
+function defaultCurrency(paymentMethod) {
+    
+    $("#defaultCurrency").html("");
+    
+    if (paymentMethod === "paypal") {
+        
+        $("#defaultCurrency").append(
+                '<option value="MXN">MXN</option>'
+        );        
+    }
+}
+
+/** Pay Button **/
+
+$(".btnPay").click(function() {
+    
+    var sort = $(this).attr("sort");
+    
+    if (sort === "fisico" && $("#selectState").val() === "") {
+        
+        $(".btnPay").before('<div class="alert alert-warning">No ha seleccionado el estado para su envío.</div>');
+        
+        document.querySelector(".btnPay").disabled = true;
+        
+        return;
+    }
+    
+    console.log("Pagando");
+//    var currency = $("#defaultCurrency").val();
+//    var total = $(".valueTotalShopping").html();
+//    var tax = $(".valueTotalTax").html();
+//    var delivery = $(".valueTotalDelivery").html();
+//    var subtotal = $(".valueSubtotal").html();
+//    var title = $(".valueTitle");
+//    var quantity = $(".valueQuantity");
+//    var valueItem = $(".valueItem");
+//    var idProduct = $(".bodyCart button");
+//    
+//    var titleArray = [];
+//    var quantityArray = [];
+//    var valueItemArray = [];
+//    var idProductArray = [];
+//    
+//    for (var i = 0; i < title.length; i++) {
+//        
+//        titleArray[i] = $(title[i]).html();
+//        quantityArray[i] = $(quantity[i]).html();
+//        valueItemArray[i] = $(valueItem[i]).html();
+//        idProductArray[i] = $(idProduct[i]).attr("idProduct");
+//    }
+//    
+//    var data = new FormData();
+//    
+//    data.append("currency", currency);
+//    data.append("total", total);
+//    data.append("tax", tax);
+//    data.append("delivery", delivery);
+//    data.append("subtotal", subtotal);
+//    data.append("titleArray", titleArray);
+//    data.append("quantityArray", quantityArray);
+//    data.append("valueItemArray", valueItemArray);
+//    data.append("idProductArray", idProductArray);
+//    
+//    $.ajax({
+//       
+//       url: hidePath + "ajax/cart.ajax.php",
+//       method: "POST",
+//       data: data,
+//       cache: false,
+//       contentType: false,
+//       processData: false,
+//       success: function(response) {
+//           window.location = response;
+//       }
+//        
+//    });
+        
+    
+});
 
 

@@ -170,7 +170,7 @@ BREADCRUMB SHOPPING CART
                             
                             <div class="currency">
                                 <select class="form-control" id="defaultCurrency" name="currency">
-                                    <option value="MXN">MXN</option>
+                                    
                                 </select>
                             </div>                                                                                    
                         </div>
