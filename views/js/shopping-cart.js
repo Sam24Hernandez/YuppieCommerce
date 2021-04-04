@@ -606,30 +606,29 @@ $(".btnPay").click(function() {
         
         return;
     }
+        
+    var currency = $("#defaultCurrency").val();
+    var total = $(".valueTotalShopping").html();
+    var tax = $(".valueTotalTax").html();
+    var delivery = $(".valueTotalDelivery").html();
+    var subtotal = $(".valueSubtotal").html();
+    var title = $(".valueTitle");
+    var quantity = $(".valueQuantity");
+    var valueItem = $(".valueItem");
+    var idProduct = $(".bodyCart button");
     
-    console.log("Pagando");
-//    var currency = $("#defaultCurrency").val();
-//    var total = $(".valueTotalShopping").html();
-//    var tax = $(".valueTotalTax").html();
-//    var delivery = $(".valueTotalDelivery").html();
-//    var subtotal = $(".valueSubtotal").html();
-//    var title = $(".valueTitle");
-//    var quantity = $(".valueQuantity");
-//    var valueItem = $(".valueItem");
-//    var idProduct = $(".bodyCart button");
-//    
-//    var titleArray = [];
-//    var quantityArray = [];
-//    var valueItemArray = [];
-//    var idProductArray = [];
-//    
-//    for (var i = 0; i < title.length; i++) {
-//        
-//        titleArray[i] = $(title[i]).html();
-//        quantityArray[i] = $(quantity[i]).html();
-//        valueItemArray[i] = $(valueItem[i]).html();
-//        idProductArray[i] = $(idProduct[i]).attr("idProduct");
-//    }
+    var titleArray = [];
+    var quantityArray = [];
+    var valueItemArray = [];
+    var idProductArray = [];
+    
+    for (var i = 0; i < title.length; i++) {
+        
+        titleArray[i] = $(title[i]).html();
+        quantityArray[i] = $(quantity[i]).html();
+        valueItemArray[i] = $(valueItem[i]).html();
+        idProductArray[i] = $(idProduct[i]).attr("idProduct");
+    }
 //    
 //    var data = new FormData();
 //    
