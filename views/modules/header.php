@@ -211,7 +211,7 @@ foreach (array_slice($categories, 0, 4) as $key => $value) {
         <div class="container">
             <div class="nav-depart">
                 <div class="depart-btn">
-                    <a href="#">
+                    <a href="<?php echo $url; ?>all-categories">
                         <i class="fa fa-shopping-bag"></i>
                         <span>Todo</span> 
                     </a>                   
@@ -228,8 +228,8 @@ foreach (array_slice($categoriesMenu, 0, 3) as $key => $value) {
     echo '<li><a href = "' . $url . $value["route"] . '">' . $value["category_name"] . '</a></li>';
 }
 ?>
-                    <li><a href="#">Ofertas</a></li>
-                    <li><a href="#">Vender</a></li>
+                    <li><a href="<?php echo $url; ?>offers">Ofertas</a></li>
+                    <li><a href="#">Ayuda</a></li>
                 </ul>
             </nav>
             <div id="mobile-menu-wrap"></div>

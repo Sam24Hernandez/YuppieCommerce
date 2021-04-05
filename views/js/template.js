@@ -169,3 +169,11 @@ $("#toggle-password-change").click(function () {
     }
 
 });
+
+/** Close Offers **/
+
+$(".closeOffers").click(function() {
+   
+   $(this).parent().remove();
+    
+});

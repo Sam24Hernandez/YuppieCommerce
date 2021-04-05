@@ -45,6 +45,7 @@
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/my_shopping.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/my_list.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/shopping_cart.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo $url; ?>views/css/offers.css" type="text/css">
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/footer.css" type="text/css">
 
         <!-- ============================================================== -->
