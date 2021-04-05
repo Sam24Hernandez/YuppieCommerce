@@ -82,7 +82,7 @@ for (var i = 0; i < index.length; i++) {
                             '<td class="qua-col first-row">' +
                             '<div class="quantity">' +
                             '<div class="pro-qty">' +
-                            '<input id="numberQ" class="form-control quantityItem" type="number" min="1" max="30" value="' + item.quantity + '" sort="' + item.sort + '" price="' + price + '" idProduct="' + item.idProduct + '" item="' + index + '">' +
+                            '<input class="form-control quantityItem" type="number" min="1" max="30" onkeypress="return /\d/.test(String.fromCharCode(event.keyCode || event.which))" value="' + item.quantity + '" sort="' + item.sort + '" price="' + price + '" idProduct="' + item.idProduct + '" item="' + index + '">' +
                             '</div>' +
                             '</div>' +
                             '</td>' +
