@@ -84,7 +84,7 @@ class Paypal {
         try {
             
             $payment->create($apiContext);            
-        } catch (Exception $ex) {
+        } catch (PayPal\Exception\PayPalConnectionException $ex) {
             
             echo $ex->getCode();
             echo $ex->getData();

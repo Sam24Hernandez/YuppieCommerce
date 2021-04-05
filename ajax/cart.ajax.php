@@ -42,61 +42,61 @@ class CartAjax {
 
         echo $response;
     }
-    
-    /** Verify if the user already have the free product **/
-    
+
+    /** Verify if the user already have the free product * */
     public $idUser;
     public $idProduct;
-    
+
     public function ajaxVerifyProduct() {
-        
-        $data = array(            
+
+        $data = array(
             "idUser" => $this->idUser,
-            "idProduct" => $this->idProduct            
+            "idProduct" => $this->idProduct
         );
-        
+
         $response = CartController::ctrVerifyProduct($data);
-        
+
         echo json_encode($response);
     }
 
 }
 
-/** Paypal Method Payment **/
-
+/** Paypal Method Payment * */
 if (isset($_POST["currency"])) {
-    
+
     $idProducts = explode(",", $_POST["idProductArray"]);
     $quantityProducts = explode(",", $_POST["quantityArray"]);
     $priceProducts = explode(",", $_POST["valueItemArray"]);
-    
+
     $item = "id";
-    
+
     for ($i = 0; $i < count($idProducts); $i++) {
-        
+
         $valueProduct = $idProducts[$i];
-        
+
         $verifyProducts = ProductController::ctrShowInfoProduct($item, $valueProduct);
-        
+
         if ($verifyProducts["offer_price"] == 0) {
-            
-            $price = number_format($verifyProducts["price"], 2);
+
+            $price = $verifyProducts["price"];
         } else {
-            
-            $price = number_format($verifyProducts["offer_price"], 2);
+
+            $price = $verifyProducts["offer_price"];
         }
-        
+
         $verifySubTotal = $quantityProducts[$i] * $price;
-        
-        if ($verifySubTotal != $priceProducts[$i]) {
-            
+
+//        echo number_format($verifySubTotal,2)."<br>";
+//        echo number_format($priceProducts[$i],2)."<br>";        
+
+        if (number_format($verifySubTotal, 2) != number_format($priceProducts[$i], 2)) {
+
             echo 'shopping_cart';
-            
+
             return;
         }
-        
     }
-    
+
     $paypal = new CartAjax();
     $paypal->currency = $_POST["currency"];
     $paypal->total = $_POST["total"];
@@ -112,7 +112,7 @@ if (isset($_POST["currency"])) {
 }
 
 if (isset($_POST["idProduct"])) {
-    
+
     $purchase = new CartAjax();
     $purchase->idUser = $_POST["idUser"];
     $purchase->idProduct = $_POST["idProduct"];

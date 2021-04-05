@@ -118,9 +118,15 @@ if (!isset($_SESSION["validateSession"])) {
                                                 }
                                             }
 
-                                            echo '</td>
-                                                    <td>$19.00</td>
-                                                    <td>#' . $value1["id"] . '</td>
+                                            echo '</td>';
+                                                
+                                                if ($value1["payment"] != 0) {
+                                                    echo '<td>$'. number_format($value1["payment"], 2).'</td>';
+                                                } else {
+                                                    echo '<td>Gratis</td>';
+                                                }
+                                                    
+                                                    echo '<td>#' . $value1["id"] . '</td>
 
                                                 </tr>';
                                         }

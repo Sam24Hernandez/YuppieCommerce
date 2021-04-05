@@ -65,7 +65,24 @@ if (isset($routes[1])) {
                             <input type="text" placeholder="Buscar...">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
-                    </div>                                      
+                    </div> 
+                    <div class="offer-category">
+                        <h4>Departamentos</h4>
+                        <ul>
+                            <?php
+                            
+                            $item = NULL;
+                            $valueProduct = NULL;
+                            
+                            $categories = ProductController::ctrShowCategories($item, $valueCategory);
+                            
+                            foreach ($categories as $key => $value) {
+                                echo '<li><a href="'.$url.$value["route"].'" class="pixelCategory">'.$value["category_name"].'</a></li>';  
+                            }
+                            
+                            ?>                            
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-9 order-1 order-lg-2">
@@ -127,6 +144,103 @@ if (isset($routes[1])) {
                             }
                         }
                     }
+                    
+                    $responseSubcategories = ProductController::ctrShowSubCategories($item, $valueSubCategory);
+                    
+                    foreach ($responseSubcategories as $key => $value) {
+                        
+                        if ($value["offer"] == 1 && $value["offered_by_category"] == 0) {
+
+                            if ($value["end_offer"] > $date) {
+
+                                $datetime1 = new DateTime($value["end_offer"]);
+                                $datetime2 = new DateTime($actualDate);
+
+                                $interval = date_diff($datetime1, $datetime2);
+
+                                $endOffer = $interval->format('%a');
+
+                                echo '<div class="col-lg-6 col-sm-6">
+                                    <div class="offer-item">
+                                        <div class="bi-pic">
+                                            <img src="' . $server . $value["offer_image"] .'" width="100%" alt="Oferta">
+                                        </div>
+                                        <div class="bi-text">
+                                            <a class="pixelOffer" href="' . $url . $value["route"] . '">
+                                                <h4>Oferta especial en ' . $value["subcategory_name"] . '</h4>
+                                            </a>
+                                            <p>';
+                                
+                                            if ($endOffer == 0) {
+                                                echo 'La oferta termina hoy';
+                                            } elseif ($endOffer == 1) {
+                                                echo 'La oferta termina en '.$endOffer.' día';
+                                            } else {
+                                                echo 'La oferta termina en '.$endOffer.' días';
+                                            }
+                                
+                                            echo '</p>';
+                                            
+                                            if ($value["offer_discount"] != 0 && $value["offer_price"] != 0) {
+                                                echo '<span class="text-center">Desde $'. number_format($value["offer_price"], 2).' con '.$value["offer_discount"].'% de Descuento</span>';
+                                            }
+                                            
+                                        echo '</div>
+                                    </div>
+                                </div> ';
+                            }
+                        }
+                    }
+                    
+                    $order = "id";
+                    
+                    $responseProducts = ProductController::ctrListProducts($order, $item, $valueProduct);
+                    
+                    foreach ($responseProducts as $key => $value) {
+    
+                        if ($value["offer"] == 1 && $value["offered_by_category"] == 0 && $value["offered_by_subcategory"] == 0) {
+
+                            if ($value["end_offer"] > $date) {
+
+                                $datetime1 = new DateTime($value["end_offer"]);
+                                $datetime2 = new DateTime($actualDate);
+
+                                $interval = date_diff($datetime1, $datetime2);
+
+                                $endOffer = $interval->format('%a');
+
+                                echo '<div class="col-lg-6 col-sm-6">
+                                    <div class="offer-item">
+                                        <div class="bi-pic">
+                                            <img src="' . $server . $value["offer_image"] .'" width="100%" alt="Oferta">
+                                        </div>
+                                        <div class="bi-text">
+                                            <a class="pixelOffer" href="' . $url . $value["route"] . '">
+                                                <h4>Oferta especial en ' . $value["product_title"] . '</h4>
+                                            </a>
+                                            <p>';
+                                
+                                            if ($endOffer == 0) {
+                                                echo 'La oferta termina hoy';
+                                            } elseif ($endOffer == 1) {
+                                                echo 'La oferta termina en '.$endOffer.' día';
+                                            } else {
+                                                echo 'La oferta termina en '.$endOffer.' días';
+                                            }
+                                
+                                            echo '</p>';
+                                            
+                                            if ($value["offer_discount"] != 0 && $value["offer_price"] != 0) {
+                                                echo '<span class="text-center">Desde $'. number_format($value["offer_price"], 2).' con '.$value["offer_discount"].'% de Descuento</span>';
+                                            }
+                                            
+                                        echo '</div>
+                                    </div>
+                                </div> ';
+                            }
+                        }
+                    }   
+                    
                     ?>                                       
                 </div>
             </div>

@@ -122,7 +122,7 @@ if (isset($_GET["paypal"]) && $_GET["paypal"] == "true") {
     if ($response == "ok") {
 
         echo '<script>
-            window.location = "' . $url . 'offers";
+            window.location = "' . $url . 'offers/announcement";
         </script>';
     }
 } else {
