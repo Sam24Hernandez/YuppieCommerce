@@ -30,5 +30,16 @@ class CartController {
         
         return $response;
     }
+    
+    /* Verify Purchase Product **/
+    
+    static public function ctrVerifyProduct($data) {
+        
+        $table = "shopping";
+        
+        $response = CartModel::mdlVerifyProduct($table, $data);
+        
+        return $response;
+    }
 }
 

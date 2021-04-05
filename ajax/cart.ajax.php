@@ -42,6 +42,23 @@ class CartAjax {
 
         echo $response;
     }
+    
+    /** Verify if the user already have the free product **/
+    
+    public $idUser;
+    public $idProduct;
+    
+    public function ajaxVerifyProduct() {
+        
+        $data = array(            
+            "idUser" => $this->idUser,
+            "idProduct" => $this->idProduct            
+        );
+        
+        $response = CartController::ctrVerifyProduct($data);
+        
+        echo json_encode($response);
+    }
 
 }
 
@@ -92,5 +109,13 @@ if (isset($_POST["currency"])) {
     $paypal->valueItemArray = $_POST["valueItemArray"];
     $paypal->idProductArray = $_POST["idProductArray"];
     $paypal->ajaxSendToPaypal();
+}
+
+if (isset($_POST["idProduct"])) {
+    
+    $purchase = new CartAjax();
+    $purchase->idUser = $_POST["idUser"];
+    $purchase->idProduct = $_POST["idProduct"];
+    $purchase->ajaxVerifyProduct();
 }
 

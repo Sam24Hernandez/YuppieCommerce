@@ -348,12 +348,22 @@ $server = Route::ctrRouteServer();
                         <?php
                         if ($infoproduct["price"] == 0) {
 
-                            if ($infoproduct["sort"] == "virtual") {
-                                echo '<button class="btn btn-warning pd-cart addFree" role="button" idProduct="' . $infoproduct["id"] . '" product_title="' . $infoproduct["product_title"] . '" sort="' . $infoproduct["sort"] . '">
-                                    Acceder Ahora
-                                    <i class="fa fa-play"></i>
-                            </button>';
+                            if (isset($_SESSION["validateSession"]) && $_SESSION["validateSession"] == "ok") {
+                                if ($infoproduct["sort"] == "virtual") {
+                                    echo '<button class="btn btn-warning pd-cart addFree" role="button" idProduct="' . $infoproduct["id"] . '" idUser="'.$_SESSION["id"].'" product_title="' . $infoproduct["product_title"] . '" sort="' . $infoproduct["sort"] . '">
+                                        Acceder Ahora
+                                        <i class="fa fa-play"></i>
+                                    </button>';
+                                }
+                            } else {
+                                echo '<a href="#modalLogin" data-toggle="modal">
+                                        <button class="btn btn-warning pd-cart">
+                                            Acceder Ahora
+                                            <i class="fa fa-play"></i>
+                                    </button>
+                                </a>';
                             }
+                            
                         } else {
                             if ($infoproduct["sort"] == "virtual") {
                                 

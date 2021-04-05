@@ -65,12 +65,12 @@ for (var i = 0; i < index.length; i++) {
                 processData: false,
                 dataType: "json",
                 success: function (response) {
-                    
+
                     if (response["offer_price"] == 0) {
-                        
+
                         price = response["price"];
                     } else {
-                        
+
                         price = response["offer_price"];
                     }
 
@@ -676,4 +676,50 @@ $(".btnPay").click(function () {
 
 });
 
+/** Obtain Free Products **/
 
+$(".addFree").click(function () {
+
+    var idProduct = $(this).attr("idProduct");
+    var idUser = $(this).attr("idUser");
+    var title = $(this).attr("product_title");
+    var addFreeProduct = false;
+
+    var data = new FormData();
+
+    data.append("idUser", idUser);
+    data.append("idProduct", idProduct);
+
+    $.ajax({
+        url: hidePath + "ajax/cart.ajax.php",
+        method: "POST",
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+
+            if (response !== "false") {
+
+                swal({
+                    title: "¡Ya haz adquirido este producto!",
+                    text: "",
+                    type: "warning",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Volver",
+                    closeOnConfirm: false
+                });
+            } else {
+
+                addFreeProduct = true;
+
+                if (addFreeProduct) {
+
+                    window.location = hidePath + "index.php?route=finalise_purchase&free=true&product=" + idProduct + "&title=" + title;
+                }
+
+            }
+        }
+    });
+});
