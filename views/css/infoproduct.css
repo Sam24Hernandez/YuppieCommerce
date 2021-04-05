@@ -406,6 +406,7 @@
     display: inline-block;
     font-size: 14px;
     margin-left: 15px;
+    cursor: pointer;
 }
 
 .product-details .pd-share .pd-social a .share-fb {

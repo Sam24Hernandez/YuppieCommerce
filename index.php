@@ -7,6 +7,7 @@ require_once "controllers/user.controller.php";
 require_once "controllers/cart.controller.php";
 
 /* Models */
+require_once "models/template.model.php";
 require_once "models/product.model.php";
 require_once "models/slide.model.php";
 require_once "models/user.model.php";

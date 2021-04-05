@@ -3,10 +3,7 @@
     <head>
         <meta charset="utf-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Compra y venta de artículos electrónicos, ropa, calzado, artículos deportivos, cursos digitales, cámaras digitales, artículos para bebé, cupones y muchos artículos más en Yuppie, la plataforma de comercio electrónico en México.">
-        <meta name="keywords" content="Yuppie, Yuppie.com.mx, artículos electrónicos, cursos digitales, compras por Internet, compras en linea, yuppie méxico, ropa, cámaras digitales, bebé, herramientas, belleza, relojes, deportes y entretenimiento">
-        <title>Yuppie | Comercio electrónico - Electrónicos - Ropa de Moda - Tecnología</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">        
 
         <?php
         session_start();
@@ -18,7 +15,54 @@
         /* == Maintaining the project's fixed route == */
 
         $url = Route::ctrRoute();
-        ?>      
+
+        /* == Heading Section == */
+
+        $routes = array();
+
+        if (isset($_GET["route"])) {
+
+            $routes = explode("/", $_GET["route"]);
+
+            $route = $routes[0];
+        } else {
+
+            $route = "inicio";
+        }
+
+        $headings = TemplateController::ctrGetHeadings($route);
+
+        if (!$headings["route"]) {
+
+            $route = "inicio";
+
+            $headings = TemplateController::ctrGetHeadings($route);
+        }
+        ?>    
+
+        <!-- === META HTML5 === -->
+        <meta name="title" content="<?php echo $headings["heading_title"]; ?>">
+        <meta name="description" content="<?php echo $headings["heading_description"]; ?>">
+        <meta name="keywords" content="<?php echo $headings["key_words"]; ?>">
+        <meta name="author" content="Sam Hernández">
+        <title><?php echo $headings["heading_title"]; ?></title>
+
+        <!-- === OPEN GRAPH FACEBOOK META === -->
+        <meta property="og:title"              content="<?php echo $headings["heading_title"]; ?>">
+        <meta property="og:url"                content="<?php echo $url . $headings["route"]; ?>">
+        <meta property="og:description"        content="<?php echo $headings["heading_description"]; ?>">                
+        <meta property="og:image"              content="<?php echo $server . $headings["cover"]; ?>">
+        <meta property="og:type"               content="website">
+        <meta property="og:site_name"          content="Yuppie">
+        <meta property="og:locale"             content="es_MX">
+
+        <!-- === METADATA TWITTER === -->        
+        <meta name="twitter:card"              content="summary">
+        <meta name="twitter:title"             content="<?php echo $headings['heading_title']; ?>">
+        <meta name="twitter:url"               content="<?php echo $url . $headings['route']; ?>">
+        <meta name="twitter:description"       content="<?php echo $headings['heading_description']; ?>">
+        <meta name="twitter:image"             content="<?php echo $server . $headings['cover']; ?>">
+        <meta name="twitter:site"              content="@SamHernandezDev">
 
         <!-- === CSS PLUGINS === -->
         <link rel="stylesheet" href="<?php echo $url; ?>views/css/plugins/bootstrap.min.css" type="text/css">
@@ -64,7 +108,7 @@
         <script src="<?php echo $url; ?>views/js/plugins/jquery.slicknav.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.zoom.min.js" type="text/javascript"></script>
         <script src="<?php echo $url; ?>views/js/plugins/jquery.scrollUp.js" type="text/javascript"></script>
-        <script src="<?php echo $url; ?>views/js/plugins/md5-min.js" type="text/javascript"></script>
+        <script src="<?php echo $url; ?>views/js/plugins/md5-min.js" type="text/javascript"></script>        
     </head>
     <body>       
 
@@ -127,15 +171,25 @@
             /* == White List of Friendly URLs  == */
 
             if ($route != null || $routes[0] === "articulos-gratis" || $routes[0] === "lo-mas-vendido" || $routes[0] === "lo-mas-visto") {
+
                 include "modules/products.php";
             } elseif ($infoProduct != NULL) {
+
                 include "modules/infoproduct.php";
             } elseif ($routes[0] === "all-categories" || $routes[0] === "search" || $routes[0] === "signout" || $routes[0] === "profile" || $routes[0] === "my_account" || $routes[0] === "my_shopping" || $routes[0] === "my_list" || $routes[0] === "shopping_cart" || $routes[0] === "error" || $routes[0] === "finalise_purchase" || $routes[0] === "course" || $routes[0] === "offers") {
+
                 include "modules/" . $routes[0] . ".php";
+            } elseif ($routes[0] === "inicio") {
+
+                include "modules/slide.php";
+
+                include "modules/featured.php";
             } else {
+
                 include "modules/error404.php";
             }
         } else {
+
             include "modules/slide.php";
 
             include "modules/featured.php";
@@ -188,7 +242,20 @@
                 js.src = "https://connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-        </script>               
+        </script>   
+
+        <script>
+
+            $(".shareFacebook").click(function () {
+
+                FB.ui({
+                    method: 'share',
+                    href: '<?php echo $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>'
+                }, function (response) {});
+
+            });            
+
+        </script>                
 
     </body>
 </html>

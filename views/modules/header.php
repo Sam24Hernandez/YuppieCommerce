@@ -219,7 +219,7 @@ foreach (array_slice($categories, 0, 4) as $key => $value) {
             </div>
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="active"><a href="<?php echo $url; ?>">Inicio</a></li>
+                    <li><a href="<?php echo $url; ?>">Inicio</a></li>
 <?php
 $itemCategoryMenu = null;
 $valueCategoryMenu = null;
